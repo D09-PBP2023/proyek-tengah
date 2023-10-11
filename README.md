@@ -1,2 +1,24 @@
-# proyek-tengah
-Proyek Tengah Semester
+# BookPals
+"Rajin Membaca, Cerewet di BookPals"
+> Sebuah karya dari kami, kelompok D09 untuk Indonesia.
+
+> Proyek ini dibuat untuk memenuhi tugas Proyek Tengah Semester pada mata kuliah Pemograman Berbasis Platform (PBP) yang diselenggarakan oleh Fakultas Ilmu Komputer, Universitas Indonesia di Semester Gasal Tahun Ajaran 2023/2024.
+
+# [Anggota Kelompok]
+Proyek aplikasi ini dibuat oleh kelompok D09 yang beranggotakan:
+- [Arvin](https://github.com/ArvinCS) (2206041562)
+- [Gilang Fajar Pratama](https://github.com/gilangp03) (2206082631)
+- [Marvel Martin Everthard](https://github.com/marvelm57) (2206081345)
+- [Muhammad Radhitya Utomo](https://github.com/MRadhityaUtomo) (2206830744)
+- [Taniella](https://github.com/eilalleinat) (2206082316)
+- [Tengku Laras Malahayati](https://github.com/rxa15) (2206081641)
+
+# [Latar Belakang BookPals]
+Buku adalah jendela dunia. Ungkapan tersebut mengandung arti yang sangat luas sekaligus mengajak semua orang untuk membaca buku karena orang yang membaca buku akan memperoleh wawasan pengetahuan yang sangat bermanfaat. Beragam karya tulis semakin berkembang sejak manusia menemukan aksara. Dari kitab susastra kuno, kita dapat menggali kemampuan manusia dalam memahami beragam fenomena dalam kehidupan. Diseminasi pengetahuan ke berbagai belahan dunia semakin pesat sejak manusia menemukan mesin cetak. Penemuan teknologi komputer dan internet awalnya diharapkan akan semakin mendukung penyebaran informasi. Sayangnya, minat baca tidak berbanding lurus dengan penemuan teknologi tersebut. Secara singkat, dapat disimpulkan bahwa minat membaca di berbagai belahan dunia semakin menurun yang akhirnya juga mempengaruhi kemampuan literasi seseorang. 
+
+Dalam sebuah riset yang dilakukan oleh UNESCO, Indonesia dinyatakan sebagai salah satu negara yang menduduki urutan bawah literasi dunia. Riset tersebut menunjukkan bahwa minat baca masyarakat Indonesia **HANYA 0.001%**. Akan tetapi, Indonesia menduduki peringkat kelima dunia dalam negara yang memiliki gadget terbanyak. Dengan kondisi yang sedemikian rupa, kami ingin menumbuhkan kembali minat baca tanpa mengabaikan kemajuan teknologi. Dalam projek ini, kami akan merancang sebuah aplikasi berbasis web bernama **BookPals** yang dapat digunakan untuk menghubungkan para penikmat buku dan literasi. Perancangan aplikasi ini terinspirasi dari kegiatan [**BACA BARENG**](https://instagram.com/bacabareng.sbc?igshid=MzRlODBiNWFlZA==) yang diadakan oleh Silent Book Club Jakarta di Taman Literasi Martha Tiahahu. Setiap anggota komunitas tersebut biasanya memilih satu buku pilihan masing-masing yang kemudian akan diceritakan kembali di hadapan anggota lainnya. Dengan mengandaikan kegiatan anggota komunitas tersebut, kami membuat perancangan fitur yang mampu mengajak pengguna untuk saling bertukar buku dan memberikan ulasan setelah membacanya. Tidak hanya itu, kami juga mengundang pengguna kami untuk menjelajahi buku-buku baru melalui opsi pemilihan buku berdasarkan genre, kategori, serta rating yang diberikan oleh pengguna lain. 
+
+Kami berharap kehadiran BookPals tidak hanya dapat mengembalikan minat literasi masyarakat Indonesia, tetapi juga memberikan wadah bagi para peminat buku untuk saling bertukar pandangan. Melalui aplikasi ini, kami berupaya menciptakan lingkungan bagi para pembaca untuk berinteraksi, berbagi ulasan, dan mendiskusikan berbagai buku yang mereka baca. Mari bersama-sama menjelajahi dunia literasi bersama BookPals. 
+# [Daftar Modul yang Akan Diimplementasikan]
+# [Sumber Dataset Katalog Buku]
+# [*Role* Pengguna]
