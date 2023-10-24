@@ -1,0 +1,1302 @@
+[
+  {
+    "pk": 1,
+    "model": "main.book",
+    "fields": {
+      "name": "A Tale of Two Cities",
+      "author": "Charles Dickens",
+      "original_language": "English",
+      "year_published": 1859,
+      "sales": 200,
+      "genre": "Historical fiction",
+      "cover_image": "fixtures/cover/0/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "main.book",
+    "fields": {
+      "name": "The Little Prince (Le Petit Prince)",
+      "author": "Antoine de Saint-Exupéry",
+      "original_language": "French",
+      "year_published": 1943,
+      "sales": 200,
+      "genre": "Novella",
+      "cover_image": "fixtures/cover/1/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "main.book",
+    "fields": {
+      "name": "Harry Potter and the Philosopher's Stone",
+      "author": "J. K. Rowling",
+      "original_language": "English",
+      "year_published": 1997,
+      "sales": 120,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/2/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "main.book",
+    "fields": {
+      "name": "And Then There Were None",
+      "author": "Agatha Christie",
+      "original_language": "English",
+      "year_published": 1939,
+      "sales": 100,
+      "genre": "Mystery",
+      "cover_image": "fixtures/cover/3/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "main.book",
+    "fields": {
+      "name": "Dream of the Red Chamber (紅樓夢)",
+      "author": "Cao Xueqin",
+      "original_language": "Chinese",
+      "year_published": 1791,
+      "sales": 100,
+      "genre": "Family saga",
+      "cover_image": "fixtures/cover/4/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "main.book",
+    "fields": {
+      "name": "The Hobbit",
+      "author": "J. R. R. Tolkien",
+      "original_language": "English",
+      "year_published": 1937,
+      "sales": 100,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/5/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "main.book",
+    "fields": {
+      "name": "The Lion, the Witch and the Wardrobe",
+      "author": "C. S. Lewis",
+      "original_language": "English",
+      "year_published": 1950,
+      "sales": 85,
+      "genre": "Fantasy, Children's fiction",
+      "cover_image": "fixtures/cover/6/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "main.book",
+    "fields": {
+      "name": "She: A History of Adventure",
+      "author": "H. Rider Haggard",
+      "original_language": "English",
+      "year_published": 1887,
+      "sales": 83,
+      "genre": "Adventure",
+      "cover_image": "fixtures/cover/7/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "main.book",
+    "fields": {
+      "name": "Vardi Wala Gunda (वर्दी वाला गुंडा)",
+      "author": "Ved Prakash Sharma",
+      "original_language": "Hindi",
+      "year_published": 1992,
+      "sales": 80,
+      "genre": "Detective",
+      "cover_image": "fixtures/cover/8/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "main.book",
+    "fields": {
+      "name": "The Da Vinci Code",
+      "author": "Dan Brown",
+      "original_language": "English",
+      "year_published": 2003,
+      "sales": 80,
+      "genre": "Mystery thriller",
+      "cover_image": "fixtures/cover/9/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "main.book",
+    "fields": {
+      "name": "Harry Potter and the Chamber of Secrets",
+      "author": "J. K. Rowling",
+      "original_language": "English",
+      "year_published": 1998,
+      "sales": 77,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/10/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "main.book",
+    "fields": {
+      "name": "Harry Potter and the Prisoner of Azkaban",
+      "author": "J. K. Rowling",
+      "original_language": "English",
+      "year_published": 1999,
+      "sales": 65,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/11/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "main.book",
+    "fields": {
+      "name": "Harry Potter and the Goblet of Fire",
+      "author": "J. K. Rowling",
+      "original_language": "English",
+      "year_published": 2000,
+      "sales": 65,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/12/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "main.book",
+    "fields": {
+      "name": "Harry Potter and the Order of the Phoenix",
+      "author": "J. K. Rowling",
+      "original_language": "English",
+      "year_published": 2003,
+      "sales": 65,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/13/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "main.book",
+    "fields": {
+      "name": "Harry Potter and the Half-Blood Prince",
+      "author": "J. K. Rowling",
+      "original_language": "English",
+      "year_published": 2005,
+      "sales": 65,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/14/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "main.book",
+    "fields": {
+      "name": "Harry Potter and the Deathly Hallows",
+      "author": "J. K. Rowling",
+      "original_language": "English",
+      "year_published": 2007,
+      "sales": 65,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/15/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "main.book",
+    "fields": {
+      "name": "The Alchemist (O Alquimista)",
+      "author": "Paulo Coelho",
+      "original_language": "Portuguese",
+      "year_published": 1988,
+      "sales": 65,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/16/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "main.book",
+    "fields": {
+      "name": "The Catcher in the Rye",
+      "author": "J. D. Salinger",
+      "original_language": "English",
+      "year_published": 1951,
+      "sales": 65,
+      "genre": "Coming-of-age",
+      "cover_image": "fixtures/cover/17/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "main.book",
+    "fields": {
+      "name": "The Bridges of Madison County",
+      "author": "Robert James Waller",
+      "original_language": "English",
+      "year_published": 1992,
+      "sales": 60,
+      "genre": "Romance",
+      "cover_image": "fixtures/cover/18/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "main.book",
+    "fields": {
+      "name": "Ben-Hur: A Tale of the Christ",
+      "author": "Lew Wallace",
+      "original_language": "English",
+      "year_published": 1880,
+      "sales": 50,
+      "genre": "Historical fiction",
+      "cover_image": "fixtures/cover/19/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "main.book",
+    "fields": {
+      "name": "You Can Heal Your Life",
+      "author": "Louise Hay",
+      "original_language": "English",
+      "year_published": 1984,
+      "sales": 50,
+      "genre": "Self-help",
+      "cover_image": "fixtures/cover/20/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "main.book",
+    "fields": {
+      "name": "One Hundred Years of Solitude (Cien años de soledad)",
+      "author": "Gabriel García Márquez",
+      "original_language": "Spanish",
+      "year_published": 1967,
+      "sales": 50,
+      "genre": "Magic realism",
+      "cover_image": "fixtures/cover/21/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "main.book",
+    "fields": {
+      "name": "Lolita",
+      "author": "Vladimir Nabokov",
+      "original_language": "English",
+      "year_published": 1955,
+      "sales": 50,
+      "genre": "Novel",
+      "cover_image": "fixtures/cover/22/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "main.book",
+    "fields": {
+      "name": "Heidi",
+      "author": "Johanna Spyri",
+      "original_language": "German",
+      "year_published": 1880,
+      "sales": 50,
+      "genre": "Children's fiction",
+      "cover_image": "fixtures/cover/23/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "main.book",
+    "fields": {
+      "name": "The Common Sense Book of Baby and Child Care",
+      "author": "Benjamin Spock",
+      "original_language": "English",
+      "year_published": 1946,
+      "sales": 50,
+      "genre": "Manual",
+      "cover_image": "fixtures/cover/24/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "main.book",
+    "fields": {
+      "name": "Anne of Green Gables",
+      "author": "Lucy Maud Montgomery",
+      "original_language": "English",
+      "year_published": 1908,
+      "sales": 50,
+      "genre": "Children's novel",
+      "cover_image": "fixtures/cover/25/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "main.book",
+    "fields": {
+      "name": "Black Beauty",
+      "author": "Anna Sewell",
+      "original_language": "English",
+      "year_published": 1877,
+      "sales": 50,
+      "genre": "Children's literature",
+      "cover_image": "fixtures/cover/26/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "main.book",
+    "fields": {
+      "name": "The Name of the Rose (Il Nome della Rosa)",
+      "author": "Umberto Eco",
+      "original_language": "Italian",
+      "year_published": 1980,
+      "sales": 50,
+      "genre": "Historical novel, mystery",
+      "cover_image": "fixtures/cover/27/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "main.book",
+    "fields": {
+      "name": "The Eagle Has Landed",
+      "author": "Jack Higgins",
+      "original_language": "English",
+      "year_published": 1975,
+      "sales": 50,
+      "genre": "War, thriller",
+      "cover_image": "fixtures/cover/28/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 30,
+    "model": "main.book",
+    "fields": {
+      "name": "Watership Down",
+      "author": "Richard Adams",
+      "original_language": "English",
+      "year_published": 1972,
+      "sales": 50,
+      "genre": "Fantasy",
+      "cover_image": "fixtures/cover/29/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 31,
+    "model": "main.book",
+    "fields": {
+      "name": "The Hite Report",
+      "author": "Shere Hite",
+      "original_language": "English",
+      "year_published": 1976,
+      "sales": 50,
+      "genre": "Sexology",
+      "cover_image": "fixtures/cover/30/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "main.book",
+    "fields": {
+      "name": "Charlotte's Web",
+      "author": "E. B. White; illustrated by Garth Williams",
+      "original_language": "English",
+      "year_published": 1952,
+      "sales": 50,
+      "genre": "Children's fiction",
+      "cover_image": "fixtures/cover/31/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 33,
+    "model": "main.book",
+    "fields": {
+      "name": "The Ginger Man",
+      "author": "J. P. Donleavy",
+      "original_language": "English",
+      "year_published": 1955,
+      "sales": 50,
+      "genre": "Novel",
+      "cover_image": "fixtures/cover/32/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 34,
+    "model": "main.book",
+    "fields": {
+      "name": "The Tale of Peter Rabbit",
+      "author": "Beatrix Potter",
+      "original_language": "English",
+      "year_published": 1902,
+      "sales": 45,
+      "genre": "Children's Literature",
+      "cover_image": "fixtures/cover/33/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 35,
+    "model": "main.book",
+    "fields": {
+      "name": "Jonathan Livingston Seagull",
+      "author": "Richard Bach",
+      "original_language": "English",
+      "year_published": 1970,
+      "sales": 44,
+      "genre": "Novella, Self-help",
+      "cover_image": "fixtures/cover/34/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 36,
+    "model": "main.book",
+    "fields": {
+      "name": "The Very Hungry Caterpillar",
+      "author": "Eric Carle",
+      "original_language": "English",
+      "year_published": 1969,
+      "sales": 43,
+      "genre": "Children's Literature, picture book",
+      "cover_image": "fixtures/cover/35/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 37,
+    "model": "main.book",
+    "fields": {
+      "name": "A Message to Garcia",
+      "author": "Elbert Hubbard",
+      "original_language": "English",
+      "year_published": 1899,
+      "sales": 40,
+      "genre": "Essay/Literature",
+      "cover_image": "fixtures/cover/36/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 38,
+    "model": "main.book",
+    "fields": {
+      "name": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "original_language": "English",
+      "year_published": 1960,
+      "sales": 40,
+      "genre": "Southern Gothic, Bildungsroman",
+      "cover_image": "fixtures/cover/37/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 39,
+    "model": "main.book",
+    "fields": {
+      "name": "Flowers in the Attic",
+      "author": "V. C. Andrews",
+      "original_language": "English",
+      "year_published": 1979,
+      "sales": 40,
+      "genre": "Gothic horror, Family saga",
+      "cover_image": "fixtures/cover/38/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 40,
+    "model": "main.book",
+    "fields": {
+      "name": "Cosmos",
+      "author": "Carl Sagan",
+      "original_language": "English",
+      "year_published": 1980,
+      "sales": 40,
+      "genre": "Popular science, Anthropology, Astrophysics, Cosmology, Philosophy, History",
+      "cover_image": "fixtures/cover/39/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 41,
+    "model": "main.book",
+    "fields": {
+      "name": "Sophie's World (Sofies verden)",
+      "author": "Jostein Gaarder",
+      "original_language": "Norwegian",
+      "year_published": 1991,
+      "sales": 40,
+      "genre": "Philosophical novel, Young adult",
+      "cover_image": "fixtures/cover/40/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 42,
+    "model": "main.book",
+    "fields": {
+      "name": "Angels & Demons",
+      "author": "Dan Brown",
+      "original_language": "English",
+      "year_published": 2000,
+      "sales": 39,
+      "genre": "Mystery-thriller",
+      "cover_image": "fixtures/cover/41/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 43,
+    "model": "main.book",
+    "fields": {
+      "name": "Kane and Abel",
+      "author": "Jeffrey Archer",
+      "original_language": "English",
+      "year_published": 1979,
+      "sales": 37,
+      "genre": "Novel",
+      "cover_image": "fixtures/cover/42/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 44,
+    "model": "main.book",
+    "fields": {
+      "name": "How the Steel Was Tempered (Как закалялась сталь)",
+      "author": "Nikolai Ostrovsky",
+      "original_language": "Russian",
+      "year_published": 1932,
+      "sales": 36.4,
+      "genre": "Socialist realist novel",
+      "cover_image": "fixtures/cover/43/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 45,
+    "model": "main.book",
+    "fields": {
+      "name": "War and Peace (Война и мир)",
+      "author": "Leo Tolstoy",
+      "original_language": "Russian",
+      "year_published": 1869,
+      "sales": 36,
+      "genre": "Historical novel",
+      "cover_image": "fixtures/cover/44/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 46,
+    "model": "main.book",
+    "fields": {
+      "name": "The Adventures of Pinocchio (Le avventure di Pinocchio)",
+      "author": "Carlo Collodi",
+      "original_language": "Italian",
+      "year_published": 1881,
+      "sales": 35,
+      "genre": "Fantasy, Children's fiction",
+      "cover_image": "fixtures/cover/45/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 47,
+    "model": "main.book",
+    "fields": {
+      "name": "The Diary of Anne Frank (Het Achterhuis)",
+      "author": "Anne Frank",
+      "original_language": "Dutch",
+      "year_published": 1947,
+      "sales": 35,
+      "genre": "Historical non-fiction, Autobiography, Memoir, Bildungsroman / Coming of Age, Jewish literature",
+      "cover_image": "fixtures/cover/46/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 48,
+    "model": "main.book",
+    "fields": {
+      "name": "Your Erroneous Zones",
+      "author": "Wayne Dyer",
+      "original_language": "English",
+      "year_published": 1976,
+      "sales": 35,
+      "genre": "Self-help",
+      "cover_image": "fixtures/cover/47/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 49,
+    "model": "main.book",
+    "fields": {
+      "name": "The Thorn Birds",
+      "author": "Colleen McCullough",
+      "original_language": "English",
+      "year_published": 1977,
+      "sales": 33,
+      "genre": "Romantic family saga",
+      "cover_image": "fixtures/cover/48/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 50,
+    "model": "main.book",
+    "fields": {
+      "name": "The Purpose Driven Life",
+      "author": "Rick Warren",
+      "original_language": "English",
+      "year_published": 2002,
+      "sales": 33,
+      "genre": "Christian literature",
+      "cover_image": "fixtures/cover/49/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 51,
+    "model": "main.book",
+    "fields": {
+      "name": "The Kite Runner",
+      "author": "Khaled Hosseini",
+      "original_language": "English",
+      "year_published": 2003,
+      "sales": 31.5,
+      "genre": "Bildungsroman, Historical fiction",
+      "cover_image": "fixtures/cover/50/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 52,
+    "model": "main.book",
+    "fields": {
+      "name": "Valley of the Dolls",
+      "author": "Jacqueline Susann",
+      "original_language": "English",
+      "year_published": 1966,
+      "sales": 31,
+      "genre": "Novel",
+      "cover_image": "fixtures/cover/51/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 53,
+    "model": "main.book",
+    "fields": {
+      "name": "Alcoholics Anonymous Big Book",
+      "author": "Bill Wilson",
+      "original_language": "English",
+      "year_published": 1939,
+      "sales": 30,
+      "genre": "Self-help",
+      "cover_image": "fixtures/cover/52/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 54,
+    "model": "main.book",
+    "fields": {
+      "name": "How to Win Friends and Influence People",
+      "author": "Dale Carnegie",
+      "original_language": "English",
+      "year_published": 1936,
+      "sales": 30,
+      "genre": "Self-help",
+      "cover_image": "fixtures/cover/53/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 55,
+    "model": "main.book",
+    "fields": {
+      "name": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "original_language": "English",
+      "year_published": 1925,
+      "sales": 30,
+      "genre": "Novel, tragedy",
+      "cover_image": "fixtures/cover/54/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 56,
+    "model": "main.book",
+    "fields": {
+      "name": "Gone with the Wind",
+      "author": "Margaret Mitchell",
+      "original_language": "English",
+      "year_published": 1936,
+      "sales": 30,
+      "genre": "Historical fiction",
+      "cover_image": "fixtures/cover/55/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 57,
+    "model": "main.book",
+    "fields": {
+      "name": "Rebecca",
+      "author": "Daphne du Maurier",
+      "original_language": "English",
+      "year_published": 1938,
+      "sales": 30,
+      "genre": "Gothic novel",
+      "cover_image": "fixtures/cover/56/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 58,
+    "model": "main.book",
+    "fields": {
+      "name": "Nineteen Eighty-Four",
+      "author": "George Orwell",
+      "original_language": "English",
+      "year_published": 1949,
+      "sales": 30,
+      "genre": "Dystopian, political fiction, social science fiction",
+      "cover_image": "fixtures/cover/57/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 59,
+    "model": "main.book",
+    "fields": {
+      "name": "The Revolt of Mamie Stover",
+      "author": "William Bradford Huie",
+      "original_language": "English",
+      "year_published": 1951,
+      "sales": 30,
+      "genre": "Fiction",
+      "cover_image": "fixtures/cover/58/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 60,
+    "model": "main.book",
+    "fields": {
+      "name": "The Girl with the Dragon Tattoo (Män som hatar kvinnor)",
+      "author": "Stieg Larsson",
+      "original_language": "Swedish",
+      "year_published": 2005,
+      "sales": 30,
+      "genre": "Fiction",
+      "cover_image": "fixtures/cover/59/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 61,
+    "model": "main.book",
+    "fields": {
+      "name": "The Lost Symbol",
+      "author": "Dan Brown",
+      "original_language": "English",
+      "year_published": 2009,
+      "sales": 30,
+      "genre": "Fiction",
+      "cover_image": "fixtures/cover/60/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 62,
+    "model": "main.book",
+    "fields": {
+      "name": "The Hunger Games",
+      "author": "Suzanne Collins",
+      "original_language": "English",
+      "year_published": 2008,
+      "sales": 29,
+      "genre": "Young adult fiction",
+      "cover_image": "fixtures/cover/61/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 63,
+    "model": "main.book",
+    "fields": {
+      "name": "James and the Giant Peach",
+      "author": "Roald Dahl",
+      "original_language": "English",
+      "year_published": 1961,
+      "sales": 28,
+      "genre": "Children's novel",
+      "cover_image": "fixtures/cover/62/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 64,
+    "model": "main.book",
+    "fields": {
+      "name": "The Young Guard (Молодая гвардия)",
+      "author": "Alexander Alexandrovich Fadeyev",
+      "original_language": "Russian",
+      "year_published": 1945,
+      "sales": 26,
+      "genre": "Young adult historical novel",
+      "cover_image": "fixtures/cover/63/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 65,
+    "model": "main.book",
+    "fields": {
+      "name": "Who Moved My Cheese?",
+      "author": "Spencer Johnson",
+      "original_language": "English",
+      "year_published": 1998,
+      "sales": 29,
+      "genre": "Self-help, motivational, business fable, psychology, leadership, parable",
+      "cover_image": "fixtures/cover/64/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 66,
+    "model": "main.book",
+    "fields": {
+      "name": "A Brief History of Time",
+      "author": "Stephen Hawking",
+      "original_language": "English",
+      "year_published": 1988,
+      "sales": 25,
+      "genre": "Popular science",
+      "cover_image": "fixtures/cover/65/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 67,
+    "model": "main.book",
+    "fields": {
+      "name": "Paul et Virginie",
+      "author": "Jacques-Henri Bernardin de Saint-Pierre",
+      "original_language": "French",
+      "year_published": 1788,
+      "sales": 25,
+      "genre": "Novel",
+      "cover_image": "fixtures/cover/66/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 68,
+    "model": "main.book",
+    "fields": {
+      "name": "Lust for Life",
+      "author": "Irving Stone",
+      "original_language": "English",
+      "year_published": 1934,
+      "sales": 25,
+      "genre": "Biographical novel",
+      "cover_image": "fixtures/cover/67/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 69,
+    "model": "main.book",
+    "fields": {
+      "name": "The Wind in the Willows",
+      "author": "Kenneth Grahame",
+      "original_language": "English",
+      "year_published": 1908,
+      "sales": 25,
+      "genre": "Children's literature",
+      "cover_image": "fixtures/cover/68/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 70,
+    "model": "main.book",
+    "fields": {
+      "name": "The 7 Habits of Highly Effective People",
+      "author": "Stephen R. Covey",
+      "original_language": "English",
+      "year_published": 1989,
+      "sales": 25,
+      "genre": "Self-help",
+      "cover_image": "fixtures/cover/69/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 71,
+    "model": "main.book",
+    "fields": {
+      "name": "Virgin Soil Upturned (Поднятая целина)",
+      "author": "Mikhail Sholokhov",
+      "original_language": "Russian",
+      "year_published": 1935,
+      "sales": 24,
+      "genre": "Novel",
+      "cover_image": "fixtures/cover/70/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 72,
+    "model": "main.book",
+    "fields": {
+      "name": "The Celestine Prophecy",
+      "author": "James Redfield",
+      "original_language": "English",
+      "year_published": 1993,
+      "sales": 23,
+      "genre": "New-age spiritual novel",
+      "cover_image": "fixtures/cover/71/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 73,
+    "model": "main.book",
+    "fields": {
+      "name": "The Fault in Our Stars",
+      "author": "John Green",
+      "original_language": "English",
+      "year_published": 2012,
+      "sales": 23,
+      "genre": "Young adult romantic novel",
+      "cover_image": "fixtures/cover/72/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 74,
+    "model": "main.book",
+    "fields": {
+      "name": "The Girl on the Train",
+      "author": "Paula Hawkins",
+      "original_language": "English",
+      "year_published": 2015,
+      "sales": 23,
+      "genre": "Thriller",
+      "cover_image": "fixtures/cover/73/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 75,
+    "model": "main.book",
+    "fields": {
+      "name": "The Shack",
+      "author": "William P. Young",
+      "original_language": "English",
+      "year_published": 2007,
+      "sales": 22.5,
+      "genre": "Novel",
+      "cover_image": "fixtures/cover/74/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 76,
+    "model": "main.book",
+    "fields": {
+      "name": "Uncle Styopa (Дядя Стёпа)",
+      "author": "Sergey Mikhalkov",
+      "original_language": "Russian",
+      "year_published": 1936,
+      "sales": 21,
+      "genre": "Children's Literature, picture book",
+      "cover_image": "fixtures/cover/75/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 77,
+    "model": "main.book",
+    "fields": {
+      "name": "The Godfather",
+      "author": "Mario Puzo",
+      "original_language": "English",
+      "year_published": 1969,
+      "sales": 21,
+      "genre": "Crime novel",
+      "cover_image": "fixtures/cover/76/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 78,
+    "model": "main.book",
+    "fields": {
+      "name": "Love Story",
+      "author": "Erich Segal",
+      "original_language": "English",
+      "year_published": 1970,
+      "sales": 21,
+      "genre": "Romance novel",
+      "cover_image": "fixtures/cover/77/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 79,
+    "model": "main.book",
+    "fields": {
+      "name": "Catching Fire",
+      "author": "Suzanne Collins",
+      "original_language": "English",
+      "year_published": 2009,
+      "sales": 21,
+      "genre": "Young Adult novel, adventure, dystopian, science fiction",
+      "cover_image": "fixtures/cover/78/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 80,
+    "model": "main.book",
+    "fields": {
+      "name": "Mockingjay",
+      "author": "Suzanne Collins",
+      "original_language": "English",
+      "year_published": 2010,
+      "sales": 20,
+      "genre": "Young Adult novel, adventure, war, science fiction, action thriller",
+      "cover_image": "fixtures/cover/79/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 81,
+    "model": "main.book",
+    "fields": {
+      "name": "Kitchen (キッチン)",
+      "author": "Banana Yoshimoto",
+      "original_language": "Japanese",
+      "year_published": 1988,
+      "sales": 20,
+      "genre": "Japanese novel",
+      "cover_image": "fixtures/cover/80/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 82,
+    "model": "main.book",
+    "fields": {
+      "name": "Andromeda Nebula (Туманность Андромеды)",
+      "author": "Ivan Yefremov",
+      "original_language": "Russian",
+      "year_published": 1957,
+      "sales": 20,
+      "genre": "Science fiction novel",
+      "cover_image": "fixtures/cover/81/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 83,
+    "model": "main.book",
+    "fields": {
+      "name": "Autobiography of a Yogi (योगी कथामृत)",
+      "author": "Paramahansa Yogananda",
+      "original_language": "Hindi",
+      "year_published": 1946,
+      "sales": 20,
+      "genre": "Autobiography",
+      "cover_image": "fixtures/cover/82/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 84,
+    "model": "main.book",
+    "fields": {
+      "name": "Gone Girl",
+      "author": "Gillian Flynn",
+      "original_language": "English",
+      "year_published": 2012,
+      "sales": 20,
+      "genre": "Crime thriller novel",
+      "cover_image": "fixtures/cover/83/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 85,
+    "model": "main.book",
+    "fields": {
+      "name": "All Quiet on the Western Front (Im Westen nichts Neues)",
+      "author": "Erich Maria Remarque",
+      "original_language": "German",
+      "year_published": 1929,
+      "sales": 20,
+      "genre": "War novel",
+      "cover_image": "fixtures/cover/84/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 86,
+    "model": "main.book",
+    "fields": {
+      "name": "The Bermuda Triangle",
+      "author": "Charles Berlitz",
+      "original_language": "English",
+      "year_published": 1974,
+      "sales": 20,
+      "genre": "Mystery",
+      "cover_image": "fixtures/cover/85/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 87,
+    "model": "main.book",
+    "fields": {
+      "name": "Things Fall Apart ",
+      "author": "Chinua Achebe",
+      "original_language": "English",
+      "year_published": 1958,
+      "sales": 20,
+      "genre": "Novel",
+      "cover_image": "fixtures/cover/86/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 88,
+    "model": "main.book",
+    "fields": {
+      "name": "Animal Farm ",
+      "author": "George Orwell",
+      "original_language": "English",
+      "year_published": 1945,
+      "sales": 20,
+      "genre": "Satirical allegorical novella, Political satire, Dystopian Fiction, Roman à clef",
+      "cover_image": "fixtures/cover/87/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 89,
+    "model": "main.book",
+    "fields": {
+      "name": "Wolf Totem (狼图腾)",
+      "author": "Jiang Rong",
+      "original_language": "Chinese",
+      "year_published": 2004,
+      "sales": 20,
+      "genre": "Semi-autobiographical novel",
+      "cover_image": "fixtures/cover/88/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 90,
+    "model": "main.book",
+    "fields": {
+      "name": "The Happy Hooker: My Own Story",
+      "author": "Xaviera Hollander",
+      "original_language": "English",
+      "year_published": 1971,
+      "sales": 20,
+      "genre": "Memoir",
+      "cover_image": "fixtures/cover/89/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 91,
+    "model": "main.book",
+    "fields": {
+      "name": "Jaws",
+      "author": "Peter Benchley",
+      "original_language": "English",
+      "year_published": 1974,
+      "sales": 20,
+      "genre": "Thriller",
+      "cover_image": "fixtures/cover/90/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 92,
+    "model": "main.book",
+    "fields": {
+      "name": "Love You Forever",
+      "author": "Robert Munsch",
+      "original_language": "English",
+      "year_published": 1986,
+      "sales": 20,
+      "genre": "Children's literature, picture book, fiction",
+      "cover_image": "fixtures/cover/91/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 93,
+    "model": "main.book",
+    "fields": {
+      "name": "The Women's Room",
+      "author": "Marilyn French",
+      "original_language": "English",
+      "year_published": 1977,
+      "sales": 20,
+      "genre": "Feminist novel",
+      "cover_image": "fixtures/cover/92/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 94,
+    "model": "main.book",
+    "fields": {
+      "name": "What to Expect When You're Expecting",
+      "author": "Arlene Eisenberg and Heidi Murkoff",
+      "original_language": "English",
+      "year_published": 1984,
+      "sales": 20,
+      "genre": "Pregnancy guide",
+      "cover_image": "fixtures/cover/93/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 95,
+    "model": "main.book",
+    "fields": {
+      "name": "Adventures of Huckleberry Finn",
+      "author": "Mark Twain",
+      "original_language": "English",
+      "year_published": 1885,
+      "sales": 20,
+      "genre": "Picaresque novel, Bildungsroman, satire, Robinsonade",
+      "cover_image": "fixtures/cover/94/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 96,
+    "model": "main.book",
+    "fields": {
+      "name": "The Secret Diary of Adrian Mole, Aged 13¾",
+      "author": "Sue Townsend",
+      "original_language": "English",
+      "year_published": 1982,
+      "sales": 20,
+      "genre": "Young adult novel",
+      "cover_image": "fixtures/cover/95/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 97,
+    "model": "main.book",
+    "fields": {
+      "name": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "original_language": "English",
+      "year_published": 1813,
+      "sales": 20,
+      "genre": "Classic regency novel, romance",
+      "cover_image": "fixtures/cover/96/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 98,
+    "model": "main.book",
+    "fields": {
+      "name": "Kon-Tiki: Across the Pacific in a Raft (Kon-Tiki ekspedisjonen)",
+      "author": "Thor Heyerdahl",
+      "original_language": "Norwegian",
+      "year_published": 1950,
+      "sales": 20,
+      "genre": "Travel literature",
+      "cover_image": "fixtures/cover/97/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 99,
+    "model": "main.book",
+    "fields": {
+      "name": "The Good Soldier Švejk (Osudy dobrého vojáka Švejka za světové války)",
+      "author": "Jaroslav Hašek",
+      "original_language": "Czech",
+      "year_published": 1923,
+      "sales": 20,
+      "genre": "Unfinished satirical dark comedy novel",
+      "cover_image": "fixtures/cover/98/cover_0.jpeg"
+    }
+  },
+  {
+    "pk": 100,
+    "model": "main.book",
+    "fields": {
+      "name": "Where the Wild Things Are",
+      "author": "Maurice Sendak",
+      "original_language": "English",
+      "year_published": 1963,
+      "sales": 20,
+      "genre": "Children's picture book",
+      "cover_image": "fixtures/cover/99/cover_0.jpeg"
+    }
+  }
+]
