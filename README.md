@@ -53,3 +53,11 @@ Berikut adalah jenis peran pengguna BookPals beserta penjelasannya:
 ## 2. Admin
 - Mengecek apakah buku yang di-*request* oleh User telah tersedia di list buku atau tidak
 - Menyetujui/Menolak permintaan menambah buku dari User
+
+# [Setup the development]
+
+1. Buat env dengan `python -m venv env`.
+2. Setiap memulai development, aktifkan env dengan `activate` di folder `env/Scripts`.
+3. Install semua package yang wajib dengan `pip install -r requirements.txt`.
+4. Lakukan sinkronisasi migration files dengan `python manage.py migrate`.
+5. Voila! Coba jalankan proyeknya dengan `python manage.py runserver`.
