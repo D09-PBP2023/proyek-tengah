@@ -1,1 +1,37 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
 <h1>Belum ada nama hehe</h1>
+
+<h1>Testing data:</h1>
+<table class="mb-[20px]">
+    <tr>
+        <th style="width:150px">Cover</th>
+        <th style="width:150px">Name</th>
+        <th style="width:100px">Author</th>
+        <th style="width:200px">Language</th>
+        <th style="width:120px">Year</th>
+    </tr>
+    {% for book in books %}
+        <tr>
+            <td>
+                <img src="{{ book.cover_image.url }}" alt="Lights" style="width:120px">
+            </td>
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.original_language}}</td>
+            <td>{{book.year_published}}</td>
+        </tr>
+    {% endfor %}
+    {% if menus|length == 0 %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    {% endif %}
+</table>
+{% endblock %}

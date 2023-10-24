@@ -6,7 +6,9 @@ from main.models import Book
 
 # Create your views here.
 def show_main(request):
-    context = {} # empty
+    context = {
+        'books': Book.objects.all()
+    }
     return render(request, "main.html", context)
 
 def get_books(request):
