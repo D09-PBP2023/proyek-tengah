@@ -40,3 +40,7 @@ def register_user(request):
             messages.error(request, form.error_messages)
     context = {'form':form}
     return render(request, 'register.html', context)
+
+def logout_user(request):
+    logout(request)
+    return redirect('users:login')
