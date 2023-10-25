@@ -1,47 +1,53 @@
 {% extends 'base.html' %} 
 
 {% block meta %}
-    <title>Login</title>
+    <title>Register</title>
 {% endblock meta %}
 
 {% block content %}
 
 <div class="flex flex-col min-h-screen items-center justify-center bg-gradient-to-r from-gray-100 to-blue-200">
-    <div class="flex flex-row rounded-xl w-[900px] h-[450px] items-center bg-white drop-shadow-md">
-        <div class="flex flex-col h-full w-4/6 rounded-l-xl justify-center items-center gap-5">
+    <div class="flex flex-col lg:flex-row rounded-xl w-[350px] lg:w-[900px] h-[600px] lg:h-[450px] items-center bg-white shadow-2xl">
+        <div class="flex flex-col h-5/6 lg:h-full w-full lg:w-4/6 rounded-l-xl justify-center items-center gap-5">
             <h1 class="font-bold text-3xl">Sign Up</h1>
             <form method="post">
                 {% csrf_token %}
                 <div class="flex flex-col gap-5">
                     <div class="flex flex-col gap-3">
-                        <label for="username">Username</label>
-                        <input class="px-[8px] py-[4px] border border-blue-100" type="text" name="username" placeholder="Username" class="form-control">
+                        <label for="{{ form.username.id_for_label }}">Username</label>
+                        <div class="border border-blue-100" type="text" name="username" placeholder="Username" class="form-control">
+                            {{ form.username }}
+                        </div>
                     </div>
                             
                     <div class="flex flex-col gap-3">
-                        <label for="password">Password</label>
-                        <input class="px-[8px] py-[4px] border border-blue-100" type="password" name="password" placeholder="Password" class="form-control">
+                        <label for="{{ form.password1.id_for_label }}">Password</label>
+                        <div class="border border-blue-100" type="password" name="password" placeholder="Password" class="form-control">
+                            {{ form.password1 }}
+                        </div>
                     </div>
 
                     <div class="flex flex-col gap-3">
-                        <label for="password">Retype Password</label>
-                        <input class="px-[8px] py-[4px] border border-blue-100" type="password" name="retype_password" placeholder="Password" class="form-control" data-toggle="password">
+                        <label for="{{ form.password2.id_for_label }}">Retype Password</label>
+                        <div class="border border-blue-100 w-full relative">
+                            {{ form.password2 }}
+                        </div>
                     </div>
         
                     <div class="flex justify-center">
-                        <input class="btn login_btn bg-blue-500 hover:bg-blue-600 text-white font-bold border border-blue-500 rounded px-[20px] py-[5px] hover:cursor-pointer" type="submit" value="Sign Up">
+                        <input class="btn login_btn bg-blue-500 hover:bg-blue-600 text-white font-bold border border-blue-500 rounded px-[20px] py-[5px] hover:cursor-pointer" type="submit" value="SIGN UP">
                     </div>
                 </div>
             </form>
         </div>
-        <div class="flex relative flex-row h-full w-1/3 overflow-hidden">
-            <div class="flex h-full w-full translate-x-6 rounded-r-xl skew-x-6 bg-blue-400">
+        <div class="flex relative flex-row h-1/6 lg:h-full w-full lg:w-1/3 rounded-b-xl lg:rounded-b-none lg:rounded-r-xl overflow-hidden">
+            <div class="flex h-full w-full lg:translate-x-6 lg:skew-x-6 bg-blue-400">
             </div>
-            <div class="flex absolute h-full w-full">
+            <div class="flex absolute h-full w-full border-none">
                 <div class="flex flex-col justify-center w-full items-center gap-3">
                     <h1 class="text-sm text-white font-bold">Already have an account?</h1>
-                    <a class="btn login_btn bg-blue-500 hover:bg-blue-600 text-white font-bold border border-blue-500 rounded px-[20px] py-[5px] hover:cursor-pointer" href="{% url 'users:login' %}">
-                        Sign In
+                    <a class="btn login_btn bg-blue-400 hover:bg-blue-500 text-white font-bold border border-white rounded px-[20px] py-[5px] hover:cursor-pointer" href="{% url 'users:login' %}">
+                        SIGN IN
                     </a>
                 </div>
             </div>

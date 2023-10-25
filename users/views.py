@@ -1,13 +1,13 @@
-from datetime import datetime
-from django.shortcuts import render
+import datetime
+from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core import serializers
 from django.contrib import messages  
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
 
 from main.models import Book
+from users.forms import UserRegistrationForm
 
 # Create your views here.
 def login_user(request):
@@ -28,14 +28,14 @@ def login_user(request):
     return render(request, 'login.html', context)
 
 def register_user(request):
-    form = UserCreationForm()
+    form = UserRegistrationForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Your account has been successfully created!')
-            return redirect('main:login')
+            return redirect('users:login')
         else:
             messages.error(request, form.error_messages)
     context = {'form':form}
