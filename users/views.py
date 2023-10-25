@@ -11,6 +11,9 @@ from users.forms import UserRegistrationForm
 
 # Create your views here.
 def login_user(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("main:show_main"))
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -28,6 +31,9 @@ def login_user(request):
     return render(request, 'login.html', context)
 
 def register_user(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("main:show_main"))
+    
     form = UserRegistrationForm()
 
     if request.method == 'POST':
