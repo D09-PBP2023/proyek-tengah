@@ -26,7 +26,7 @@ def login_user(request):
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
         else:
-            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+            messages.error(request, 'Sorry, incorrect username or password. Please try again.')
     context = {}
     return render(request, 'login.html', context)
 
@@ -42,8 +42,7 @@ def register_user(request):
             form.save()
             messages.success(request, 'Your account has been successfully created!')
             return redirect('users:login')
-        else:
-            messages.error(request, form.error_messages)
+    
     context = {'form':form}
     return render(request, 'register.html', context)
 
