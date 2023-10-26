@@ -2,36 +2,227 @@
 
 {% block content %}
 
-<h1>Belum ada nama hehe</h1>
+<div>
+    <!-- Header -->
+    <div class="flex flex-row h-[60px] lg:mb-[25px] border py-3 px-5 justify-between items-center">
+        <div class="flex flex-row w-[300px] justify-self-start items-center gap-2">
+            <div id="dropdown_general_button" class="lg:hidden mouse-pointer" onclick="toggleDropdownGeneral()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                    <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/>
+                </svg>
+            </div>
+            <h1 class="font-bold text-xl">BookPals</h1>
+        </div>
+        <div>
+            <ul class="lg:flex flex-row gap-16 hidden">
+                <li class="text-gray-800 font-semibold"><a href="{% url 'main:show_main' %}">Home</a></li>
+                <li class="text-gray-800 font-semibold"><a href="#">Add New Book</a></li>
+                <li class="text-gray-800 font-semibold"><a href="#">About Us</a></li>
+            </ul>
+        </div>
+        <div class="flex flex-row gap-4 relative w-[300px] items-end justify-end">
+            {% if user.is_authenticated %}
+                <div class="flex flex-col mx-5">
+                    <button id="dropdown_user_button" class="flex flex-row items-center justify-center gap-2" onclick="toggleDropdownUser()">
+                        <h1 class="font-semibold">{{ user.username }}</h1>
+                        <svg class="h-5 w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor"><path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10
+                                10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" /></svg>
+                    </button>
+                    <div id="dropdown_user_menu" class="flex flex-col origin-top-right opacity-0 transition scale-0 divide-y absolute z-20 top-[50px] right-[20px] w-[200px] border rounded-lg bg-white shadow-md">
+                        <a href="#" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
+                            Profile
+                        </a>
+                        <a href="#" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
+                            Requests
+                        </a>
+                        <a href="{% url 'users:logout' %}" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
+                            Sign Out
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'users:login' %}" class="px-3 py-2">Login</a>
+                <a href="{% url 'users:register' %}" class="px-8 py-2 border rounded-xl bg-sky-500 text-white">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Subheader for Mobile -->
+    <div id="dropdown_general_menu" class="flex flex-col h-0 origin-top w-full transition scale-0 divide-y mb-[25px] lg:hidden border py-3 justify-between items-center">
+        <a href="{% url 'main:show_main' %}" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
+            Home
+        </a>
+        <a href="#" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
+            Add New Book
+        </a>
+        <a href="{% url 'users:logout' %}" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
+            About Us
+        </a>
+    </div>
+    <!-- Featured books -->
+    <div>
+        <h1 class="font-bold text-3xl mx-[50px] my-[20px]">For You</h1>
+        <div class="flex justify-center items-center">
+            <div id="featured_books" class="flex flex-col lg:flex-row w-full h-auto lg:h-[250px] items-center gap-3 overflow-x-auto snap-x snap-normal snap-mandatory">
+                <!-- Coded in javascript -->
+            </div>
+        </div>
+    </div>
+    <!-- Browse books -->
+    <div class="flex flex-col mt-[30px] mb-[60px]">
+        <h1 class="font-bold text-2xl mx-[50px]">Browse</h1>
+        <div class="flex flex-col justify-center items-center my-5 gap-1">
+            <h1 class="font-bold text-lg">Search your books here!</h1>
+            <input id="search_input" type="text" class="rounded-xl bg-gray-200 w-[300px] lg:w-[350px] h-[40px] px-3 py-1 border-black border" placeholder="The title..." value="" autocomplete="off">
+        </div>
+        <div id="browse_books" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 w-full h-auto items-center justify-center justify-items-center gap-4 px-[50px] py-2">
+            <!-- Coded in javascript -->
+        </div>
+    </div>
+</div>
 
-<h1>Testing data:</h1>
-<table class="mb-[20px]">
-    <tr>
-        <th style="width:150px">Cover</th>
-        <th style="width:150px">Name</th>
-        <th style="width:100px">Author</th>
-        <th style="width:200px">Language</th>
-        <th style="width:120px">Year</th>
-    </tr>
-    {% for book in books %}
-        <tr>
-            <td>
-                <img src="{{ book.cover_image.url }}" alt="Lights" style="width:120px">
-            </td>
-            <td>{{book.name}}</td>
-            <td>{{book.author}}</td>
-            <td>{{book.original_language}}</td>
-            <td>{{book.year_published}}</td>
-        </tr>
-    {% endfor %}
-    {% if menus|length == 0 %}
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    {% endif %}
-</table>
+<script>
+    const featured_book_ids = [3, 7, 6, 68, 32];
+    const featured_book_colors = {
+        3: 'from-indigo-800 to-indigo-400', 
+        6: 'from-red-600 to-red-300', 
+        7: 'from-sky-500 to-sky-200',
+        68: 'from-green-700 to-green-500',
+        32: 'from-pink-400 to-pink-200',
+    };
+
+    async function getBooks() {
+        return fetch("{% url 'main:get_books' %}").then((res) => res.json());
+    }
+
+    async function buildFeaturedBooks(featured_books) {
+        document.getElementById("featured_books").innerHTML = "";
+        let htmlString = ``;
+        featured_books.forEach((book) => {
+            htmlString += `\n
+            <div class="flex flex-row relative snap-center items-center hover:cursor-pointer rounded-xl transition shadow-md hover:shadow-xl w-[300px] lg:w-[400px] h-[200px] px-4 py-3 mx-1 gap-3 bg-gradient-to-t ${featured_book_colors[book.pk]}">
+                <img src='media/${book.fields.cover_image}' class='w-[100px] rounded-lg drop-shadow-md'>
+                <div class="flex-col w-[200px] lg:w-[300px]">
+                    <div class="line-clamp-1 lg:line-clamp-2 font-bold text-md lg:text-lg text-white">${book.fields.name}</div>
+                    <div class="line-clamp-1 text-white">By ${book.fields.author}</div>
+                    <div class="h-[5px]"></div>
+                    <div class="truncate text-white text-xs">${book.fields.genre}</div>
+                    <div class="truncate text-white text-xs">${book.fields.original_language} - ${book.fields.year_published}</div>
+                    <div class="flex flex-row gap-2">
+                        {% for i in n %}
+                            {% if i < 3 %}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-white bi bi-star-fill my-2" viewBox="0 0 16 16"> 
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
+                                </svg>
+                            {% else %}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-gray-300 opacity-50 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
+                                </svg>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>`.replaceAll('177013', book.pk)
+        });
+        
+        document.getElementById("featured_books").innerHTML = htmlString;
+    }
+
+    async function buildBrowseBooks(books) {
+        document.getElementById("browse_books").innerHTML = "";
+        let htmlString = ``;
+        books.forEach((book) => {
+            htmlString += `\n
+            <div class="flex flex-row items-center rounded-xl border transition shadow-md hover:shadow-xl w-[350px] sm:w-[250px] lg:w-[350px] h-[200px] px-4 py-3 gap-3 cursor-pointer">
+                <img src='media/${book.fields.cover_image}' class='w-[100px] rounded-lg drop-shadow-md'>
+                <div class="flex-col w-[250px] sm:w-[150px] lg:w-[250px]">
+                    <div class="line-clamp-1 lg:line-clamp-2 font-semibold text-lg text-black">${book.fields.name}</div>
+                    <div class="line-clamp-1 font-normal text-slate-400 text-sm">${book.fields.author}</div>
+                    <div class="flex flex-row gap-2">
+                        {% for i in n %}
+                            {% if i < 3 %}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-yellow-400 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
+                                </svg>
+                            {% else %}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-gray-300 opacity-50 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
+                                </svg>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>`.replaceAll('177013', book.pk)
+        });
+        
+        document.getElementById("browse_books").innerHTML = htmlString;
+
+        const hiddenElements = document.querySelectorAll("#card-book");
+        console.log(hiddenElements);
+        hiddenElements.forEach((element) => booksCardObserver.observe(element));
+    }
+
+    async function refreshBooks() {
+        const books = await getBooks();
+        const featured_books = books.filter(book => featured_book_ids.includes(book.pk));
+        
+        buildFeaturedBooks(featured_books);
+        buildBrowseBooks(books);
+    }
+
+    function toggleDropdownUser() {
+        const dropdownButton = document.getElementById("dropdown_user_button");
+        const dropdownMenu = document.getElementById("dropdown_user_menu");
+        
+        dropdownMenu.classList.toggle('opacity-0');
+        dropdownMenu.classList.toggle('scale-100');
+        dropdownMenu.classList.toggle('scale-0');
+    }
+
+    function toggleDropdownGeneral() {
+        const dropdownButton = document.getElementById("dropdown_general_button");
+        const dropdownMenu = document.getElementById("dropdown_general_menu");
+
+        dropdownMenu.classList.toggle('scale-100');
+        dropdownMenu.classList.toggle('scale-0');
+        dropdownMenu.classList.toggle('h-0');
+    }
+    
+    let lastTime = -1;
+    function searchBooks(value, searchTime) {
+        lastTime = searchTime;
+        setTimeout(async function() { // Make sure not to spam request to backend
+            if (searchTime != lastTime) return;
+            if (value && value != "") {
+                const books = await fetch(`{% url 'main:get_books_by_name' 177013 %}`.replace(177013, value)).then((res) => res.json());
+                buildBrowseBooks(books);
+            } else {
+                buildBrowseBooks(await getBooks());
+            }
+        }, 700);
+    }
+
+    const booksCardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            console.log(entry);
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('opacity-0');
+                entry.target.classList.remove('blur-md');
+                entry.target.classList.remove('translate-y-full');
+                entry.target.classList.add('opacity-1');
+                entry.target.classList.add('blur-none');
+                entry.target.classList.add('translate-y-0');
+            }
+        });
+    });
+
+    const searchInput = document.getElementById("search_input");
+
+    refreshBooks();
+    searchInput.oninput = function(event) {
+        searchBooks(event.target.value, event.timeStamp);
+    };
+</script>
 {% endblock %}
