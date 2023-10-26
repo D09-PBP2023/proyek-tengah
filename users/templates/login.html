@@ -10,6 +10,11 @@
     <div class="flex flex-col lg:flex-row rounded-xl w-[350px] lg:w-[900px] h-[500px] lg:h-[450px] items-center bg-white shadow-2xl">
         <div class="flex flex-col h-4/6 lg:h-full w-full lg:w-4/6 rounded-l-xl justify-center items-center gap-5">
             <h1 class="font-bold text-3xl">Sign In</h1>
+            {% for error in messages %}
+                <div class="alert alert-danger text-red-700" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
             <form method="post">
                 {% csrf_token %}
                 <div class="flex flex-col gap-5">
