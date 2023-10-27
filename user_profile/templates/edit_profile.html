@@ -1,35 +1,65 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block meta %}
-    <title>Edit Profile</title>
+    <title>Profile</title>
 {% endblock meta %}
 
 {% block content %}
-
 <div class="flex flex-col min-h-screen items-center justify-center bg-gradient-to-r from-gray-100 to-blue-200">
-    <div class="flex flex-col lg:flex-row rounded-xl w-[350px] lg:w-[900px] h-[500px] lg:h-[450px] items-center bg-white shadow-2xl">
-        <div class="flex flex-col h-4/6 lg:h-full w-full lg:w-4/6 rounded-l-xl justify-center items-center gap-5">
-            <h1 class="font-bold text-3xl">edit</h1>
-            <form method="post">
-                {% csrf_token %}
-                <div class="flex flex-col gap-5">
-                    <div class="flex flex-col gap-3">
-                        <label for="username">Username</label>
-                        <input class="px-[8px] py-[4px] border border-blue-100" type="text" id="username" name="username" placeholder="Username" class="form-control">
-                    </div>
-                            
-                    <div class="flex flex-col gap-3">
-                        <label for="password">Bio</label>
-                        <input class="px-[8px] py-[4px] border border-blue-100" type="text" class="form-control">
-                    </div>
+    <div class="h-14 bg-gradient-to-r from-cyan-400 to-blue-700 flex flex-col lg:flex-row rounded-xl w-[300px] lg:w-[1400px] h-[600px] lg:h-[700px] bg-white shadow-2xl relative">
+        <div class="h-[60%] w-full bg-white absolute bottom-0 left-0 lg:flex-row rounded-b-lg 12px"></div>
+        <h1 class="text-white font-bold text-3xl ml-4 mt-4">{{ profile.user.username }}'s Atelier</h1>
         
-                    <div class="flex justify-center">
-                        <input class="btn login_btn bg-blue-500 hover:bg-blue-600 text-white font-bold border border-blue-500 rounded px-[20px] py-[5px] hover:cursor-pointer" type="submit" value="SIGN IN">
-                    </div>
-                </div>
-            </form>
+        <div style="width: 200px; height: 200px; background-color: gray; border-radius: 50%;" class="absolute top-1/3 left-20 transform translate-x-5 -translate-y-20">
+        </div>
+    
+        <!-- New "email" section below the circle -->
+        <div class="absolute top-1/2 left-20 w-[500px] bg-white rounded-lg p-4 shadow-md translate-y-3">
+            <!-- Add your email -->
+            <p class="text-gray-700">{{ profile.email }}</p>
+        </div>
+
+        <!-- New "bio" section below the email -->
+        <div class="absolute top-2/3 left-20 w-[500px] bg-white rounded-lg p-4 shadow-md transform -translate-y-10">
+            <!-- Add your bio content here -->
+            <p class="text-gray-700">{{ profile.bio }}</p>
+        </div>
+        
+        <!-- Container for highlighted book covers on the right side -->
+        <div class="absolute top-1/2 right-10 w-[700px] bg-gradient-to-r from-cyan-300 to-blue-600 rounded-lg p-4 shadow-md transform translate-y-3" style="display: flex; justify-content: space-around;">
+            <!-- Add your book covers here -->
+            <div style="display: flex; align-items: center;  margin-top: -150px;">
+                <svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 472.615 472.615" xml:space="preserve">
+                    <g>
+                        <g>
+                            <polygon points="96.738,0 96.738,333.046 236.307,472.615 375.877,333.046 375.877,0"/>
+                        </g>
+                    </g>
+                </svg>
+                <p class="text-lg text-gray-700 ml-2">Bookmarks</p>
+            </div>
+            <div class="flex flex-col gap-3">
+                <img href= "" class="rounded-lg" src="{{ fav1.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav1.name }}">
+             
+
+            </div>
+            <div class="flex flex-col gap-3">
+                <img class="rounded-lg" src="{{ fav2.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav2.name }}">
+
+            </div>
+            <div class="flex flex-col gap-3">
+                <img class="rounded-lg" src="{{ fav3.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav3.name }}">
+         
+            </div>
+        </div>
+        <div class="absolute top-3/4 right-10 transform translate-y-20">
+        <a href="{% url 'user_profile:edit_profile' %}">
+        <button class="group relative h-8 w-36 overflow-hidden rounded-lg bg-white text-lg shadow">
+            <div class="absolute inset-0 w-3 bg-gradient-to-r from-cyan-300 to-blue-600 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+            <span class="relative text-black group-hover:text-white">Edit Profile</span>
+          </button>
+        </a>
         </div>
     </div>
 </div>
-
 {% endblock %}
