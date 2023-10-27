@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, reverse
 from main.models import Book
+from user_profile.models import UserProfile
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -13,20 +16,17 @@ def book_details(request, id):
         'year_published': book.year_published,
         'sales' : book.sales,
         'genre' : book.genre,
-        'cover_image' : book.cover_image
+        'cover_image' : book.cover_image,
+        'id' : book.pk
     }
     return render(request, "book_details.html", context)
 
-# def book(request, id):
-#     book = Book.objects.get(pk = id)
+def bookmark_book(request, id):
+    book = get_object_or_404(Book, pk=id)
+    user_profile = UserProfile.objects.get(user=request.user)
 
-#     context = {
-#         'name': book.name,
-#         'author': book.author,
-#         'original_language': book.original_language,
-#         'year_published': book.year_published,
-#         'sales' : book.sales,
-#         'genre' : book.genre,
-#         'cover_image' : book.cover_image
-#     }
-#     return render(request, "book.html", context)
+    if user_profile.bookmarkedbooks.filter(id=book.id).exists():
+        user_profile.bookmarkedbooks.remove(book)
+    else:
+        user_profile.bookmarkedbooks.add(book)
+    return HttpResponseRedirect(reverse('catalog:book_details', kwargs={"id":id}))
