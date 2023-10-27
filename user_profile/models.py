@@ -9,7 +9,7 @@ class UserProfile(models.Model):
     nickname = models.CharField(max_length=255, default=True)
     email = models.EmailField()
     profile_picture = models.ImageField(upload_to='profile_pictures', null=True, blank=True)
-    bio = models.TextField()
+    bio = models.TextField(max_length=400)
     bookmarkedbooks = models.ManyToManyField(Book, blank=True)
     times_swapped = models.IntegerField(default=0)
     favoriteBook1 = models.ForeignKey(Book, on_delete=models.SET_NULL, related_name='profile_book1', blank=True, null=True)
