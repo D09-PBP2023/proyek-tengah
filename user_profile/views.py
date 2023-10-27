@@ -38,3 +38,9 @@ def edit_profile(request):
         form = UserUpdateForm(instance=profile)
 
     return render(request, 'edit_profile.html', {'form': form})
+
+
+def view_bookmarked_list(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    bookmarked_books = user_profile.bookmarkedbooks.all()
+    return render(request, 'bookmarked_list.html', {'bookmarked_books': bookmarked_books})

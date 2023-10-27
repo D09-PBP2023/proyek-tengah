@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     email = models.EmailField()
     profile_picture = models.ImageField(upload_to='profile_pictures', null=True, blank=True)
     bio = models.TextField()
-    bookmarkedbooks = models.ManyToManyField(Book, on_delete=None)
+    bookmarkedbooks = models.ManyToManyField(Book, blank=True)
     times_swapped = models.IntegerField(default=0)
     favoriteBook1 = models.ForeignKey(Book, on_delete=models.SET_NULL, related_name='profile_book1', blank=True, null=True)
     favoriteBook2 = models.ForeignKey(Book, on_delete=models.SET_NULL, related_name='profile_book2', blank=True, null=True)
