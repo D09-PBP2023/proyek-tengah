@@ -67,32 +67,17 @@
     <!-- Container book details -->
     <div class="w-full md:w-500px rounded-lg mx-auto p-12 flex justify-center">
         <div class="w-full h-auto mx-auto bg-blue-400 items-center rounded-lg shadow-2xl flex flex-col">
-            <h1 class="text-white font-bold p-2 text-3xl">Book Details</h1>
+            <h1 class="text-white font-bold p-2 text-3xl">Bookmark List</h1>
             <div class="w-full h-auto mx-auto rounded-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
-                <!-- Image -->
-                <div class="w-2/4 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
-                    <img class=" w-4/5 h-auto mx-auto rounded-lg hover:shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
-                </div>
-                <!-- Details -->
-                <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-2 flex justify-center flex-col">
-                    <h1 class="text-black font-bold text-3xl">{{ name }}</h1>
-                    <p class="text-lg text-3xl">By {{ author }}, {{ original_language }} - {{ year_published }}, {{ genre }}
-                        <nav>Ratings: 0/5</nav>
-                    </p>
-                    <div class="border border-black w-4/5 h-auto rounded-lg p-5 shadow-2xl">
-                        <p>No reviews yet</p>
-                    </div>
-                    <div class="w-full h-auto mx-auto rounded-lg p-5">
-                        <a class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[20px] py-[5px] hover:cursor-pointer">Request book swap?</a>
-                        
-                        <form action="{% url 'catalog:bookmark_book' id=id  %}" method="post">
-                            {% csrf_token %}
-                            <button class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[20px] py-[5px] hover:cursor-pointer" type="submit">Bookmark</button>
-                        </form>
-                        
-                        <a href="{% url 'main:show_main' %}" class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[20px] py-[5px] hover:cursor-pointer">Bookmark {{id}}</a>
-                    </div>
-                </div>
+                <!-- <h1>hai</h1> -->
+                {% for book in bookmarked_books %}
+                    <!-- Display the book here. -->
+                    <div class="w-2/4 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
+                        <img class=" w-4/5 h-auto mx-auto rounded-lg hover:shadow-2xl object-cover" src="{{ book.cover_image.url }}" alt="{{ book.name }}">
+                        <h1 class="text-2xl justify-center">{{book.name}}</h1>
+                    </div>       
+                {% endfor %}
+
             </div>
         </div>
     </div>
