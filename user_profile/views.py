@@ -60,7 +60,7 @@ def edit_profile(request):
         messages.success(request, ("You Must Be Logged In to Update Your Profile"))
         return redirect('users:login')
 
-
+#bookmark
 def view_bookmarked_list(request):
     user_profile = UserProfile.objects.get(user=request.user)
     bookmarked_books = user_profile.bookmarkedbooks.all()
