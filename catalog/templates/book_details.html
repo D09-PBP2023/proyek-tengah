@@ -2,8 +2,7 @@
 
 {% block content %}
 
-<!-- <div class="flex flex-col min-h-screen items-center justify-center bg-gradient-to-r from-gray-100 to-blue-200"> -->
-
+<div>
     <!-- Header -->
     <div class="flex flex-row h-[60px] lg:mb-[25px] border py-3 px-5 justify-between bg-gradient-to-r from-gray-100 to-blue-200 items-center">
         <div class="flex flex-row w-[300px] justify-self-start items-center gap-2">
@@ -68,15 +67,15 @@
     <div class="w-full md:w-500px rounded-lg mx-auto p-12 flex justify-center">
         <div class="w-full h-auto mx-auto bg-blue-400 items-center rounded-lg shadow-2xl flex flex-col">
             <h1 class="text-white font-bold p-2 text-3xl">Book Details</h1>
-            <div class="w-full h-auto mx-auto rounded-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
+            <div class="w-full h-auto mx-auto rounded-b-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
                 <!-- Image -->
-                <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
-                    <img class="w-4/5 h-auto mx-auto rounded-lg shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
+                <div class="w-2/5 md:w-1/5 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
+                    <img class="w-full h-auto mx-auto rounded-lg shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
                 </div>
                 <!-- Details -->
                 <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-2 flex justify-center flex-col">
                     <h1 class="text-black font-bold text-3xl">{{ name }}</h1>
-                    <div class="text-lg text-3xl py-[20px]">
+                    <div class="text-lg py-[20px]">
                         <p>By {{ author }}, {{ original_language }} - {{ year_published }}, {{ genre }}</p>
                         <p>Ratings: 0/5</p>
                     </div>
@@ -87,7 +86,8 @@
 
                         <form class="w-full text-white font-bold py-[20px] " action="{% url 'catalog:bookmark_book' id=id  %}" method="post">
                             {% csrf_token %}
-                            <button id="bookmarkButton" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[1px] py-[5px] hover:cursor-pointer" type="submit"></button>
+                            <button id="bookmarkButton" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[1px] py-[5px] hover:cursor-pointer" type="submit">
+                            </button>
                             <nav class="w-full py-[10px]">
                                 <a href="../../bookmarked/" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">See Bookmark</a>
                                 <a class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">Request book swap?</a>
@@ -99,9 +99,10 @@
             </div>
         </div>
     </div>
+</div>
 
 <script>
-     function toggleDropdownUser() {
+    function toggleDropdownUser() {
         const dropdownButton = document.getElementById("dropdown_user_button");
         const dropdownMenu = document.getElementById("dropdown_user_menu");
         
@@ -124,26 +125,25 @@
     }
 
     async function refreshMark() {
-    document.getElementById("bookmarkButton").innerHTML = ""
-    const books = await getMarked()
-    const id = "{{ id }}";
-    let isBookmarked = false;
-    let htmlString = `<button type="button">Bookmark</button>`;
+        const bookmarkButton = document.getElementById("bookmarkButton");
+        bookmarkButton.innerHTML = "";
 
-    books.forEach(book => {
+        const books = await getMarked();
+        const id = "{{ id }}";
+        let isBookmarked = false;
+        
+        books.forEach(book => {
+            if (book.pk == id){
+                isBookmarked = true;
+            }
+        });
 
-        console.log('pk' in book);
-
-        if (book.pk == id){
-            htmlString = `<button type="button">Bookmarked</button>`;
+        if (isBookmarked) {
+            bookmarkButton.textContent = "Bookmarked";
+        } else {
+            bookmarkButton.textContent = "Bookmark";
         }
-
-    });
-    
-    document.getElementById("bookmarkButton").innerHTML = htmlString;
-}
+    }
 refreshMark()
 </script>
-
-<!-- </div> -->
 {% endblock %}
