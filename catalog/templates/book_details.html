@@ -71,7 +71,7 @@
             <div class="w-full h-auto mx-auto rounded-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
                 <!-- Image -->
                 <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
-                    <img class="w-4/5 h-auto mx-auto rounded-lg hover:shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
+                    <img class="w-4/5 h-auto mx-auto rounded-lg shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
                 </div>
                 <!-- Details -->
                 <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-2 flex justify-center flex-col">
@@ -85,11 +85,14 @@
                     </div>
                     <div class="w-full h-auto mx-auto rounded-lg py-[20px]">
 
-                        <form class="w-2/4 text-white font-bold py-[20px] " action="{% url 'catalog:bookmark_book' id=id  %}" method="post">
+                        <form class="w-full text-white font-bold py-[20px] " action="{% url 'catalog:bookmark_book' id=id  %}" method="post">
                             {% csrf_token %}
-                            <button class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer" type="submit">Bookmark</button>
-                            <a href="../../bookmarked/" class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">See Bookmark</a>
-                            <a class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">Request book swap?</a>
+                            <button id="bookmarkButton" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[1px] py-[5px] hover:cursor-pointer" type="submit"></button>
+                            <nav class="w-full py-[10px]">
+                                <a href="../../bookmarked/" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">See Bookmark</a>
+                                <a class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">Request book swap?</a>
+                            </nav>
+                            
                         </form>
                     </div>
                 </div>
@@ -116,19 +119,30 @@
         dropdownMenu.classList.toggle('h-0');
     }
     
-    let lastTime = -1;
-    function searchBooks(value, searchTime) {
-        lastTime = searchTime;
-        setTimeout(async function() { // Make sure not to spam request to backend
-            if (searchTime != lastTime) return;
-            if (value && value != "") {
-                const books = await fetch(`{% url 'main:get_books_by_name' 177013 %}`.replace(177013, value)).then((res) => res.json());
-                buildBrowseBooks(books);
-            } else {
-                buildBrowseBooks(await getBooks());
-            }
-        }, 700);
+    async function getMarked() {
+        return fetch("{% url 'catalog:get_marked_books' %}").then((res) => res.json())
     }
+
+    async function refreshMark() {
+    document.getElementById("bookmarkButton").innerHTML = ""
+    const books = await getMarked()
+    const id = "{{ id }}";
+    let isBookmarked = false;
+    let htmlString = `<button type="button">Bookmark</button>`;
+
+    books.forEach(book => {
+
+        console.log('pk' in book);
+
+        if (book.pk == id){
+            htmlString = `<button type="button">Bookmarked</button>`;
+        }
+
+    });
+    
+    document.getElementById("bookmarkButton").innerHTML = htmlString;
+}
+refreshMark()
 </script>
 
 <!-- </div> -->
