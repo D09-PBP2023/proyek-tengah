@@ -1,8 +1,9 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, reverse
 from main.models import Book
 from user_profile.models import UserProfile
 from django.shortcuts import get_object_or_404
+from django.core import serializers
 
 # Create your views here.
 
@@ -30,3 +31,13 @@ def bookmark_book(request, id):
     else:
         user_profile.bookmarkedbooks.add(book)
     return HttpResponseRedirect(reverse('catalog:book_details', kwargs={"id":id}))
+
+
+def get_marked_books(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    data = user_profile.bookmarkedbooks.all()
+    return HttpResponse(
+        serializers.serialize("json", data),
+        content_type="application/json"
+    )
+

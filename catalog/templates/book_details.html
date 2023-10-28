@@ -70,32 +70,66 @@
             <h1 class="text-white font-bold p-2 text-3xl">Book Details</h1>
             <div class="w-full h-auto mx-auto rounded-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
                 <!-- Image -->
-                <div class="w-2/4 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
-                    <img class=" w-4/5 h-auto mx-auto rounded-lg hover:shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
+                <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
+                    <img class="w-4/5 h-auto mx-auto rounded-lg hover:shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
                 </div>
                 <!-- Details -->
                 <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-2 flex justify-center flex-col">
                     <h1 class="text-black font-bold text-3xl">{{ name }}</h1>
-                    <p class="text-lg text-3xl">By {{ author }}, {{ original_language }} - {{ year_published }}, {{ genre }}
-                        <nav>Ratings: 0/5</nav>
-                    </p>
-                    <div class="border border-black w-4/5 h-auto rounded-lg p-5 shadow-2xl">
-                        <p>No reviews yet</p>
+                    <div class="text-lg text-3xl py-[20px]">
+                        <p>By {{ author }}, {{ original_language }} - {{ year_published }}, {{ genre }}</p>
+                        <p>Ratings: 0/5</p>
                     </div>
-                    <div class="w-full h-auto mx-auto rounded-lg p-5">
-                        <a class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[20px] py-[5px] hover:cursor-pointer">Request book swap?</a>
-                        
-                        <form action="{% url 'catalog:bookmark_book' id=id  %}" method="post">
+                    <div class="border border-black w-4/5 h-auto rounded-lg p-5 py-[20px] shadow-2xl">
+                        <p class="py-[5px]">No reviews yet</p>
+                    </div>
+                    <div class="w-full h-auto mx-auto rounded-lg py-[20px]">
+
+                        <form class="w-2/4 text-white font-bold py-[20px] " action="{% url 'catalog:bookmark_book' id=id  %}" method="post">
                             {% csrf_token %}
-                            <button class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[20px] py-[5px] hover:cursor-pointer" type="submit">Bookmark</button>
+                            <button class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer" type="submit">Bookmark</button>
+                            <a href="../../bookmarked/" class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">See Bookmark</a>
+                            <a class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">Request book swap?</a>
                         </form>
-                        
-                        <a href="{% url 'main:show_main' %}" class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[20px] py-[5px] hover:cursor-pointer">Bookmark {{id}}</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+<script>
+     function toggleDropdownUser() {
+        const dropdownButton = document.getElementById("dropdown_user_button");
+        const dropdownMenu = document.getElementById("dropdown_user_menu");
+        
+        dropdownMenu.classList.toggle('opacity-0');
+        dropdownMenu.classList.toggle('scale-100');
+        dropdownMenu.classList.toggle('scale-0');
+    }
+
+    function toggleDropdownGeneral() {
+        const dropdownButton = document.getElementById("dropdown_general_button");
+        const dropdownMenu = document.getElementById("dropdown_general_menu");
+
+        dropdownMenu.classList.toggle('scale-100');
+        dropdownMenu.classList.toggle('scale-0');
+        dropdownMenu.classList.toggle('h-0');
+    }
+    
+    let lastTime = -1;
+    function searchBooks(value, searchTime) {
+        lastTime = searchTime;
+        setTimeout(async function() { // Make sure not to spam request to backend
+            if (searchTime != lastTime) return;
+            if (value && value != "") {
+                const books = await fetch(`{% url 'main:get_books_by_name' 177013 %}`.replace(177013, value)).then((res) => res.json());
+                buildBrowseBooks(books);
+            } else {
+                buildBrowseBooks(await getBooks());
+            }
+        }, 700);
+    }
+</script>
 
 <!-- </div> -->
 {% endblock %}

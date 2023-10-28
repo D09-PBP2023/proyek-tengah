@@ -66,21 +66,59 @@
 
     <!-- Container book details -->
     <div class="w-full md:w-500px rounded-lg mx-auto p-12 flex justify-center">
-        <div class="w-full h-auto mx-auto bg-blue-400 items-center rounded-lg shadow-2xl flex flex-col">
+        <div class="w-4/5 h-auto mx-auto bg-blue-400 items-center rounded-lg shadow-2xl flex flex-col">
             <h1 class="text-white font-bold p-2 text-3xl">Bookmark List</h1>
             <div class="w-full h-auto mx-auto rounded-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
-                <!-- <h1>hai</h1> -->
-                {% for book in bookmarked_books %}
-                    <!-- Display the book here. -->
-                    <div class="w-2/4 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
-                        <img class=" w-4/5 h-auto mx-auto rounded-lg hover:shadow-2xl object-cover" src="{{ book.cover_image.url }}" alt="{{ book.name }}">
-                        <h1 class="text-2xl justify-center">{{book.name}}</h1>
-                    </div>       
-                {% endfor %}
-
+                <div id="itemDeck" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 w-full h-auto items-center justify-center justify-items-center gap-4 px-[50px] py-2">
+                    <!-- Coded in javascript -->
+                </div>
             </div>
         </div>
     </div>
 
-<!-- </div> -->
+    <script>
+        async function getItems() {
+        return fetch("{% url 'catalog:get_marked_books' %}").then((res) => res.json())
+    }
+
+    async function refreshItems() {
+        document.getElementById("itemDeck").innerHTML = ""
+        const books = await getItems()
+        let htmlString = ""
+        books.forEach((book) => {
+            htmlString += `\n
+            <a href="{% url 'catalog:book_details' id=177013 %}">
+                <div class="flex flex-row items-center rounded-xl border transition shadow-md hover:shadow-xl w-[350px] sm:w-[250px] lg:w-[350px] h-[200px] px-4 py-3 gap-3 cursor-pointer">
+                    <img src='/media/${book.fields.cover_image}' class='w-[100px] rounded-lg drop-shadow-md'>
+                    <div class="flex-col w-[250px] sm:w-[150px] lg:w-[250px]">
+                        <div class="line-clamp-1 lg:line-clamp-2 font-semibold text-lg text-black">${book.fields.name}</div>
+                        <div class="line-clamp-1 font-normal text-slate-400 text-sm">${book.fields.author}</div>
+                        <div class="flex flex-row gap-2">
+                            {% for i in n %}
+                                {% if i < 3 %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-yellow-400 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
+                                    </svg>
+                                {% else %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-gray-300 opacity-50 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
+                                    </svg>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </a>`.replaceAll('177013', book.pk)
+        });
+        
+        document.getElementById("itemDeck").innerHTML = htmlString;
+
+        const hiddenElements = document.querySelectorAll("#card-book");
+        console.log(hiddenElements);
+        hiddenElements.forEach((element) => booksCardObserver.observe(element));
+    }
+
+    refreshItems()
+    </script>
+
 {% endblock %}
