@@ -8,7 +8,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=255, default=True)
     email = models.EmailField()
-    profile_picture = models.ImageField(upload_to='profile_pictures', null=True, blank=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
     bio = models.TextField(max_length=400)
     bookmarkedbooks = models.ManyToManyField(Book, blank=True)
     times_swapped = models.IntegerField(default=0)

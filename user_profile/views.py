@@ -49,7 +49,6 @@ def edit_profile(request):
             if form.is_valid():
                 form.save()
                 login(request, current_user)
-                messages.success(request, ("Profile Successfully Updated!"))
                 return redirect('user_profile:view_myprofile')
 
         else:
