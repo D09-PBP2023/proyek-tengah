@@ -126,21 +126,34 @@
            
                 </a>
             </div>
+            {% if fav1 %}
             <div class="flex flex-col gap-3">
             <a href="{% url 'catalog:book_details' fav1.id %}">
                 <img class="rounded-lg hover:brightness-50" src="{{ fav1.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav1.name }}">
             </a>
             </div>
+            {% else %}
+            <div class="flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px;"></div>
+            {% endif %}
+            {% if fav2 %}
             <div class="flex flex-col gap-3">
             <a href="{% url 'catalog:book_details' fav2.id %}">
                 <img class="rounded-lg hover:brightness-50" src="{{ fav2.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav2.name }}">
             </a>
             </div>
+            {% else %}
+            <div class="flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px;"></div>
+            {% endif %}
+            {% if fav3 %}
             <div class="flex flex-col gap-3">
             <a href="{% url 'catalog:book_details' fav3.id %}">
                 <img class="rounded-lg hover:brightness-50" src="{{ fav3.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav3.name }}">
             </a>
             </div>
+            {% else %}
+            <div class="flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px;"></div>
+            {% endif %}
+            
         </div>
         <div class="absolute top-3/4 right-10 transform translate-y-20">
         <a href="{% url 'user_profile:edit_profile' %}">
@@ -176,5 +189,7 @@
         let url = `catalog/book_details/${id}/`;
         return fetch(url).then((res) => res.json())
     }
+
+    
 </script>
 {% endblock %}
