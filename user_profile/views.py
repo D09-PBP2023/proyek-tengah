@@ -101,3 +101,21 @@ def add_favorite(request):
 def get_buku_by_id(request, id):
     bukuDicari = Book.objects.filter(pk=id)
     return HttpResponse(serializers.serialize('json', bukuDicari))
+
+
+def book_list(request):
+    # Get the current logged-in user's profile
+    user_profile = UserProfile.objects.get(user=request.user)
+
+    # Get the bookmarked books for the current user
+    bmarkedbooks = user_profile.bookmarkedbooks.all()
+
+    # Filter by genre if a genre parameter is passed in the URL
+    genre = request.GET.get('genre')
+    if genre:
+        bmarkedbooks = bmarkedbooks.filter(genre=genre)
+
+    context = {
+        'bmarkedbooks': bmarkedbooks,
+    }
+    return render(request, 'book_list.html', context)
