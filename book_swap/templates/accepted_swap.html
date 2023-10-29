@@ -1,0 +1,77 @@
+{% extends "book_swap_main.html" %}
+
+{% block content2 %}
+<div class="justify-center" id="mobile-content">
+  <div class="text-center">
+  <h1 class="font-bold text-3xl mx-3">Daftar Tukar Buku</h1>
+  <div class="justify-center items-center inline-flex">
+    <a href="{% url 'show_processed_book_swap' %}">  
+      <div class="text-white bg-gray-800 shadow rounded-lg my-3 p-2 mx-3" aria-current="page">
+        <h1 class="font-bold">Diproses</h1>
+      </div>
+    </a>
+    <a href="{% url 'show_queue_book_swap' %}">  
+      <div class="text-white bg-gray-800 hover:bg-gray-600 shadow rounded-lg my-3 p-2 mx-2">
+        <h1 class="font-bold">Menunggu permintaan</h1>
+      </div>
+    </a>
+    <a href="#">  
+      <div class="text-white bg-gray-900 hover:bg-gray-600 shadow rounded-lg my-3 p-2 mx-3">
+        <h1 class="font-bold">Diterima</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="md:inline-flex text-white bg-gray-800 shadow rounded-lg mx-3 my-3 p-6 justify-center items-center">
+    <h1 class="me-3">Cari kata kunci</h1>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input
+      id="input"
+      class="form-control me-2 bg-gray-900"
+      type="search"
+      placeholder="Search"
+      name="search_query"
+      required aria-label="Search"
+   >
+    <button id="search-button" class="btn btn-outline-success hover:bg-blue-700 rounded" type="submit">Cari</button>
+  </form>
+  </div>
+
+  <div class="relative overflow-x-auto mx-3">
+    <table id="product_table" class="w-full text-sm text-left text-white dark:text-gray-400">
+      <thead
+        class="border-b bg-slate-800 font-medium dark:border-black dark:bg-slate-900">
+        <tr>
+          <th scope="col" class=" px-6 py-4">Penerima</th>
+          <th scope="col" class=" px-6 py-4">Pengirim</th>
+          <th scope="col" class=" px-6 py-4">Judul</th>
+          <th scope="col" class=" px-6 py-4">Status</th>
+        </tr>
+      </thead>
+      {%for swap in swaps%}
+            <tr class="border-b dark:border-black text-gray-900">
+              <td class="whitespace-nowrap  px-6 py-4 font-medium">
+                  <p>{{swap.user}}</p>  
+              </td>
+            <td class="whitespace-nowrap  px-6 py-4">{{swap.acc_user}}</td>
+            <td class="whitespace-nowrap  px-6 py-4">{{swap.name}}</td>
+            <td>
+              <p>Diterima</p>
+      </td>        
+      </tr>
+      {% endfor%}
+        <tr class="border-b bg-slate-800 font-medium dark:border-black dark:bg-slate-900"> 
+          <th scope="col" class=" px-6 py-4"></th>
+          <th scope="col" class=" px-6 py-4"></th>
+          <th scope="col" class=" px-6 py-4"></th>
+          <th scope="col" class=" px-6 py-4"></th>
+        </tr>
+    </table>
+  </div>
+</div>
+
+<script>
+  
+</script>
+{% endblock %}

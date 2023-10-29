@@ -1,0 +1,103 @@
+{% extends "book_swap_main.html" %}
+
+{% block content2 %}
+<div class="justify-center" id="mobile-content">
+  <div class="text-center">
+  <h1 class="font-bold text-3xl mx-3">Daftar Tukar Buku</h1>
+  <div class="justify-center items-center inline-flex">
+    <a href="#">  
+      <div class="text-white bg-gray-900 shadow rounded-lg my-3 p-2 mx-3" aria-current="page">
+        <h1 class="font-bold">Diproses</h1>
+      </div>
+    </a>
+    <a href="{% url 'show_queue_book_swap' %}">  
+      <div class="text-white bg-gray-800 hover:bg-gray-600 shadow rounded-lg my-3 p-2 mx-2">
+        <h1 class="font-bold">Menunggu permintaan</h1>
+      </div>
+    </a>
+    <a href="{% url 'show_accepted_book_swap' %}">  
+      <div class="text-white bg-gray-800 hover:bg-gray-600 shadow rounded-lg my-3 p-2 mx-3">
+        <h1 class="font-bold">Diterima</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="md:inline-flex text-white bg-gray-800 shadow rounded-lg mx-3 my-3 p-6 justify-center items-center">
+    <h1 class="me-3">Cari kata kunci</h1>
+    <form action="{% url 'search_key' %}" method="POST">
+      {% csrf_token %}
+      <input
+      id="input"
+      class="form-control me-2 bg-gray-900"
+      type="search"
+      placeholder="Search"
+      name="search_query"
+      required aria-label="Search"
+   >
+    <button id="search-button" class="btn btn-outline-success hover:bg-blue-700 rounded" type="submit">Cari</button>
+  </form>
+  </div>
+  
+  <div class="inline-flex relative sm:overflow-x-auto">
+    <div class=" mw-3">
+      <table id="product_table" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">      
+      
+      </table>
+    </div>
+
+    <div class=" me-3">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">      
+        <thead  class="border-b bg-slate-800 font-medium dark:border-black dark:bg-slate-900">
+          <th scope="col" class=" px-6 py-4">Action</th>
+        </thead>
+        {%for swap in swaps%}
+        <tr class="border-b dark:border-black">
+        <td class="whitespace-nowrap  px-6 py-4">
+          <div class="justify-between">
+              <a href="{% url 'cancel_swap' swap.pk %}">
+                  <button class="bg-slate-800 hover:bg-blue-700 font-bold rounded px-2">
+                Delete
+            </button>
+            </a>
+        </div>
+        </td>
+      </tr>
+        {%endfor%}
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function getProducts() {
+        return fetch("{% url 'get_processed_book_json' %}").then((res) => res.json())
+  }
+  async function refreshProducts() {
+        document.getElementById("product_table").innerHTML = ""
+        const products = await getProducts()
+        let htmlString = `<thead
+                class="border-b bg-slate-800 font-medium dark:border-black dark:bg-slate-900">
+                <tr>
+                  <th scope="col" class=" px-6 py-4">Nama</th>
+                  <th scope="col" class=" px-6 py-4">Judul</th>
+                  <th scope="col" class=" px-6 py-4">Pesan</th>
+        
+                </tr>
+              </thead>`
+        
+              products.forEach((item) => {
+            htmlString += `\n
+            <tr class="border-b dark:border-black">
+                        <td class="whitespace-nowrap px-6 py-4 font-medium">
+                            <p>${ item.fields.user }</p>  
+                        </td>
+                      <td class="whitespace-nowrap  px-6 py-4">${ item.fields.name }</td>
+                      <td class="whitespace-nowrap  px-6 py-4">${ item.fields.message }</td>  
+            </tr>
+            ` 
+        })
+        document.getElementById("product_table").innerHTML = htmlString
+    }
+    refreshProducts()
+</script>
+{% endblock %}
