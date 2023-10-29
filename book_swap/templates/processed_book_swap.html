@@ -10,12 +10,12 @@
         <h1 class="font-bold">Diproses</h1>
       </div>
     </a>
-    <a href="{% url 'show_queue_book_swap' %}">  
+    <a href="{% url 'book_swap:show_queue_book_swap' %}">  
       <div class="text-white bg-gray-800 hover:bg-gray-600 shadow rounded-lg my-3 p-2 mx-2">
         <h1 class="font-bold">Menunggu permintaan</h1>
       </div>
     </a>
-    <a href="{% url 'show_accepted_book_swap' %}">  
+    <a href="{% url 'book_swap:show_accepted_book_swap' %}">  
       <div class="text-white bg-gray-800 hover:bg-gray-600 shadow rounded-lg my-3 p-2 mx-3">
         <h1 class="font-bold">Diterima</h1>
       </div>
@@ -24,7 +24,7 @@
 
   <div class="md:inline-flex text-white bg-gray-800 shadow rounded-lg mx-3 my-3 p-6 justify-center items-center">
     <h1 class="me-3">Cari kata kunci</h1>
-    <form action="{% url 'search_key' %}" method="POST">
+    <form action="{% url 'book_swap:search_key' %}" method="POST">
       {% csrf_token %}
       <input
       id="input"
@@ -54,7 +54,7 @@
         <tr class="border-b dark:border-black">
         <td class="whitespace-nowrap  px-6 py-4">
           <div class="justify-between">
-              <a href="{% url 'cancel_swap' swap.pk %}">
+              <a href="{% url 'book_swap:cancel_swap' swap.pk %}">
                   <button class="bg-slate-800 hover:bg-blue-700 font-bold rounded px-2">
                 Delete
             </button>
@@ -70,7 +70,7 @@
 
 <script>
   async function getProducts() {
-        return fetch("{% url 'get_processed_book_json' %}").then((res) => res.json())
+        return fetch("{% url 'book_swap:get_processed_book_json' %}").then((res) => res.json())
   }
   async function refreshProducts() {
         document.getElementById("product_table").innerHTML = ""

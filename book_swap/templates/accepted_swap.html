@@ -5,12 +5,12 @@
   <div class="text-center">
   <h1 class="font-bold text-3xl mx-3">Daftar Tukar Buku</h1>
   <div class="justify-center items-center inline-flex">
-    <a href="{% url 'show_processed_book_swap' %}">  
+    <a href="{% url 'book_swap:show_processed_book_swap' %}">  
       <div class="text-white bg-gray-800 shadow rounded-lg my-3 p-2 mx-3" aria-current="page">
         <h1 class="font-bold">Diproses</h1>
       </div>
     </a>
-    <a href="{% url 'show_queue_book_swap' %}">  
+    <a href="{% url 'book_swap:show_queue_book_swap' %}">  
       <div class="text-white bg-gray-800 hover:bg-gray-600 shadow rounded-lg my-3 p-2 mx-2">
         <h1 class="font-bold">Menunggu permintaan</h1>
       </div>

@@ -7,7 +7,7 @@
   <div class="text-center">
   <h1 class="font-bold text-3xl mx-3">Daftar Tukar Buku</h1>
   <div class="justify-center items-center inline-flex">
-    <a href="{% url 'show_processed_book_swap' %}">  
+    <a href="{% url 'book_swap:show_processed_book_swap' %}">  
       <div class="text-white bg-gray-800 shadow rounded-lg my-3 p-2 mx-3" aria-current="page">
         <h1 class="font-bold">Diproses</h1>
       </div>
@@ -17,7 +17,7 @@
         <h1 class="font-bold">Menunggu permintaan</h1>
       </div>
     </a>
-    <a href="{% url 'show_accepted_book_swap' %}">  
+    <a href="{% url 'book_swap:show_accepted_book_swap' %}">  
       <div class="text-white bg-gray-800 hover:bg-gray-600 shadow rounded-lg my-3 p-2 mx-3">
         <h1 class="font-bold">Diterima</h1>
       </div>
@@ -25,12 +25,12 @@
   </div>
   
   <div class="md:inline-flex text-white bg-gray-800 shadow rounded-lg mx-3 my-3 p-6 justify-center items-center">
-    <form action="{% url 'show_queue_book_swap' %}">
+    <form action="{% url 'book_swap:show_queue_book_swap' %}">
       <button class="btn btn-outline-success hover:bg-blue-700 rounded" type="submit">Reset</button>
     </form>
 
     <h1 class="me-3">Cari kata kunci</h1>
-    <form action="{% url 'search_key' %}" method="POST">
+    <form action="{% url 'book_swap:search_key' %}" method="POST">
       {% csrf_token %}
       <input
       class="form-control me-2 bg-gray-900"
@@ -57,7 +57,7 @@
                                       placeholder="Desired Username" hidden value="{{swap.name}}"/>
       </div>
       <div class="flex-initial w-24  md:w-32">
-        <a href="{% url 'accept_swap' swap.id %}">
+        <a href="{% url 'book_swap:accept_swap' swap.id %}">
           <button id="accept-button" class="bg-gray-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Terima
           </button>

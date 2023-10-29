@@ -66,7 +66,7 @@
           -->
           <div id="profile" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
             <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="{% url 'user_profile:view_self_profile' %}" class="block px-4 py-2 text-md text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+            <a href="" class="block px-4 py-2 text-md text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
             <a href="{% url 'users:logout' %}" class="block px-4 py-2 text-md text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
           </div>
         </div>
@@ -89,7 +89,7 @@
     <h1 class="font-bold text-3xl my-3">Book Swap</h1>
     <img src="https://img.freepik.com/free-photo/abundant-collection-antique-books-wooden-shelves-generated-by-ai_188544-29660.jpg?t=st=1698564489~exp=1698568089~hmac=bfc94097dda55db920ac301c92acb1554f6f1f78dcb9b76edbdc1becabe76dc3&w=826" alt="" class=" my-3">
     <p class="my-3">Minta buku yang kamu ingin tukar dengan yang lain</p>
-    <a href="{% url 'request_book_swap' %}">    
+    <a href="{% url 'book_swap:request_book_swap' %}">    
       <button id="open-modal" class="bg-gray-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Tukar sekarang
       </button>
