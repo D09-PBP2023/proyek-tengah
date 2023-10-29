@@ -1,0 +1,58 @@
+<!-- Header -->
+<div class="flex flex-row h-[60px] lg:mb-[25px] border py-3 px-5 justify-between items-center">
+    <div class="flex flex-row w-[300px] justify-self-start items-center gap-2">
+        <div id="dropdown_general_button" class="lg:hidden mouse-pointer" onclick="toggleDropdownGeneral()">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/>
+            </svg>
+        </div>
+        <h1 class="font-bold text-xl">BookPals</h1>
+    </div>
+    <div>
+        <ul class="lg:flex flex-row gap-16 hidden">
+            <li class="text-gray-800 font-semibold"><a href="{% url 'main:show_main' %}">Home</a></li>
+            <li class="text-gray-800 font-semibold"><a href="#">Add New Book</a></li>
+            <li class="text-gray-800 font-semibold"><a href="https://github.com/D09-PBP2023/proyek-tengah/blob/main/README.md">About Us</a></li>
+        </ul>
+    </div>
+    <div class="flex flex-row gap-4 relative w-[300px] items-end justify-end">
+        {% if user.is_authenticated %}
+            <div class="flex flex-col mx-5">
+                <button id="dropdown_user_button" class="flex flex-row items-center justify-center gap-2" onclick="toggleDropdownUser()">
+                    <h1 class="font-semibold">{{ user.username }}</h1>
+                    <svg class="h-5 w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor"><path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10
+                            10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" /></svg>
+                </button>
+                <div id="dropdown_user_menu" class="flex flex-col origin-top-right opacity-0 transition scale-0 divide-y absolute z-20 top-[50px] right-[20px] w-[200px] border rounded-lg bg-white shadow-md">
+                    <a href="#" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
+                        Profile
+                    </a>
+                    <a href="#" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
+                        Requests
+                    </a>
+                    <a href="{% url 'users:logout' %}" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
+                        Sign Out
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <a href="{% url 'users:login' %}" class="px-3 py-2">Login</a>
+            <a href="{% url 'users:register' %}" class="px-8 py-2 border rounded-xl bg-sky-500 text-white">Sign Up</a>
+        {% endif %}
+    </div>
+</div>
+<!-- Subheader for Mobile -->
+<div id="dropdown_general_menu" class="flex flex-col h-0 origin-top w-full transition scale-0 divide-y mb-[25px] lg:hidden border py-3 justify-between items-center">
+    <a href="{% url 'main:show_main' %}" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
+        Home
+    </a>
+    <a href="#" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
+        Add New Book
+    </a>
+    <a href="{% url 'users:logout' %}" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
+        About Us
+    </a>
+</div>
