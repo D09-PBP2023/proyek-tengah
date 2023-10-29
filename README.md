@@ -2,7 +2,7 @@
 
 [![Deployment](https://github.com/D09-PBP2023/proyek-tengah/actions/workflows/pbp-deploy.yml/badge.svg)](https://github.com/D09-PBP2023/proyek-tengah/blob/main/.github/workflows/pbp-deploy.yml)
 [![Styling](https://img.shields.io/badge/Styling-CDN_Tailwind-blue)](https://tailwindcss.com/)
-
+URL: http://bookpals-d09-tk.pbp.cs.ui.ac.id/
 "Rajin Membaca, Cerewet di BookPals"
 > Sebuah karya dari kami, kelompok D09 untuk Indonesia.
 
@@ -29,16 +29,16 @@ Berikut adalah daftar modul yang akan diimplementasikan dalam proyek ini beserta
    
 | Modul | Penjelasan |
 | -- | -- |
-| **Authentication** | Pengguna BookPals dapat melakukan registrasi akun, *login*, dan *logout*|
-| **About Us** | Pengguna BookPals dapat melihat deskripsi dan latar belakang pembuatan BookPals oleh Kelompok D09|
+| **Authentication** | Pengguna BookPals dapat melakukan registrasi akun, *login*, dan *logout* - Handled by [Arvin](https://github.com/ArvinCS) (2206041562)|
+| **About Us** | Pengguna BookPals dapat melihat deskripsi dan latar belakang pembuatan BookPals oleh Kelompok D09 - Handled by all members|
 
 2. **Modul Buku**
    
 | Modul | Penjelasan |
 | ------ | -- |
-| **Book Catalog** | Modul ini terdiri dari submodul **list book**, **book view**, **list owner**, dan **bookmark/add to favorites**, yang masing-masing berperan agar pengguna BookPals dapat **melihat list buku-buku yang tersedia**, **menampilkan judul dan informasi terkait suatu buku yang dipilih**, **menampilkan *username* pengguna-pengguna lain yang memiliki buku tersebut**, serta **menambahkan buku yand dipilih ke *bookmark***|
-| **Book Sharing** | Modul ini terdiri dari submodul **Book Review** dan **Book Swap** yang berperan agar pengguna BookPals dapat mengisi dan menampilkan ulasannya terhadap suatu buku dan menginisiasi pertukaran buku dengan pengguna yang lain |
-| **Book Entry & Review for Admin** | Admin BookPals akan mengecek apakah suatu buku yang akan ditambahkan ke list buku telah tersedia di database. Kemudian, admin akan menyetujui/menolak *request* menambah suatu buku dari pengguna BookPals | 
+| **Book Catalog** | Modul ini terdiri dari submodul **list book**, **book view**, **list owner**, dan **bookmark/add to favorites**, yang masing-masing berperan agar pengguna BookPals dapat **melihat list buku-buku yang tersedia**, **menampilkan judul dan informasi terkait suatu buku yang dipilih**, **menampilkan *username* pengguna-pengguna lain yang memiliki buku tersebut**, serta **menambahkan buku yand dipilih ke *bookmark*** - Home page and headers handled by [Arvin](https://github.com/ArvinCS) (2206041562) - Book details page, bookmark handled by [Taniella](https://github.com/eilalleinat) (2206082316) - Book review handled by [Marvel Martin Everthard](https://github.com/marvelm57) (2206081345)|
+| **Book Sharing** | Modul ini terdiri dari submodul **Book Review** dan **Book Swap** yang berperan agar pengguna BookPals dapat mengisi dan menampilkan ulasannya terhadap suatu buku dan menginisiasi pertukaran buku dengan pengguna yang lain - Book Swap handled by [Gilang Fajar Pratama](https://github.com/gilangp03) (2206082631)|
+| **Book Entry & Review for Admin** | Admin BookPals akan mengecek apakah suatu buku yang akan ditambahkan ke list buku telah tersedia di database. Kemudian, admin akan menyetujui/menolak *request* menambah suatu buku dari pengguna BookPals - Book entry handled by [Tengku Laras Malahayati](https://github.com/rxa15) (2206081641)| 
 # [Sumber Dataset Katalog Buku]
 Kami akan menggunakan *dataset* dari Kaggle: https://www.kaggle.com/datasets/drahulsingh/best-selling-books sebagai *database* dari list buku yang akan ditampilkan di BookPals.
 # [*Role* Pengguna]
