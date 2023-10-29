@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -24,6 +25,7 @@ def book_details(request, id):
     }
     return render(request, "book_details.html", context)
 
+@login_required()
 def bookmark_book(request, id):
     book = get_object_or_404(Book, pk=id)
     user_profile = UserProfile.objects.get(user=request.user)
@@ -34,7 +36,7 @@ def bookmark_book(request, id):
         user_profile.bookmarkedbooks.add(book)
     return HttpResponseRedirect(reverse('catalog:book_details', kwargs={"id":id}))
 
-
+@login_required()
 def get_marked_books(request):
     user_profile = UserProfile.objects.get(user=request.user)
     data = user_profile.bookmarkedbooks.all()
