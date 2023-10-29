@@ -11,9 +11,19 @@ class UserUpdateForm(forms.ModelForm):
         model = UserProfile
         fields = ['email', 'bio']
 
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']
+
 # # Create a ProfileUpdateForm to update image.
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['profile_picture']
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['favoriteBook1','favoriteBook2','favoriteBook3']
 

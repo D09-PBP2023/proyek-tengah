@@ -2,7 +2,12 @@
 
 {% block content %}
 
+<<<<<<< HEAD
 <div>
+=======
+<!-- <div class="flex flex-col min-h-screen items-center justify-center bg-gradient-to-r from-gray-100 to-blue-200"> -->
+
+>>>>>>> feature/user_profile
     <!-- Header -->
     <div class="flex flex-row h-[60px] lg:mb-[25px] border py-3 px-5 justify-between bg-gradient-to-r from-gray-100 to-blue-200 items-center">
         <div class="flex flex-row w-[300px] justify-self-start items-center gap-2">
@@ -67,15 +72,26 @@
     <div class="w-full md:w-500px rounded-lg mx-auto p-12 flex justify-center">
         <div class="w-full h-auto mx-auto bg-blue-400 items-center rounded-lg shadow-2xl flex flex-col">
             <h1 class="text-white font-bold p-2 text-3xl">Book Details</h1>
+<<<<<<< HEAD
             <div class="w-full h-auto mx-auto rounded-b-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
                 <!-- Image -->
                 <div class="w-2/5 md:w-1/5 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
                     <img class="w-full h-auto mx-auto rounded-lg shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
+=======
+            <div class="w-full h-auto mx-auto rounded-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
+                <!-- Image -->
+                <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
+                    <img class="w-4/5 h-auto mx-auto rounded-lg hover:shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
+>>>>>>> feature/user_profile
                 </div>
                 <!-- Details -->
                 <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-2 flex justify-center flex-col">
                     <h1 class="text-black font-bold text-3xl">{{ name }}</h1>
+<<<<<<< HEAD
                     <div class="text-lg py-[20px]">
+=======
+                    <div class="text-lg text-3xl py-[20px]">
+>>>>>>> feature/user_profile
                         <p>By {{ author }}, {{ original_language }} - {{ year_published }}, {{ genre }}</p>
                         <p>Ratings: 0/5</p>
                     </div>
@@ -84,6 +100,7 @@
                     </div>
                     <div class="w-full h-auto mx-auto rounded-lg py-[20px]">
 
+<<<<<<< HEAD
                         <form class="w-full text-white font-bold py-[20px] " action="{% url 'catalog:bookmark_book' id=id  %}" method="post">
                             {% csrf_token %}
                             <button id="bookmarkButton" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[1px] py-[5px] hover:cursor-pointer" type="submit">
@@ -93,16 +110,29 @@
                                 <a class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">Request book swap?</a>
                             </nav>
                             
+=======
+                        <form class="w-2/4 text-white font-bold py-[20px] " action="{% url 'catalog:bookmark_book' id=id  %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer" type="submit">Bookmark</button>
+                            <a href="../../bookmarked/" class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">See Bookmark</a>
+                            <a class="btn bg-blue-400 hover:bg-blue-500 w-2/4 text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">Request book swap?</a>
+>>>>>>> feature/user_profile
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 
 <script>
     function toggleDropdownUser() {
+=======
+
+<script>
+     function toggleDropdownUser() {
+>>>>>>> feature/user_profile
         const dropdownButton = document.getElementById("dropdown_user_button");
         const dropdownMenu = document.getElementById("dropdown_user_menu");
         
@@ -120,6 +150,7 @@
         dropdownMenu.classList.toggle('h-0');
     }
     
+<<<<<<< HEAD
     async function getMarked() {
         return fetch("{% url 'catalog:get_marked_books' %}").then((res) => res.json())
     }
@@ -146,4 +177,22 @@
     }
 refreshMark()
 </script>
+=======
+    let lastTime = -1;
+    function searchBooks(value, searchTime) {
+        lastTime = searchTime;
+        setTimeout(async function() { // Make sure not to spam request to backend
+            if (searchTime != lastTime) return;
+            if (value && value != "") {
+                const books = await fetch(`{% url 'main:get_books_by_name' 177013 %}`.replace(177013, value)).then((res) => res.json());
+                buildBrowseBooks(books);
+            } else {
+                buildBrowseBooks(await getBooks());
+            }
+        }, 700);
+    }
+</script>
+
+<!-- </div> -->
+>>>>>>> feature/user_profile
 {% endblock %}

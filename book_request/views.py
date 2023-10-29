@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
-from .models import Book
+from .models import Book, RequestBook
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from book_request.forms import RequestBookForm
 
 @csrf_exempt
@@ -13,14 +14,7 @@ def request_book_by_ajax(request):
             # Create an instance of the model without saving it to the database
             user_request = form.save(commit=False)
             user_request.request_status = 'PENDING'
-            # Access the data
-            name = user_request.name
-            author = user_request.author
-            original_language = user_request.original_language
-            year_published = user_request.year_published
-            sales = user_request.sales
-            genre = user_request.genre
-            cover_image = user_request.cover_image
+            user_request.user = request.user
             # Save the modified instance to the database
             user_request.save()
             return JsonResponse({'error': False, 'message': 'Request Added Successfully'})
@@ -30,6 +24,7 @@ def request_book_by_ajax(request):
         form = RequestBookForm()
         return render(request, 'book_request_by_ajax.html', {'form': form})
 
-def get_book_json(request):
-    book = Book.objects.all()
-    return HttpResponse(serializers.serialize('json', book))
+@login_required
+def get_requested_book_json(request):
+    data = RequestBook.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
