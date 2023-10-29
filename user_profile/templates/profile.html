@@ -112,31 +112,12 @@
                         <p class="text-lg text-gray-700 ml-2 hover:text-white">Bookmarks</p>
                     </div>
                 </a>
-                    <div style="display: flex; align-items: center;" class="mt-6">
-                        <button class="button group relative h-8 w-32 overflow-hidden rounded-lg bg-white text-lg shadow">
-                        <span style="display: flex; align-items: center;" class="ml-1">
-                            <div class="absolute inset-0 w-3 bg-yellow-500 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-                            <span class="hover:fill-white">
-                            <svg fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 386.12 386.12" xml:space="preserve" transform="rotate(0)matrix(-1, 0, 0, 1, 0, 0)">
-
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                
-                                <g id="SVGRepo_iconCarrier"> <path d="M382.706,13.965l-1.813-1.639l-2.407,0.423c-1.188,0.209-29.581,5.319-70.04,22.592 c-37.278,15.915-92.112,45.617-141.643,96.734c-37.538,38.741-63.985,72.47-78.607,100.25c-2.484,4.719-4.608,9.258-6.413,13.633 L3.051,349.726c-5.007,6.6-3.716,16.009,2.883,21.016c2.711,2.057,5.896,3.051,9.055,3.051c4.531,0,9.011-2.046,11.961-5.935 l53.353-70.319c3.366,4.992,7.303,7.498,9.054,8.435c13.289,11.773,30.907,17.992,51.003,17.993c0.003,0,0.002,0,0.005,0 c44.028,0,96.975-29.479,141.627-78.853c0.815-0.902,1.623-1.824,2.435-2.751l4.935-5.639l-61.506-20.719l86.285-14.907l1.177-1.979 c11.683-19.646,22.27-41.522,31.465-65.021l1.912-4.886l-44.927-15.135l52.891-9.138l1.134-2.242 c11.25-22.24,19.666-42.234,24.336-57.821C388.697,22.956,385.887,16.843,382.706,13.965z"/> </g>
-                                
-                            </svg>
-                            </span>
-                            <span class="relative text-black ml-1">Favorites</span>
-                        </span>
-                        </button>
-                    </div>
                 </div>
             </div>
             {% if fav1 %}
             <div class="flex flex-col gap-3" >
             <button id= 1 class="open-button" onclick=showPopup(1)>
-                <img class="rounded-lg hover:brightness-50 lg:w-1/2" src="{{ fav1.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav1.name }}">
+                <img class="rounded-lg hover:brightness-50 lg:w-1/2" src="{{ fav1.cover_image.url }}" alt="Lights" style="width: 120px; height: 183px;" alt="{{ fav1.name }}">
             </button>
             </div>
             {% else %}
@@ -146,7 +127,7 @@
             {% if fav2 %}
             <div class="flex flex-col gap-3">
             <button id= 2 class="open-button" onclick=showPopup(2)>
-                <img class="rounded-lg hover:brightness-50" src="{{ fav2.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav2.name }}">
+                <img class="rounded-lg hover:brightness-50" src="{{ fav2.cover_image.url }}" alt="Lights" style="width: 120px; height: 183px;" alt="{{ fav2.name }}">
             </button>
             </div>
             {% else %}
@@ -156,7 +137,7 @@
             {% if fav3 %}
             <div class="flex flex-col gap-3">
             <button id= 3 class="open-button" onclick=showPopup(3)>
-                <img class="rounded-lg hover:brightness-50" src="{{ fav3.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav3.name }}">
+                <img class="rounded-lg hover:brightness-50" src="{{ fav3.cover_image.url }}" alt="Lights" style="width: 120px; height: 183px;" alt="{{ fav3.name }}">
             </button>
             </div>
             {% else %}
@@ -269,6 +250,10 @@
         formData.append("favId", tmp)
         buku = await getBuku(id)
         let gambar = document.getElementById(tmp);
+        if (gambar.style.height === '183px'){
+            gambar.removeAttribute('style');
+            gambar.classList.remove('flex', 'flex-col', 'gap-3', 'hover:bg-blue-400', 'rounded-lg', 'border-dotted', 'border-2', 'border-grey-800');
+        }
         fetch("{% url 'user_profile:add_favorite' %}", {
             method: "POST",
             body: formData
