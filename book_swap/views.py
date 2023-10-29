@@ -15,7 +15,7 @@ def request_book_swap(request):
     if form.is_valid() and request.method == "POST":
         form.instance.user = request.user
         form.save()
-        return HttpResponseRedirect(reverse('show_processed_book_swap'))
+        return HttpResponseRedirect(reverse('book_swap:show_processed_book_swap'))
     context = {
         'form': form,}
     get_initial(request)
@@ -68,7 +68,7 @@ def accept_swap(request, id):
     p.acc_user = request.user.username
     p.swapped = True
     p.save()
-    return HttpResponseRedirect(reverse('show_queue_book_swap'))
+    return HttpResponseRedirect(reverse('book_swap:show_queue_book_swap'))
 
 def get_processed_book_json(request):
     book_swap = BookSwap.objects.filter(user=request.user).filter(swapped=False)
@@ -94,5 +94,4 @@ def search_key(request):
 def cancel_swap(request, id):
     book_swap = BookSwap.objects.filter(user=request.user).filter(swapped=False).filter(pk=id)
     book_swap.delete()
-    return HttpResponseRedirect(reverse('show_processed_book_swap'))
-
+    return HttpResponseRedirect(reverse('book_swap:show_processed_book_swap'))
