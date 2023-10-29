@@ -78,8 +78,7 @@ def add_review(request, id):
         
     return HttpResponseNotFound()
 
-
 def get_average_rating(request, id):
     book = get_object_or_404(Book, pk=id)
-    average_rating = book.calculate_average_rating()
+    average_rating = book.calculate_average_rating
     return JsonResponse({'average_rating': average_rating})

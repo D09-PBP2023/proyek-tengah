@@ -11,6 +11,7 @@ class Book(models.Model):
     genre = models.CharField(max_length=256)
     cover_image = models.ImageField(null=True)
 
+    @property
     def calculate_average_rating(self):
         return Review.objects.filter(book=self).aggregate(avg_rating=Avg('rating'))['avg_rating']
 

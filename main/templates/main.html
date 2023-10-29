@@ -41,10 +41,16 @@
         return fetch("{% url 'main:get_books' %}").then((res) => res.json());
     }
 
+    async function getAverageRating(id) {
+        var url_mask = "{% url 'catalog:get_average_rating' id=170013 %}".replace(/170013/, id.toString());
+        return fetch(url_mask).then((res) => res.json());
+    }
+
     async function buildFeaturedBooks(featured_books) {
         document.getElementById("featured_books").innerHTML = "";
         let htmlString = ``;
-        featured_books.forEach((book) => {
+        featured_books.forEach(async (book) => {
+            let rating = await getAverageRating(book.pk)
             htmlString += `\n
             <a href="{% url 'catalog:book_details' id=177013 %}">
                 <div class="flex flex-row relative snap-center items-center hover:cursor-pointer rounded-xl transition shadow-md hover:shadow-xl w-[300px] lg:w-[400px] h-[200px] px-4 py-3 mx-1 gap-3 bg-gradient-to-t ${featured_book_colors[book.pk]}">
@@ -56,20 +62,21 @@
                         <div class="truncate text-white text-xs">${book.fields.genre}</div>
                         <div class="truncate text-white text-xs">${book.fields.original_language} - ${book.fields.year_published}</div>
                         <div class="flex flex-row gap-2">
-                            ${getStarRatingHtml(book.calculate_average_rating)}
+                            ${getStarRatingHtml(rating.average_rating)}
                         </div>
                     </div>
                 </div>
             </a>`.replaceAll('177013', book.pk)
+            document.getElementById("featured_books").innerHTML = htmlString;
         });
         
-        document.getElementById("featured_books").innerHTML = htmlString;
     }
 
     async function buildBrowseBooks(books) {
         document.getElementById("browse_books").innerHTML = "";
         let htmlString = ``;
-        books.forEach((book) => {
+        books.forEach(async (book) => {
+            let rating = await getAverageRating(book.pk)
             htmlString += `\n
             <a href="{% url 'catalog:book_details' id=177013 %}">
                 <div class="flex flex-row items-center rounded-xl border transition shadow-md hover:shadow-xl w-[350px] sm:w-[250px] lg:w-[350px] h-[200px] px-4 py-3 gap-3 cursor-pointer">
@@ -78,36 +85,35 @@
                         <div class="line-clamp-1 lg:line-clamp-2 font-semibold text-lg text-black">${book.fields.name}</div>
                         <div class="line-clamp-1 font-normal text-slate-400 text-sm">${book.fields.author}</div>
                         <div class="flex flex-row gap-2">
-                            ${getStarRatingHtml(book.calculate_average_rating)}
+                            ${getStarRatingHtml(rating.average_rating)}
                         </div>
                     </div>
                 </div>
             </a>`.replaceAll('177013', book.pk)
+            document.getElementById("browse_books").innerHTML = htmlString;
         });
         
-        document.getElementById("browse_books").innerHTML = htmlString;
 
         const hiddenElements = document.querySelectorAll("#card-book");
-        console.log(hiddenElements);
         hiddenElements.forEach((element) => booksCardObserver.observe(element));
     }
 
     function getStarRatingHtml(rating) {
         const maxRating = 5;
         let starHtml = '';
-        if (rating === null) {
-            starHtml = 'N/A';
-        } else {
-            starHtml += '<div class="flex items-center">';
-            for (let i = 1; i <= maxRating; i++) {
-                if (i <= rating) {
-                    starHtml += '<svg class="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
-                } else {
-                    starHtml += '<svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
-                }
-            }
-            starHtml += '</div>';
+        if (rating === null || rating === undefined) {
+            rating = 0;
         }
+        console.debug(rating);
+        starHtml += '<div class="flex items-center">';
+        for (let i = 1; i <= maxRating; i++) {
+            if (i <= rating) {
+                starHtml += '<svg class="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
+            } else {
+                starHtml += '<svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
+            }
+        }
+        starHtml += '</div>';
 
         return starHtml;
     }
@@ -154,7 +160,6 @@
 
     const booksCardObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            console.log(entry);
             if (entry.isIntersecting) {
                 entry.target.classList.remove('opacity-0');
                 entry.target.classList.remove('blur-md');
