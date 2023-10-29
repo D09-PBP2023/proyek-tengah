@@ -70,6 +70,7 @@ def edit_profile(request):
         return redirect('users:login')
 
 #bookmark
+@login_required()
 def view_bookmarked_list(request):
     user_profile = UserProfile.objects.get(user=request.user)
     bookmarked_books = user_profile.bookmarkedbooks.all()
@@ -118,9 +119,6 @@ def book_list(request):
         'bmarkedbooks': bmarkedbooks,
     }
     return render(request, 'book_list.html', context)
-
-
-
 
 def get_username_by_id(request, user_id):
     user = get_object_or_404(User, id=user_id)
