@@ -4,6 +4,7 @@
 [![Styling](https://img.shields.io/badge/Styling-CDN_Tailwind-blue)](https://tailwindcss.com/)
 
 URL: http://bookpals-d09-tk.pbp.cs.ui.ac.id/
+
 "Rajin Membaca, Cerewet di BookPals"
 > Sebuah karya dari kami, kelompok D09 untuk Indonesia.
 
