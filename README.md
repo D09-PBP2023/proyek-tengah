@@ -2,6 +2,7 @@
 
 [![Deployment](https://github.com/D09-PBP2023/proyek-tengah/actions/workflows/pbp-deploy.yml/badge.svg)](https://github.com/D09-PBP2023/proyek-tengah/blob/main/.github/workflows/pbp-deploy.yml)
 [![Styling](https://img.shields.io/badge/Styling-CDN_Tailwind-blue)](https://tailwindcss.com/)
+
 URL: http://bookpals-d09-tk.pbp.cs.ui.ac.id/
 "Rajin Membaca, Cerewet di BookPals"
 > Sebuah karya dari kami, kelompok D09 untuk Indonesia.
