@@ -70,6 +70,7 @@ def edit_profile(request):
         return redirect('users:login')
 
 #bookmark
+@login_required()
 def view_bookmarked_list(request):
     user_profile = UserProfile.objects.get(user=request.user)
     bookmarked_books = user_profile.bookmarkedbooks.all()
