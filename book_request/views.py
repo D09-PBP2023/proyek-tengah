@@ -10,7 +10,19 @@ def request_book_by_ajax(request):
     if request.method == 'POST':
         form = RequestBookForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            # Create an instance of the model without saving it to the database
+            user_request = form.save(commit=False)
+            user_request.request_status = 'PENDING'
+            # Access the data
+            name = user_request.name
+            author = user_request.author
+            original_language = user_request.original_language
+            year_published = user_request.year_published
+            sales = user_request.sales
+            genre = user_request.genre
+            cover_image = user_request.cover_image
+            # Save the modified instance to the database
+            user_request.save()
             return JsonResponse({'error': False, 'message': 'Request Added Successfully'})
         else:
             return JsonResponse({'error': True, 'errors': form.errors, 'message': 'Request Failed'})
