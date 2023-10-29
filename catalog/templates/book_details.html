@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <!-- Header -->
+    {% include 'header.html' %}
+
+    <!-- Container book details -->
+    <div class="w-full md:w-500px rounded-lg mx-auto p-12 flex justify-center">
+        <div class="w-full h-auto mx-auto bg-blue-400 items-center rounded-lg shadow-2xl flex flex-col">
+            <h1 class="text-white font-bold p-2 text-3xl">Book Details</h1>
+            <div class="w-full h-auto mx-auto rounded-b-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
+                <!-- Image -->
+                <div class="w-2/5 md:w-1/5 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
+                    <img class="w-full h-auto mx-auto rounded-lg shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
+                </div>
+                <!-- Details -->
+                <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-2 flex justify-center flex-col">
+                    <h1 class="text-black font-bold text-3xl">{{ name }}</h1>
+                    <div class="text-lg py-[20px]">
+                        <p>By {{ author }}, {{ original_language }} - {{ year_published }}, {{ genre }}</p>
+                        <p>Ratings: 0/5</p>
+                    </div>
+                    <div class="border border-black w-4/5 h-auto rounded-lg p-5 py-[20px] shadow-2xl">
+                        <p class="py-[5px]">No reviews yet</p>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="w-full h-auto mx-auto rounded-lg py-[20px]">
+                        <form class="w-full text-white font-bold py-[20px] " action="{% url 'catalog:bookmark_book' id=id  %}" method="post">
+                            {% csrf_token %}
+                            <button id="bookmarkButton" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[1px] py-[5px] hover:cursor-pointer" type="submit">
+                            </button>
+                            <nav class="w-full py-[10px]">
+                                <a href="../../bookmarked/" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">See Bookmark</a>
+                                <a class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">Request book swap?</a>
+                            </nav>
+                            
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleDropdownUser() {
+        const dropdownButton = document.getElementById("dropdown_user_button");
+        const dropdownMenu = document.getElementById("dropdown_user_menu");
+        
+        dropdownMenu.classList.toggle('opacity-0');
+        dropdownMenu.classList.toggle('scale-100');
+        dropdownMenu.classList.toggle('scale-0');
+    }
+
+    function toggleDropdownGeneral() {
+        const dropdownButton = document.getElementById("dropdown_general_button");
+        const dropdownMenu = document.getElementById("dropdown_general_menu");
+
+        dropdownMenu.classList.toggle('scale-100');
+        dropdownMenu.classList.toggle('scale-0');
+        dropdownMenu.classList.toggle('h-0');
+    }
+    
+    async function getMarked() {
+        return fetch("{% url 'catalog:get_marked_books' %}").then((res) => res.json())
+    }
+
+    async function refreshMark() {
+        const bookmarkButton = document.getElementById("bookmarkButton");
+        bookmarkButton.innerHTML = "";
+
+        const books = await getMarked();
+        const id = "{{ id }}";
+        let isBookmarked = false;
+        
+        books.forEach(book => {
+            if (book.pk == id){
+                isBookmarked = true;
+            }
+        });
+
+        if (isBookmarked) {
+            bookmarkButton.textContent = "Bookmarked";
+        } else {
+            bookmarkButton.textContent = "Bookmark";
+        }
+    }
+refreshMark()
+</script>
+{% endblock %}
