@@ -13,6 +13,7 @@ from django.db.models import Q
 def request_book_swap(request):
     form = BookSwapForm(request.POST or None)
     if form.is_valid() and request.method == "POST":
+        form.cleaned_data.get('choice')
         form.instance.user = request.user
         form.save()
         return HttpResponseRedirect(reverse('book_swap:show_processed_book_swap'))
