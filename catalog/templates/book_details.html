@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 <div>
@@ -77,7 +77,7 @@
                     <h1 class="text-black font-bold text-3xl">{{ name }}</h1>
                     <div class="text-lg py-[20px]">
                         <p>By {{ author }}, {{ original_language }} - {{ year_published }}, {{ genre }}</p>
-                        <p id="average_rating"><!-- The average rating will be displayed here --></p>
+                        <p id="average_rating"></p>
                     </div>
                     <div class="border border-black w-4/5 h-auto rounded-lg p-5 py-[20px] shadow-2xl">
                         <table id="review_table">
@@ -270,10 +270,10 @@
                 <tr class="review-row">
                     <td>
                         <div class="flex items-center">
-                            <img src="" alt="User's Profile Picture" class="w-10 h-10 rounded-full mr-2">
+                            <img src="{% static 'profile_picture/default-avatar-icon-of-social-media-user-vector.jpg' %}" alt="User's Profile Picture" class="w-10 h-10 rounded-full mr-2">
                             <div>
                                 <h5 class="text-lg font-semibold">
-                                    <a href="" class="text-link">
+                                    <a>
                                     Review by ${item.user}
                                     </a>
                                 </h5>
@@ -292,7 +292,7 @@
                 </tr>
                 <tr class="review-separator">
                     <td>
-                        <hr class="border-t border-gray-300 my-4" style="width: 100%;"><!-- Adjust the width as needed -->
+                        <hr class="border-t border-gray-300 my-4" style="width: 100%;">
                     </td>
                 </tr>`;
             })

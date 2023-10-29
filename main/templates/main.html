@@ -112,17 +112,7 @@
                         <div class="truncate text-white text-xs">${book.fields.genre}</div>
                         <div class="truncate text-white text-xs">${book.fields.original_language} - ${book.fields.year_published}</div>
                         <div class="flex flex-row gap-2">
-                            {% for i in n %}
-                                {% if i < 3 %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-white bi bi-star-fill my-2" viewBox="0 0 16 16"> 
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
-                                    </svg>
-                                {% else %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-gray-300 opacity-50 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
-                                    </svg>
-                                {% endif %}
-                            {% endfor %}
+                            ${getStarRatingHtml(book.calculate_average_rating)}
                         </div>
                     </div>
                 </div>
@@ -144,17 +134,7 @@
                         <div class="line-clamp-1 lg:line-clamp-2 font-semibold text-lg text-black">${book.fields.name}</div>
                         <div class="line-clamp-1 font-normal text-slate-400 text-sm">${book.fields.author}</div>
                         <div class="flex flex-row gap-2">
-                            {% for i in n %}
-                                {% if i < 3 %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-yellow-400 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
-                                    </svg>
-                                {% else %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-gray-300 opacity-50 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
-                                    </svg>
-                                {% endif %}
-                            {% endfor %}
+                            ${getStarRatingHtml(book.calculate_average_rating)}
                         </div>
                     </div>
                 </div>
@@ -166,6 +146,26 @@
         const hiddenElements = document.querySelectorAll("#card-book");
         console.log(hiddenElements);
         hiddenElements.forEach((element) => booksCardObserver.observe(element));
+    }
+
+    function getStarRatingHtml(rating) {
+        const maxRating = 5;
+        let starHtml = '';
+        if (rating === null) {
+            starHtml = 'N/A';
+        } else {
+            starHtml += '<div class="flex items-center">';
+            for (let i = 1; i <= maxRating; i++) {
+                if (i <= rating) {
+                    starHtml += '<svg class="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
+                } else {
+                    starHtml += '<svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
+                }
+            }
+            starHtml += '</div>';
+        }
+
+        return starHtml;
     }
 
     async function refreshBooks() {
