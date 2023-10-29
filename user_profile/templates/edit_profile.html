@@ -64,31 +64,36 @@
         About Us
     </a>
 </div>
-<div class="flex flex-col min-h-screen items-center justify-center bg-gradient-to-r from-gray-100 to-blue-200">
-    <div class="h-14 bg-gradient-to-r from-cyan-400 to-blue-700 flex flex-col lg:flex-row rounded-xl w-[300px] lg:w-[1400px] h-[600px] lg:h-[700px] bg-white shadow-2xl relative">
-        <div class="h-[60%] w-full bg-white absolute bottom-0 left-0 lg:flex-row rounded-b-lg 12px"></div>
+<div class="xl:w-full xl:w-500px rounded-lg xl:mx-auto xl:p-12 xl:flex sm:justify-center
+            md:w-full lg:w-10px rounded-lg mx-auto p-12 flex md:justify-center ">
+        <div class="h-14 bg-gradient-to-r from-cyan-400 to-blue-700 flex flex-col md:flex-row rounded-xl w-[700px] lg:w-[1400px] xl:h-[800px] lg:h-[1100px] bg-white shadow-2xl relative
+            md:h-[1100px] sm:h-[1300px]">
+        <div class="md: h-[66%] lg:h-[65%] h-[60%] w-full bg-white absolute bottom-0 left-0 lg:flex-row rounded-b-lg 12px"></div>
         <form action="{% url 'user_profile:edit_profile' %}" method="post">
         {% csrf_token %}
         <h1 class="text-white font-bold text-3xl ml-4 mt-4">{{ user.username }}'s Atelier</h1>
-        <input type="text" id="username" name="username" value="{{ user.username  }}" class="text-gray-700 absolute top-1/3 left-80 bg-gray-200 p-2 rounded-md">
+        <input type="text" id="username" name="username" value="{{ user.username  }}" class="xl: top-[29%] md:top-[36%] text-gray-700 absolute top-1/3 left-80 bg-gray-200 p-2 rounded-md">
         <div style="width: 200px; height: 200px; background-color: gray; border-radius: 50%;" class="absolute top-1/3 left-20 transform translate-x-5 -translate-y-20">
-            <img style="width: 200px; height: 200px; border-radius: 50%;" src="{% static 'profile_picture/default-avatar-icon-of-social-media-user-vector.jpg' %}" >
+            <img style="width: 200px; height: 200px; border-radius: 50%;" src="{% static 'profile_picture/default-avatar-icon-of-social-media-user-vector.png' %}" >
         </div>
     
         <!-- New "profile information" section below the circle -->
             <!-- Add form fields for username, email, and bio -->
-            <div class="absolute top-1/2 left-20 w-[500px] bg-white rounded-lg p-4 shadow-md translate-y-2">
+            <div class="absolute xl:top-[50%] left-20 w-[400px] xl:w-[400px] bg-white rounded-lg p-4 shadow-md translate-y-3
+                        lg: top-[45%]
+                        md: top-[20%]">
                 <!-- Add your email -->
                 <input type="email" id="email" name="email" value="{{ profile.email }}" class="text-gray-700 mb-3 bg-gray-200">
             </div>
 
-            <div class="absolute top-2/3 left-20 w-[500px] bg-white rounded-lg p-4 shadow-md transform -translate-y-10">
+            <div class="absolute xl:top-2/3 left-20 w-[500px] bg-white rounded-lg p-4 shadow-md transform -translate-y-10
+                        lg: top-[56%]">
                 <!-- Add your bio content here -->
                 <textarea id="bio" name="bio" class="text-gray-700 bg-gray-200" rows="7" cols="60">{{ profile.bio }}</textarea>
 
             </div>
 
-            <div class="absolute top-3/4 right-10 transform translate-y-20">
+            <div class="absolute xl:top-[74%] right-10 transform translate-y-20 lg:top-[20%] md:top-[22%]">
                 <a href="{% url 'user_profile:edit_profile' %}">
                 <button type="submit" class="group relative h-8 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
                     <div class="absolute inset-0 w-3 bg-gradient-to-r from-cyan-300 to-blue-600 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
@@ -100,49 +105,78 @@
         </form>
 
         <!-- Container for highlighted book covers on the right side -->
-        <div class="absolute top-1/2 right-10 w-[700px] bg-gradient-to-r from-cyan-300 to-blue-600 rounded-lg p-4 shadow-md transform translate-y-3" style="display: flex; justify-content: space-around;">
+        <div class="flex lg:flex-row 
+                    absolute xl:top-[50%] lg: right-10 lg:w-[700px] bg-gradient-to-r from-cyan-300 to-blue-600 rounded-lg p-4 shadow-md xl:transform md:translate-y-3
+                    lg: top-[75%] lg:flex-1 gap-3" style="display: flex; justify-content: space-around;">
             <!-- Add your book covers here -->
-            <div style="display: flex; align-items: center;  margin-top: -150px;">
-                <svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 472.615 472.615" xml:space="preserve">
-                    <g>
-                        <g>
-                            <polygon points="96.738,0 96.738,333.046 236.307,472.615 375.877,333.046 375.877,0"/>
-                        </g>
-                    </g>
-                </svg>
-                <p class="text-lg text-gray-700 ml-2">Bookmarks</p>
+            <div style="display: flex; "class="flex flex-col sm:mr-8">
+                <div class="flex flex-col"> 
+                <a href="{% url 'catalog:view_bookmarked_list' %}">
+                    <div style="display: flex; align-items: center;">
+                        <svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 472.615 472.615" xml:space="preserve">
+                            <g>
+                                <g>
+                                    <polygon points="96.738,0 96.738,333.046 236.307,472.615 375.877,333.046 375.877,0"/>
+                                </g>
+                            </g>
+                        </svg>
+                        <p class="text-lg text-gray-700 ml-2 hover:text-white">Bookmarks</p>
+                    </div>
+                </a>
+                </div>
             </div>
             {% if fav1 %}
-            <div class="flex flex-col gap-3">
-            <a href="{% url 'catalog:book_details' fav1.id %}">
-                <img class="rounded-lg hover:brightness-50" src="{{ fav1.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav1.name }}">
-            </a>
+            <div class="flex flex-col gap-3" >
+            <button id= 1 class="open-button" onclick=showPopup(1)>
+                <img class="rounded-lg hover:brightness-50 lg:w-1/2" src="{{ fav1.cover_image.url }}" alt="Lights" style="width: 120px; height: 183px;" alt="{{ fav1.name }}">
+            </button>
             </div>
             {% else %}
-            <div class="flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183.76px;"></div>
+            <button id= 1 onclick=showPopup(1) class="open-button flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183;">
+            </button>
             {% endif %}
             {% if fav2 %}
             <div class="flex flex-col gap-3">
-            <a href="{% url 'catalog:book_details' fav2.id %}">
-                <img class="rounded-lg hover:brightness-50" src="{{ fav2.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav2.name }}">
-            </a>
+            <button id= 2 class="open-button" onclick=showPopup(2)>
+                <img class="rounded-lg hover:brightness-50" src="{{ fav2.cover_image.url }}" alt="Lights" style="width: 120px; height: 183px;" alt="{{ fav2.name }}">
+            </button>
             </div>
             {% else %}
-            <div class="flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183.76px;"></div>
+            <button id= 2 onclick=showPopup(2) class="open-button flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183px;">
+            </button>
             {% endif %}
             {% if fav3 %}
             <div class="flex flex-col gap-3">
-            <a href="{% url 'catalog:book_details' fav3.id %}">
-                <img class="rounded-lg hover:brightness-50" src="{{ fav3.cover_image.url }}" alt="Lights" style="width: 120px;" alt="{{ fav3.name }}">
-            </a>
+            <button id= 3 class="open-button" onclick=showPopup(3)>
+                <img class="rounded-lg hover:brightness-50" src="{{ fav3.cover_image.url }}" alt="Lights" style="width: 120px; height: 183px;" alt="{{ fav3.name }}">
+            </button>
             </div>
             {% else %}
-            <div class="flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183.76px;"></div>
+            <div class="flex flex-col gap-3">
+                <button id= 3 class="open-button flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183px;" onclick=showPopup(3) >
+                </button>
+            </div>
             {% endif %}
+
         </div>
         
     </div>
 </div>
+
+<dialog class="modal rounded-lg" values="" id="modal">
+    <div class="h-auto mx-auto bg-blue-400 items-center rounded-lg shadow-2xl flex flex-col">
+        <div class="flex flex-row">
+            <h1 class="text-white font-bold p-2 text-3xl">Bookmark List</h1>
+            <button onclick=modal.close() class="button close-button absolute right-0 mr-5 mt-3 border-solid border-2 border-white hover:bg-white text-white hover:text-blue-500 px-3 rounded-lg">Exit</button>
+        </div>
+        <div class="w-full h-auto mx-auto rounded-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
+            <div id="itemDeck" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 w-full h-auto items-center justify-center justify-items-center gap-4 px-[50px] py-2">
+
+                <!-- Coded in javascript -->
+            </div>
+        </div>
+    </div>
+</dialog>
 
 <script>
     function toggleDropdownUser() {
@@ -161,6 +195,86 @@
         dropdownMenu.classList.toggle('scale-100');
         dropdownMenu.classList.toggle('scale-0');
         dropdownMenu.classList.toggle('h-0');
+    }
+
+    async function getBuku(id) {
+        let url = `/get_buku_by_id/${id}/`;
+        return fetch(url).then((res) => res.json())
+    }
+
+    async function getItems() {
+        return fetch("{% url 'catalog:get_marked_books' %}").then((res) => res.json())
+    }
+
+    async function refreshItems() {
+        document.getElementById("itemDeck").innerHTML = ""
+        const books = await getItems()
+        let htmlString = ""
+        books.forEach((book) => {
+            htmlString += `\n
+            <button onclick=selectBook(${book.pk})>
+                <div class="flex flex-row items-center rounded-xl border transition shadow-md hover:shadow-xl w-[350px] sm:w-[250px] lg:w-[350px] h-[200px] px-4 py-3 gap-3 cursor-pointer">
+                    <img src='/media/${book.fields.cover_image}' class='w-[100px] rounded-lg drop-shadow-md'>
+                    <div class="flex-col w-[250px] sm:w-[150px] lg:w-[250px]">
+                        <div class="line-clamp-1 lg:line-clamp-2 font-semibold text-lg text-black">${book.fields.name}</div>
+                        <div class="line-clamp-1 font-normal text-slate-400 text-sm">${book.fields.author}</div>
+                        <div class="flex flex-row gap-2">
+                            {% for i in n %}
+                                {% if i < 3 %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-yellow-400 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
+                                    </svg>
+                                {% else %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-gray-300 opacity-50 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
+                                    </svg>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </button>`.replaceAll('177013', book.pk)
+            
+        });
+        
+        document.getElementById("itemDeck").innerHTML = htmlString;
+
+        const hiddenElements = document.querySelectorAll("#card-book");
+        console.log(hiddenElements);
+        hiddenElements.forEach((element) => booksCardObserver.observe(element));
+    }
+
+    refreshItems()
+
+
+    async function selectBook(id){
+        let formData = new FormData();
+        formData.append("idBuku", id)
+        formData.append("favId", tmp)
+        buku = await getBuku(id)
+        let gambar = document.getElementById(tmp);
+        if (gambar.style.height === '183px'){
+            gambar.removeAttribute('style');
+            gambar.classList.remove('flex', 'flex-col', 'gap-3', 'hover:bg-blue-400', 'rounded-lg', 'border-dotted', 'border-2', 'border-grey-800');
+        }
+        fetch("{% url 'user_profile:add_favorite' %}", {
+            method: "POST",
+            body: formData
+            }).then(refreshItems);
+                gambar.innerHTML = `<img class="rounded-lg hover:brightness-50" src='/media/${buku[0].fields.cover_image}' alt="Lights" style="width: 120px; height: 183.76px;" alt="${buku[0].fields.name}">`
+                modal.close()
+    
+    }
+
+
+
+    const modal = document.querySelector("#modal");
+    const openModal = document.querySelector(".open-button");
+    const closeModal = document.querySelector(".close-button");
+
+    function showPopup(id){
+        tmp=id
+        modal.showModal();  
     }
 </script>
 {% endblock %}

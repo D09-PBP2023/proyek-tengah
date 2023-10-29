@@ -75,31 +75,43 @@
 </div>
 
 <!-- Profile Section -->
-<div class="w-full md:w-500px rounded-lg mx-auto p-12 flex justify-center">
-    <div class="h-14 bg-gradient-to-r from-cyan-400 to-blue-700 flex flex-col lg:flex-row rounded-xl w-[700px] lg:w-[1400px] h-[600px] lg:h-[700px] bg-white shadow-2xl relative">
-        <div class="h-[60%] w-full bg-white absolute bottom-0 left-0 lg:flex-row rounded-b-lg 12px"></div>
-        <h1 class="text-white sm:font-bold sm:text-3xl sm:ml-4 sm:mt-4 text-sm">{{ profile.user.username }}'s Atelier</h1>
-        <div style="width: 20vw; height: 20vw; max-width: 200px; max-height: 200px; background-color: gray; border-radius: 50%;" class="absolute top-1/3 left-20 transform translate-x-5 -translate-y-20">
-            <img style="width: 20vw; height: 20vw; max-width: 200px; max-height: 200px; border-radius: 50%;" src="{% static 'profile_picture/default-avatar-icon-of-social-media-user-vector.jpg' %}" >
+<div class="xl:w-full xl:w-500px rounded-lg xl:mx-auto xl:p-12 xl:flex sm:justify-center
+            md:w-full lg:w-10px rounded-lg mx-auto p-12 flex md:justify-center ">
+    <div class="h-14 bg-gradient-to-r from-cyan-400 to-blue-700 flex flex-col md:flex-row rounded-xl w-[700px] lg:w-[1400px] xl:h-[700px] lg:h-[1000px] bg-white shadow-2xl relative
+                md:h-[1000px] sm:h-[1200px] min-[320px]:h-[1800px] max-[400px]=h-[1800px]">
+        <div class="min-[320px]:h-[85%] md: h-[66%] lg:h-[65%] h-[60%] w-full bg-white absolute bottom-0 left-0 lg:flex-row rounded-b-lg 12px"></div>
+        <h1 class="min-[320px]:text-2xl min-[320px]:ml-2 min-[320px]:mt-2 text-white sm:font-bold sm:text-3xl sm:ml-4 sm:mt-4 text-sm">{{ profile.user.username }}'s Atelier</h1>
+        <div style="max-width: 200px; max-height: 200px; background-color: gray; border-radius: 50%;" class="absolute max-[400px]:mt-40 max-[400px]:ml-12 sm:top-1/3 md:left-20 md:transform translate-x-5 md:-translate-y-20">
+            <img style="max-width: 200px; max-height: 200px; border-radius: 50%;" src="{% static 'profile_picture/default-avatar-icon-of-social-media-user-vector.png' %}" >
         </div>
     
         <!-- New "email" section below the circle -->
-        <div class="absolute top-1/2 left-20 w-full sm:w-[400px] bg-white rounded-lg p-4 shadow-md translate-y-3">
+        <div class="absolute xl:top-[50%] max-[400px]:mx-10 sm:left-20 w-[400px] xl:w-[400px] bg-white rounded-lg p-4 shadow-md translate-y-3
+                    lg: top-[45%]
+                    md: top-[20%]
+                    max-[400px]:w-[250px]
+                    max-[400px]:top-[25%]">
             <!-- Add your email -->
             <p class="text-gray-700">{{ profile.email }}</p>
         </div>
 
         <!-- New "bio" section below the email -->
-        <div class="absolute top-2/3 left-20 w-[500px] bg-white rounded-lg p-4 shadow-md transform -translate-y-10">
+        <div class="absolute xl:top-2/3 max-[400px]:mx-10 sm:left-20 w-[500px] bg-white rounded-lg p-4 shadow-md transform -translate-y-10
+                    lg: top-[56%] max-[400px]:w-[250px]
+                    max-[400px]:top-[31%]">
             <!-- Add your bio content here -->
             <p class="text-gray-700">{{ profile.bio }}</p>
         </div>
         
         <!-- Container for highlighted book covers on the right side -->
-        <div class="absolute top-1/2 right-10 w-[350px] lg:w-[700px] bg-gradient-to-r from-cyan-300 to-blue-600 rounded-lg p-4 shadow-md transform translate-y-3" style="display: flex; justify-content: space-around;">
+        <div class="flex lg:flex-row max-[400px]:flex-col max-[400px]: gap-6 max-[400px]:w-[150px] max-[400px]:mt-5 
+                    lg: absolute xl:top-[50%] min-[320px]:mx-10 lg: right-10 lg:w-[700px] bg-gradient-to-r from-cyan-300 to-blue-600 rounded-lg p-4 shadow-md xl:transform md:translate-y-3
+                    lg: top-[70%] lg:flex-1
+                    min-[320px]:top-[45%]
+                    max-[400px]:top-[45%]" style="display: flex; justify-content: space-around;">
             <!-- Add your book covers here -->
             <div style="display: flex; "class="flex flex-col">
-                <div class="hidden lg:flex flex-col"> 
+                <div class="lg:flex flex-col"> 
                 <a href="{% url 'catalog:view_bookmarked_list' %}">
                     <div style="display: flex; align-items: center;">
                         <svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 472.615 472.615" xml:space="preserve">
@@ -115,64 +127,44 @@
                 </div>
             </div>
             {% if fav1 %}
-            <div class="flex flex-col gap-3" >
-            <button id= 1 class="open-button" onclick=showPopup(1)>
-                <img class="rounded-lg hover:brightness-50 lg:w-1/2" src="{{ fav1.cover_image.url }}" alt="Lights" style="width: 120px; height: 183px;" alt="{{ fav1.name }}">
-            </button>
+            <div class="flex flex-col gap-3">
+            <a href="{% url 'catalog:book_details' fav1.id %}">
+                <img class="rounded-lg hover:brightness-50" src="{{ fav1.cover_image.url }}" alt="Lights" style="width: 120px; height: 183.76px;" alt="{{ fav1.name }}">
+            </a>
             </div>
             {% else %}
-            <button id= 1 onclick=showPopup(1) class="open-button flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183;">
-            </button>
+            <div class="flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183.76px;"></div>
             {% endif %}
             {% if fav2 %}
             <div class="flex flex-col gap-3">
-            <button id= 2 class="open-button" onclick=showPopup(2)>
-                <img class="rounded-lg hover:brightness-50" src="{{ fav2.cover_image.url }}" alt="Lights" style="width: 120px; height: 183px;" alt="{{ fav2.name }}">
-            </button>
+            <a href="{% url 'catalog:book_details' fav2.id %}">
+                <img class="rounded-lg hover:brightness-50" src="{{ fav2.cover_image.url }}" alt="Lights" style="width: 120px; height: 183.76px;" alt="{{ fav2.name }}">
+            </a>
             </div>
             {% else %}
-            <button id= 2 onclick=showPopup(2) class="open-button flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183px;">
-            </button>
+            <div class="flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183.76px;"></div>
             {% endif %}
             {% if fav3 %}
             <div class="flex flex-col gap-3">
-            <button id= 3 class="open-button" onclick=showPopup(3)>
-                <img class="rounded-lg hover:brightness-50" src="{{ fav3.cover_image.url }}" alt="Lights" style="width: 120px; height: 183px;" alt="{{ fav3.name }}">
-            </button>
+            <a href="{% url 'catalog:book_details' fav3.id %}">
+                <img class="rounded-lg hover:brightness-50" src="{{ fav3.cover_image.url }}" alt="Lights" style="width: 120px; height: 183.76px;" alt="{{ fav3.name }}">
+            </a>
             </div>
             {% else %}
-            <div class="flex flex-col gap-3">
-                <button id= 3 class="open-button flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183px;" onclick=showPopup(3) >
-                </button>
-            </div>
+            <div class="flex flex-col gap-3 hover:bg-blue-400 rounded-lg border-dotted border-2 border-grey-800" style="width: 120px; height: 183.76px;"></div>
             {% endif %}
             
         </div>
-        <div class="absolute top-3/4 right-10 transform translate-y-20">
-        <a href="{% url 'user_profile:edit_profile' %}">
-        <button class="group relative h-8 w-36 overflow-hidden rounded-lg bg-white text-lg shadow">
-            <div class="absolute inset-0 w-3 bg-gradient-to-r from-cyan-300 to-blue-500 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-            <span class="relative text-black group-hover:text-white">Edit Profile</span>
-          </button>
-        </a>
+        <div class="absolute xl:top-3/4 right-10 transform translate-y-20 lg:top-[23%] md:top-[22%] min-[320px]:top-[18%] min-[320px]:mr-12">
+            <a href="{% url 'user_profile:edit_profile' %}">
+                <button class="group relative h-8 w-36 overflow-hidden rounded-lg bg-white text-lg shadow">
+                    <div class="absolute inset-0 w-3 bg-gradient-to-r from-cyan-300 to-blue-500 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+                    <span class="relative text-black group-hover:text-white">Edit Profile</span>
+                </button>
+            </a>
         </div>
     </div>
 </div>
-
-<dialog class="modal rounded-lg" values="" id="modal">
-    <div class="h-auto mx-auto bg-blue-400 items-center rounded-lg shadow-2xl flex flex-col">
-        <div class="flex flex-row">
-            <h1 class="text-white font-bold p-2 text-3xl">Bookmark List</h1>
-            <button onclick=modal.close() class="button close-button absolute right-0 mr-5 mt-3 border-solid border-2 border-white hover:bg-white text-white hover:text-blue-500 px-3 rounded-lg">Exit</button>
-        </div>
-        <div class="w-full h-auto mx-auto rounded-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
-            <div id="itemDeck" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 w-full h-auto items-center justify-center justify-items-center gap-4 px-[50px] py-2">
-
-                <!-- Coded in javascript -->
-            </div>
-        </div>
-    </div>
-</dialog>
 
 <script>
     let tmp
@@ -258,7 +250,7 @@
             method: "POST",
             body: formData
             }).then(refreshItems);
-                gambar.innerHTML = `<img class="rounded-lg hover:brightness-50" src='/media/${buku[0].fields.cover_image}' alt="Lights" style="width: 120px;" alt="${buku[0].fields.name}">`
+                gambar.innerHTML = `<img class="rounded-lg hover:brightness-50" src='/media/${buku[0].fields.cover_image}' alt="Lights" style="width: 120px; height: 183.76px;" alt="${buku[0].fields.name}">`
                 modal.close()
     
     }

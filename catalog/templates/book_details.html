@@ -134,7 +134,6 @@
         }, 700);
     }
 
-
     async function getMarked() {
         return fetch("{% url 'catalog:get_marked_books' %}").then((res) => res.json())
     }
