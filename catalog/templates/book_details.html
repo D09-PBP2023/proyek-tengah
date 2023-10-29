@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 <div>
@@ -13,17 +13,21 @@
             <div class="w-full h-auto mx-auto rounded-b-lg bg-white flex flex-col md:flex-row justify-center shadow-2xl">
                 <!-- Image -->
                 <div class="w-2/5 md:w-1/5 h-auto mx-auto rounded-lg p-5 flex-1 flex justify-center flex-col">
-                    <img class="w-full h-auto mx-auto rounded-lg shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
+                    <img class="w-full h-auto mx-auto shadow-2xl object-cover" src="{{ cover_image.url }}" alt="{{ name }}">
                 </div>
                 <!-- Details -->
                 <div class="w-4/5 h-auto mx-auto rounded-lg p-5 flex-2 flex justify-center flex-col">
                     <h1 class="text-black font-bold text-3xl">{{ name }}</h1>
                     <div class="text-lg py-[20px]">
                         <p>By {{ author }}, {{ original_language }} - {{ year_published }}, {{ genre }}</p>
-                        <p>Ratings: 0/5</p>
+                        <p id="average_rating"></p>
                     </div>
                     <div class="border border-black w-4/5 h-auto rounded-lg p-5 py-[20px] shadow-2xl">
-                        <p class="py-[5px]">No reviews yet</p>
+                        <table id="review_table">
+                            <tr>
+                                <td colspan="2">No reviews yet</td>
+                            </tr>
+                        </table>
                     </div>
                     {% if user.is_authenticated %}
                     <div class="w-full h-auto mx-auto rounded-lg py-[20px]">
@@ -34,8 +38,8 @@
                             <nav class="w-full py-[10px]">
                                 <a href="../../bookmarked/" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">See Bookmark</a>
                                 <a class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">Request book swap?</a>
+                                <a data-modal-target="static-modal" data-modal-toggle="static-modal" class="btn bg-blue-400 hover:bg-blue-500 w-[200px] min-w-[100px] text-white font-bold border border-white rounded px-[10px] py-[5px] hover:cursor-pointer">Add Review</a>
                             </nav>
-                            
                         </form>
                     </div>
                     {% endif %}
@@ -45,7 +49,217 @@
     </div>
 </div>
 
+<!-- Main modal -->
+<div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Add Review
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="static-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form method="post" id="form">
+                {% csrf_token %}
+                <div class="p-6 space-y-6">
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        Rating:
+                    </p>
+                    <div class="flex items-center space-x-1">
+                        <label for="rating-1" class="cursor-pointer star-label" onclick="toggleStar(1)">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                            <input type="radio" id="rating-1" name="rating" value="1" class="hidden">
+                        </label>
+                        <label for="rating-2" class="cursor-pointer star-label" onclick="toggleStar(2)">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                            <input type="radio" id="rating-2" name="rating" value="2" class="hidden">
+                        </label>
+                        <label for="rating-3" class="cursor-pointer star-label" onclick="toggleStar(3)">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                            <input type="radio" id="rating-3" name="rating" value="3" class="hidden">
+                        </label>
+                        <label for="rating-4" class="cursor-pointer star-label" onclick="toggleStar(4)">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                            <input type="radio" id="rating-4" name="rating" value="4" class="hidden">
+                        </label>
+                        <label for="rating-5" class="cursor-pointer star-label" onclick="toggleStar(5)">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                            <input type="radio" id="rating-5" name="rating" value="5" class="hidden">
+                        </label>
+                    </div>
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        Review:
+                    </p>
+                    <textarea type="text" id="review" name="review" class="w-full px-4 py-2 border rounded"></textarea>
+                </div>
+            </form>
+
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button id="button_add" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-modal-hide="static-modal">Submit</button>
+                <button type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" data-modal-hide="static-modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+    function toggleStar(rating) {
+        const starLabels = document.querySelectorAll('.star-label');
+        
+        for (let i = 0; i < starLabels.length; i++) {
+            if (i < rating) {
+                starLabels[i].querySelector('svg').style.fill = 'yellow';
+                starLabels[i].querySelector('input').checked = true;
+            } else {
+                starLabels[i].querySelector('svg').style.fill = 'currentColor';
+                starLabels[i].querySelector('input').checked = false;
+            }
+        }
+    }
+
+    function resetStarColors() {
+        const starLabels = document.querySelectorAll('.star-label');
+        for (let i = 0; i < starLabels.length; i++) {
+            starLabels[i].querySelector('svg').style.fill = 'currentColor';
+            starLabels[i].querySelector('input').checked = false;
+        }
+    }
+
+    function getStarRatingHtml(rating) {
+        const maxRating = 5;
+        let starHtml = '';
+        starHtml += '<div class="flex items-center">';
+
+        for (let i = 1; i <= maxRating; i++) {
+            if (i <= rating) {
+                starHtml += '<svg class="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
+            } else {
+                starHtml += '<svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
+            }
+        }
+
+        starHtml += '</div>';
+
+        return starHtml;
+    }
+
+    async function getAverageRating() {
+        const response = await fetch("{% url 'catalog:get_average_rating' id=id %}");
+        const data = await response.json();
+        return data.average_rating;
+    }
+
+    async function updateAverageRating() {
+        const averageRating = await getAverageRating();
+
+        const averageRatingElement = document.getElementById("average_rating");
+        if (averageRatingElement) {
+            if (averageRating !== null) {
+                // Display the average rating as stars out of 5
+                const starsHtml = getStarRatingHtml(averageRating);
+                averageRatingElement.innerHTML = starsHtml;
+            } else {
+                // Display "N/A" if there are no ratings
+                averageRatingElement.textContent = "N/A";
+            }
+        }
+    }
+
+    updateAverageRating();
+
+    async function getReviews() {
+        return fetch("{% url 'catalog:get_review' id=id %}").then((res) => res.json())
+    }
+
+    async function refreshReviews() {
+        document.getElementById("review_table").innerHTML = ""
+        const reviews = await getReviews()
+
+        if (reviews.length == 0) {
+            document.getElementById("review_table").innerHTML = 
+                `<tr>
+                    <td colspan="2">No reviews yet</td>
+                </tr>`
+            ;
+
+        } else {
+            let htmlString = ``
+            reviews.forEach((item) => {
+                const createdAtDate = new Date(item.created_at);
+
+                // Format the date as "YYYY-MM-DD" (e.g., "2023-10-30")
+                const formattedDate = `${createdAtDate.getFullYear()}-${(createdAtDate.getMonth() + 1).toString().padStart(2, '0')}-${createdAtDate.getDate().toString().padStart(2, '0')}`;
+
+                htmlString += `
+                <tr class="review-row">
+                    <td>
+                        <div class="flex items-center">
+                            <img src="{% static 'profile_picture/default-avatar-icon-of-social-media-user-vector.png' %}" alt="User's Profile Picture" class="w-10 h-10 rounded-full mr-2">
+                            <div>
+                                <h5 class="text-lg font-semibold">
+                                    <a>
+                                    Review by ${item.user}
+                                    </a>
+                                </h5>
+                                ${getStarRatingHtml(item.rating)}
+                                <p class="text-sm text-gray-500">${formattedDate}</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-base">
+                            ${item.review}
+                        </div>
+                    </td>
+                </tr>
+                <tr class="review-separator">
+                    <td>
+                        <hr class="border-t border-gray-300 my-4" style="width: 100%;">
+                    </td>
+                </tr>`;
+            })
+            
+            document.getElementById("review_table").innerHTML = htmlString
+        }
+    }
+
+    refreshReviews()
+    function addReview() {
+        fetch("{% url 'catalog:add_review' id=id %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(() => {
+            resetStarColors(); // Reset the star colors after submitting the review
+            refreshReviews();
+            updateAverageRating();
+        });
+
+        document.getElementById("form").reset()
+        return false
+    }
+    document.getElementById("button_add").onclick = addReview 
+
     function toggleDropdownUser() {
         const dropdownButton = document.getElementById("dropdown_user_button");
         const dropdownMenu = document.getElementById("dropdown_user_menu");
