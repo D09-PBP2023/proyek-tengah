@@ -75,9 +75,8 @@
             </div>
         </div>
     </div>
-
     <script>
-        async function getItems() {
+    async function getItems() {
         return fetch("{% url 'catalog:get_marked_books' %}").then((res) => res.json())
     }
 
