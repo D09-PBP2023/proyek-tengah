@@ -28,7 +28,7 @@
     <div>
         <ul class="lg:flex flex-row gap-16 hidden">
             <li class="text-gray-800 font-semibold"><a href="{% url 'main:show_main' %}">Home</a></li>
-            <li class="text-gray-800 font-semibold"><a href="#">Add New Book</a></li>
+            <li class="text-gray-800 font-semibold"><a href="{% url 'book_request:request_book' %}">Add New Book</a></li>
             <li class="text-gray-800 font-semibold"><a href="#">About Us</a></li>
         </ul>
     </div>
@@ -82,7 +82,7 @@
 
         {% csrf_token %}
         <h1 class="max-[600px]:text-2xl max-[600px]:ml-2 max-[600px]:mt-2 text-white sm:font-bold sm:text-3xl sm:ml-4 sm:mt-4 text-sm">{{ profile.user.username }}'s Atelier</h1>
-        <input type="text" id="username" name="username" value="{{ user.username  }}" class="absolute xl:top-3/4 right-10 transform translate-y-20 lg:top-[23%] md:top-[22%] max-[600px]:top-[5%] max-[600px]:mr-5">
+        <input type="text" id="username" name="username" value="{{ user.username  }}" class="absolute lg:top-3/4 lg:right-10 transform translate-y-20 lg:top-[25%] lg:right-[60%] md:top-[22%] max-[600px]:top-[5%] max-[600px]:mr-5 bg-grey-800">
         <div style="max-width: 200px; max-height: 200px; background-color: gray; border-radius: 50%;" class="absolute max-[600px]:mt-40 max-[600px]:ml-12 sm:top-1/3 md:left-20 md:transform translate-x-5 md:-translate-y-20">
             <img style="max-width: 200px; max-height: 200px; border-radius: 50%;" src="{% static 'profile_picture/default-avatar-icon-of-social-media-user-vector.png' %}" >
         </div>
@@ -90,8 +90,8 @@
         <!-- New "profile information" section below the circle -->
             <!-- Add form fields for username, email, and bio -->
             <div class="absolute xl:top-[50%] max-[600px]:mx-10 sm:left-20 w-[400px] xl:w-[400px] bg-white rounded-lg p-4 shadow-md translate-y-3
-                        lg: top-[45%]
-                        md: top-[20%]
+                        top-[45%]
+                        top-[20%]
                         max-[600px]:w-[250px]
                         max-[600px]:top-[25%]">
                 <!-- Add your email -->

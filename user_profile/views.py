@@ -118,3 +118,15 @@ def book_list(request):
         'bmarkedbooks': bmarkedbooks,
     }
     return render(request, 'book_list.html', context)
+
+
+
+
+def get_username_by_id(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    username = user.username
+    
+    context = {
+        'username': username,
+    }
+    return render(request, 'username_detail.html', context)
