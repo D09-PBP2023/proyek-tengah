@@ -1,0 +1,33 @@
+{% extends "request_swap_main.html" %}
+
+{% block content1 %}
+<!--Mobile Content-->
+<div class="md" id="mobile-content">
+  <!--Intro-->
+  <div class="flex justify-center">
+    <div class="overflow-x-auto text-white bg-gray-800 w-4/5 rounded-lg mx-5 my-3 p-6 justify-center">
+        <h1>Request Buku yang Kamu Inginkan</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <h1>Nama Buku</h1>
+            <div class="text-gray-900"> 
+              {{ form.name }}
+            </div>
+            <h1>Pesan</h1>
+            <div class="text-gray-900"> 
+              {{ form.message }}
+            </div>
+          <input type="submit" value="Tukar Sekarang" class="bg-gray-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-8"/>
+        </form>
+      </div>
+  </div>
+  <!--Table-->
+</div>
+
+<style>
+  #id_long_desc {
+    width: 100px;
+    height: 100px;
+}
+</style>
+{% endblock %}
