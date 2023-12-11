@@ -75,7 +75,7 @@ def login_user_mobile(request):
             }, status=200)
         else:
             return JsonResponse({
-                "status": True,
+                "status": False,
                 "message": "Sorry, incorrect username or password. Please try again."
             }, status=401)
     return JsonResponse({
