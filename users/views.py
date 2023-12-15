@@ -54,12 +54,12 @@ def logout_user(request):
 # Mobile
 @csrf_exempt
 def login_user_mobile(request):
-    if request.user.is_authenticated:
-        print(request.user)
-        return JsonResponse({
-            "status": False,
-            "message": "You have signed in."
-        }, status=400)
+    # if request.user.is_authenticated:
+    #     print(request.user)
+    #     return JsonResponse({
+    #         "status": False,
+    #         "message": "You have signed in."
+    #     }, status=400)
     
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -85,11 +85,11 @@ def login_user_mobile(request):
 
 @csrf_exempt
 def register_user_mobile(request):
-    if request.user.is_authenticated:
-        return JsonResponse({
-            "status": False,
-            "message": "You have signed in."
-        }, status=400)
+    # if request.user.is_authenticated:
+    #     return JsonResponse({
+    #         "status": False,
+    #         "message": "You have signed in."
+    #     }, status=400)
     
     form = UserRegistrationForm()
 
@@ -114,11 +114,11 @@ def register_user_mobile(request):
 
 @csrf_exempt
 def logout_user_mobile(request):
-    if not request.user.is_authenticated:
-        return JsonResponse({
-            "status": False,
-            "message": "You have not signed in."
-        }, status=400)
+    # if not request.user.is_authenticated:
+    #     return JsonResponse({
+    #         "status": False,
+    #         "message": "You have not signed in."
+    #     }, status=400)
 
     logout(request)
     return JsonResponse({
