@@ -1,5 +1,5 @@
 from django.urls import path
-from catalog.views import book_details, bookmark_book, get_marked_books, get_review, add_review, get_average_rating
+from catalog.views import book_details, bookmark_book, get_marked_books, get_review, add_review, get_average_rating, create_review_flutter
 from user_profile.views import view_bookmarked_list
 
 app_name = 'catalog'
@@ -13,4 +13,5 @@ urlpatterns = [
     path('get_review/<int:id>/', get_review, name='get_review'),
     path('add_review/<int:id>/', add_review, name='add_review'),
     path('get_average_rating/<int:id>/', get_average_rating, name='get_average_rating'),
+    path('create-flutter/', create_review_flutter, name='create_review_flutter'),
 ]
