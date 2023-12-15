@@ -11,6 +11,8 @@ from django.shortcuts import get_object_or_404
 from main.models import Book
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
+from django.http import HttpResponse
+from django.core.serializers import serialize
 
 
 def view_self_profile(request):
@@ -128,9 +130,15 @@ def get_username_by_id(request, user_id):
     }
     return render(request, 'username_detail.html', context)
 
+from django.core.serializers import serialize
+from django.http import HttpResponse
+
 def get_profile_flutter(request):
     data = UserProfile.objects.get(user=request.user)
+    serialized_data = serialize("json", [data])
     return HttpResponse(
-        serializers.serialize("json", data),
+        serialized_data,
         content_type="application/json"
     )
+
+
