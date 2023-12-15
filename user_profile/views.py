@@ -26,7 +26,6 @@ def view_self_profile(request):
         messages.success(request,("Please Log In to view your profile"))
         return redirect('users:login')
 
-
 def view_profile_byId(request, pk):
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user_id=pk)
@@ -128,3 +127,10 @@ def get_username_by_id(request, user_id):
         'username': username,
     }
     return render(request, 'username_detail.html', context)
+
+def get_profile_flutter(request):
+    data = UserProfile.objects.get(user=request.user)
+    return HttpResponse(
+        serializers.serialize("json", data),
+        content_type="application/json"
+    )
