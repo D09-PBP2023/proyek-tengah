@@ -36,6 +36,27 @@ def bookmark_book(request, id):
         user_profile.bookmarkedbooks.add(book)
     return HttpResponseRedirect(reverse('catalog:book_details', kwargs={"id":id}))
 
+from django.http import JsonResponse
+
+def bookmark_book_flutter(request, id):
+    book = get_object_or_404(Book, pk=id)
+    user_profile = UserProfile.objects.get(user=request.user)
+
+    if user_profile.bookmarkedbooks.filter(id=book.id).exists():
+        user_profile.bookmarkedbooks.remove(book)
+        action = 'removed'
+    else:
+        user_profile.bookmarkedbooks.add(book)
+        action = 'added'
+
+    response_data = {
+        'status': 'success',
+        'message': f'Book {action} successfully.',
+        'book_id': book.id
+    }
+    return JsonResponse(response_data)
+
+
 @login_required()
 def get_marked_books(request):
     user_profile = UserProfile.objects.get(user=request.user)
