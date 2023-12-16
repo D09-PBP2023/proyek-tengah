@@ -28,10 +28,10 @@ def get_books_by_name(request, name):
         content_type="application/json"
     )
 
-def get_books_by_id(request):
-    id_list = [int(x) for x in request.GET.get('id').split(',')]
-    data = Book.objects.filter(pk__in=id_list)
-    return HttpResponse(
-        serializers.serialize("json", data),
-        content_type="application/json"
-    )
+# def get_books_by_id(request):
+#     id_list = [int(x) for x in request.GET.get('id').split(',')]
+#     data = Book.objects.filter(pk__in=id_list)
+#     return HttpResponse(
+#         serializers.serialize("json", data),
+#         content_type="application/json"
+#     )

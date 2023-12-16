@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block meta %}
+    <title>Profile</title>
+{% endblock meta %}
 
 {% block content %}
-{% if profile %}
-
-    <h1>PROFILE</h1>
-    <br>
-    <p>{{ profile.user.username }}</p>
-
-{% endif %}
-
-{% endblock content %}
-
+    <div class="w-full md:max-w-500px rounded-lg mx-auto p-4 md:p-12 flex flex-col items-center">
+        <!-- Content goes here -->
+    </div>
+{% endblock %}

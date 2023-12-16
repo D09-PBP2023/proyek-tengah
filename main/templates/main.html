@@ -4,63 +4,7 @@
 
 <div>
     <!-- Header -->
-    <div class="flex flex-row h-[60px] lg:mb-[25px] border py-3 px-5 justify-between items-center">
-        <div class="flex flex-row w-[300px] justify-self-start items-center gap-2">
-            <div id="dropdown_general_button" class="lg:hidden mouse-pointer" onclick="toggleDropdownGeneral()">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
-                    <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/>
-                </svg>
-            </div>
-            <h1 class="font-bold text-xl">BookPals</h1>
-        </div>
-        <div>
-            <ul class="lg:flex flex-row gap-16 hidden">
-                <li class="text-gray-800 font-semibold"><a href="{% url 'main:show_main' %}">Home</a></li>
-                <li class="text-gray-800 font-semibold"><a href="#">Add New Book</a></li>
-                <li class="text-gray-800 font-semibold"><a href="#">About Us</a></li>
-            </ul>
-        </div>
-        <div class="flex flex-row gap-4 relative w-[300px] items-end justify-end">
-            {% if user.is_authenticated %}
-                <div class="flex flex-col mx-5">
-                    <button id="dropdown_user_button" class="flex flex-row items-center justify-center gap-2" onclick="toggleDropdownUser()">
-                        <h1 class="font-semibold">{{ user.username }}</h1>
-                        <svg class="h-5 w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                            fill="currentColor"><path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10
-                                10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd" /></svg>
-                    </button>
-                    <div id="dropdown_user_menu" class="flex flex-col origin-top-right opacity-0 transition scale-0 divide-y absolute z-20 top-[50px] right-[20px] w-[200px] border rounded-lg bg-white shadow-md">
-                        <a href="{% url 'user_profile:view_myprofile' %}" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
-                            Profile
-                        </a>
-                        <a href="#" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
-                            Requests
-                        </a>
-                        <a href="{% url 'users:logout' %}" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
-                            Sign Out
-                        </a>
-                    </div>
-                </div>
-            {% else %}
-                <a href="{% url 'users:login' %}" class="px-3 py-2">Login</a>
-                <a href="{% url 'users:register' %}" class="px-8 py-2 border rounded-xl bg-sky-500 text-white">Sign Up</a>
-            {% endif %}
-        </div>
-    </div>
-    <!-- Subheader for Mobile -->
-    <div id="dropdown_general_menu" class="flex flex-col h-0 origin-top w-full transition scale-0 divide-y mb-[25px] lg:hidden border py-3 justify-between items-center">
-        <a href="{% url 'main:show_main' %}" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
-            Home
-        </a>
-        <a href="#" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
-            Add New Book
-        </a>
-        <a href="{% url 'users:logout' %}" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
-            About Us
-        </a>
-    </div>
+    {% include 'header.html' %}
     <!-- Featured books -->
     <div>
         <h1 class="font-bold text-3xl mx-[50px] my-[20px]">For You</h1>
@@ -97,10 +41,16 @@
         return fetch("{% url 'main:get_books' %}").then((res) => res.json());
     }
 
+    async function getAverageRating(id) {
+        var url_mask = "{% url 'catalog:get_average_rating' id=170013 %}".replace(/170013/, id.toString());
+        return fetch(url_mask).then((res) => res.json());
+    }
+
     async function buildFeaturedBooks(featured_books) {
         document.getElementById("featured_books").innerHTML = "";
         let htmlString = ``;
-        featured_books.forEach((book) => {
+        featured_books.forEach(async (book) => {
+            let rating = await getAverageRating(book.pk)
             htmlString += `\n
             <a href="{% url 'catalog:book_details' id=177013 %}">
                 <div class="flex flex-row relative snap-center items-center hover:cursor-pointer rounded-xl transition shadow-md hover:shadow-xl w-[300px] lg:w-[400px] h-[200px] px-4 py-3 mx-1 gap-3 bg-gradient-to-t ${featured_book_colors[book.pk]}">
@@ -112,30 +62,21 @@
                         <div class="truncate text-white text-xs">${book.fields.genre}</div>
                         <div class="truncate text-white text-xs">${book.fields.original_language} - ${book.fields.year_published}</div>
                         <div class="flex flex-row gap-2">
-                            {% for i in n %}
-                                {% if i < 3 %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-white bi bi-star-fill my-2" viewBox="0 0 16 16"> 
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
-                                    </svg>
-                                {% else %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-gray-300 opacity-50 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
-                                    </svg>
-                                {% endif %}
-                            {% endfor %}
+                            ${getStarRatingHtml(rating.average_rating)}
                         </div>
                     </div>
                 </div>
             </a>`.replaceAll('177013', book.pk)
+            document.getElementById("featured_books").innerHTML = htmlString;
         });
         
-        document.getElementById("featured_books").innerHTML = htmlString;
     }
 
     async function buildBrowseBooks(books) {
         document.getElementById("browse_books").innerHTML = "";
         let htmlString = ``;
-        books.forEach((book) => {
+        books.forEach(async (book) => {
+            let rating = await getAverageRating(book.pk)
             htmlString += `\n
             <a href="{% url 'catalog:book_details' id=177013 %}">
                 <div class="flex flex-row items-center rounded-xl border transition shadow-md hover:shadow-xl w-[350px] sm:w-[250px] lg:w-[350px] h-[200px] px-4 py-3 gap-3 cursor-pointer">
@@ -144,28 +85,37 @@
                         <div class="line-clamp-1 lg:line-clamp-2 font-semibold text-lg text-black">${book.fields.name}</div>
                         <div class="line-clamp-1 font-normal text-slate-400 text-sm">${book.fields.author}</div>
                         <div class="flex flex-row gap-2">
-                            {% for i in n %}
-                                {% if i < 3 %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-yellow-400 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
-                                    </svg>
-                                {% else %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[16px] h-[16px] fill-gray-300 opacity-50 bi bi-star-fill my-2" viewBox="0 0 16 16"> 
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> 
-                                    </svg>
-                                {% endif %}
-                            {% endfor %}
+                            ${getStarRatingHtml(rating.average_rating)}
                         </div>
                     </div>
                 </div>
             </a>`.replaceAll('177013', book.pk)
+            document.getElementById("browse_books").innerHTML = htmlString;
         });
         
-        document.getElementById("browse_books").innerHTML = htmlString;
 
         const hiddenElements = document.querySelectorAll("#card-book");
-        console.log(hiddenElements);
         hiddenElements.forEach((element) => booksCardObserver.observe(element));
+    }
+
+    function getStarRatingHtml(rating) {
+        const maxRating = 5;
+        let starHtml = '';
+        if (rating === null || rating === undefined) {
+            rating = 0;
+        }
+        console.debug(rating);
+        starHtml += '<div class="flex items-center">';
+        for (let i = 1; i <= maxRating; i++) {
+            if (i <= rating) {
+                starHtml += '<svg class="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
+            } else {
+                starHtml += '<svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"><path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path></svg>';
+            }
+        }
+        starHtml += '</div>';
+
+        return starHtml;
     }
 
     async function refreshBooks() {
@@ -210,7 +160,6 @@
 
     const booksCardObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            console.log(entry);
             if (entry.isIntersecting) {
                 entry.target.classList.remove('opacity-0');
                 entry.target.classList.remove('blur-md');

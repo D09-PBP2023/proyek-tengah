@@ -11,17 +11,23 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import environ
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-to8#rqx4*d2gxhyh3d^ufv37s@&3^-k#k15v4n!8xt%q3a6os*'
+
+# Automatically determine environment by detecting if DATABASE_URL variable.
+# DATABASE_URL is provided by Heroku if a database add-on is added (e.g. Heroku Postgres).
+PRODUCTION = env.bool('PRODUCTION', False)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,8 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'main',
     'users',
+    'book_swap',
+    'book_request',
     'user_profile',
     'catalog',
 ]
@@ -47,11 +56,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'book_catalogue.urls'
@@ -86,6 +97,12 @@ DATABASES = {
     }
 }
 
+# Set database settings automatically using DATABASE_URL.
+if PRODUCTION:
+    DATABASES = {
+        'default': env.db('DATABASE_URL')
+    }
+    DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -126,6 +143,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Media files
 # https://docs.djangoproject.com/en/4.0/topics/files/
@@ -137,3 +155,19 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOW_CREDENTIALS=True
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+
+ALLOWED_HOSTS = ["bookpals-d09-tk.pbp.cs.ui.ac.id", "127.0.0.1", "localhost"]
+CSRF_TRUSTED_ORIGINS = ["https://bookpals-d09-tk.pbp.cs.ui.ac.id"]
+CSRF_ALLOWED_ORIGINS = ["https://bookpals-d09-tk.pbp.cs.ui.ac.id"]
+CORS_ORIGINS_WHITELIST = ["https://bookpals-d09-tk.pbp.cs.ui.ac.id"]
