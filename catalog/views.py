@@ -39,6 +39,7 @@ def bookmark_book(request, id):
 from django.http import JsonResponse
 
 def bookmark_book_flutter(request, id):
+    # id -=1
     book = get_object_or_404(Book, pk=id)
     user_profile = UserProfile.objects.get(user=request.user)
 
