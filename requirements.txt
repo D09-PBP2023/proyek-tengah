@@ -7,3 +7,4 @@ urllib3
 pillow
 coverage
 django-environ
+django-cors-headers

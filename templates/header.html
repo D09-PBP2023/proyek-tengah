@@ -11,7 +11,7 @@
     <div>
         <ul class="lg:flex flex-row gap-16 hidden">
             <li class="text-gray-800 font-semibold"><a href="{% url 'main:show_main' %}">Home</a></li>
-            <li class="text-gray-800 font-semibold"><a href="#">Add New Book</a></li>
+            <li class="text-gray-800 font-semibold"><a href="{% url 'book_request:request_book' %}">Add New Book</a></li>
             <li class="text-gray-800 font-semibold"><a href="https://github.com/D09-PBP2023/proyek-tengah/blob/main/README.md">About Us</a></li>
         </ul>
     </div>
@@ -27,10 +27,10 @@
                             clip-rule="evenodd" /></svg>
                 </button>
                 <div id="dropdown_user_menu" class="flex flex-col origin-top-right opacity-0 transition scale-0 divide-y absolute z-20 top-[50px] right-[20px] w-[200px] border rounded-lg bg-white shadow-md">
-                    <a href="#" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
+                    <a href="{% url 'user_profile:view_myprofile' %}" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
                         Profile
                     </a>
-                    <a href="#" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
+                    <a href="{% url 'book_swap:show_processed_book_swap' %}" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
                         Requests
                     </a>
                     <a href="{% url 'users:logout' %}" class="flex justify-end px-4 py-2 cursor-pointer hover:bg-gray-200">
@@ -49,7 +49,7 @@
     <a href="{% url 'main:show_main' %}" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
         Home
     </a>
-    <a href="#" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
+    <a href="{% url 'book_request:request_book' %}" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
         Add New Book
     </a>
     <a href="{% url 'users:logout' %}" class="flex justify-center w-full px-4 py-2 cursor-pointer hover:bg-gray-200">
