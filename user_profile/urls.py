@@ -12,6 +12,7 @@ urlpatterns = [
     path('get_buku_by_id/<int:id>/', get_buku_by_id, name='get_buku_by_id'),
     path('profileflutter/', get_profile_flutter, name='view_flutter'),
     path('editprofile-mobile/', edit_profile_mobile, name='edit_profile_flutter'),
+    path('fav-mobile/<int:favchange>', edit_fav_mobile, name='fav-mobile'),
 
     
 

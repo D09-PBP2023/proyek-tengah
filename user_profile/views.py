@@ -162,4 +162,28 @@ def edit_profile_mobile(request):
     else:
         return JsonResponse({"status": False}, status=401)
 
+@csrf_exempt
+def edit_fav_mobile(request, favchange):
+    if request.method == 'POST':
 
+        formData = request.POST
+        profile = UserProfile.objects.get(user=request.user)
+        if favchange == 1:
+            book_id1 = formData.get('fav1')
+            book1 = Book.objects.get(id=book_id1) if book_id1 else None
+            profile.favoriteBook1 = book1
+        if favchange == 2:
+            book_id2 = formData.get('fav2')
+            book2 = Book.objects.get(id=book_id2) if book_id2 else None
+            profile.favoriteBook2 = book2
+            
+        if favchange == 3:
+            book_id3 = formData.get('fav3')
+            book3 = Book.objects.get(id=book_id3) if book_id3 else None
+            profile.favoriteBook3 = book3
+
+        profile.save()
+
+        return JsonResponse({"status": True}, status=200)
+    else:
+        return JsonResponse({"status": False}, status=401)

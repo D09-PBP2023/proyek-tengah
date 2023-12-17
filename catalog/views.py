@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, reverse
 from main.models import Book, Review
 from user_profile.models import UserProfile
