@@ -150,13 +150,13 @@ def edit_profile_mobile(request):
     if request.method == 'POST':
 
         formData = request.POST
-        # profile = UserProfile.objects.get(user=request.user)
+        profile = UserProfile.objects.get(user=request.user)
         print(formData)
-        # profile.nickname = formData.get('nickname')
-        # profile.email = formData.get('email')
-        # profile.bio = formData.get('bio')
+        profile.nickname = formData.get('nickname')
+        profile.email = formData.get('email')
+        profile.bio = formData.get('bio')
 
-        # profile.save()
+        profile.save()
 
         return JsonResponse({"status": True}, status=200)
     else:
