@@ -1,9 +1,10 @@
+import json
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse, HttpResponse
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from django.contrib import messages
-from .forms import UserUpdateForm,UserForm
+from .forms import *
 from django.contrib.auth.models import User
 from users.urls import login_user
 from django.contrib.auth import authenticate, login, logout
@@ -135,10 +136,30 @@ from django.http import HttpResponse
 
 def get_profile_flutter(request):
     data = UserProfile.objects.get(user=request.user)
+    print(data)
     serialized_data = serialize("json", [data])
+    print(serialized_data)
     return HttpResponse(
         serialized_data,
         content_type="application/json"
     )
+
+
+@csrf_exempt
+def edit_profile_mobile(request):
+    if request.method == 'POST':
+
+        formData = request.POST
+        # profile = UserProfile.objects.get(user=request.user)
+        print(formData)
+        # profile.nickname = formData.get('nickname')
+        # profile.email = formData.get('email')
+        # profile.bio = formData.get('bio')
+
+        # profile.save()
+
+        return JsonResponse({"status": True}, status=200)
+    else:
+        return JsonResponse({"status": False}, status=401)
 
 
