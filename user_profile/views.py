@@ -1,9 +1,10 @@
+import json
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse, HttpResponse
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from django.contrib import messages
-from .forms import UserUpdateForm,UserForm
+from .forms import *
 from django.contrib.auth.models import User
 from users.urls import login_user
 from django.contrib.auth import authenticate, login, logout
@@ -11,6 +12,8 @@ from django.shortcuts import get_object_or_404
 from main.models import Book
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
+from django.http import HttpResponse
+from django.core.serializers import serialize
 
 
 def view_self_profile(request):
@@ -25,7 +28,6 @@ def view_self_profile(request):
     else :
         messages.success(request,("Please Log In to view your profile"))
         return redirect('users:login')
-
 
 def view_profile_byId(request, pk):
     if request.user.is_authenticated:
@@ -128,3 +130,60 @@ def get_username_by_id(request, user_id):
         'username': username,
     }
     return render(request, 'username_detail.html', context)
+
+from django.core.serializers import serialize
+from django.http import HttpResponse
+
+def get_profile_flutter(request):
+    data = UserProfile.objects.get(user=request.user)
+    print(data)
+    serialized_data = serialize("json", [data])
+    print(serialized_data)
+    return HttpResponse(
+        serialized_data,
+        content_type="application/json"
+    )
+
+
+@csrf_exempt
+def edit_profile_mobile(request):
+    if request.method == 'POST':
+
+        formData = request.POST
+        profile = UserProfile.objects.get(user=request.user)
+        print(formData)
+        profile.nickname = formData.get('nickname')
+        profile.email = formData.get('email')
+        profile.bio = formData.get('bio')
+
+        profile.save()
+
+        return JsonResponse({"status": True}, status=200)
+    else:
+        return JsonResponse({"status": False}, status=401)
+
+@csrf_exempt
+def edit_fav_mobile(request, favchange):
+    if request.method == 'POST':
+
+        formData = request.POST
+        profile = UserProfile.objects.get(user=request.user)
+        if favchange == 1:
+            book_id1 = formData.get('fav1')
+            book1 = Book.objects.get(id=book_id1) if book_id1 else None
+            profile.favoriteBook1 = book1
+        if favchange == 2:
+            book_id2 = formData.get('fav2')
+            book2 = Book.objects.get(id=book_id2) if book_id2 else None
+            profile.favoriteBook2 = book2
+            
+        if favchange == 3:
+            book_id3 = formData.get('fav3')
+            book3 = Book.objects.get(id=book_id3) if book_id3 else None
+            profile.favoriteBook3 = book3
+
+        profile.save()
+
+        return JsonResponse({"status": True}, status=200)
+    else:
+        return JsonResponse({"status": False}, status=401)
