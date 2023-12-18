@@ -27,3 +27,11 @@ class ProfileUpdateForm(forms.ModelForm):
         model = UserProfile
         fields = ['favoriteBook1','favoriteBook2','favoriteBook3']
 
+from django import forms
+from django.contrib.auth.models import User
+
+class UserProfileEditForm(forms.ModelForm):
+    email = forms.EmailField()
+    class Meta(UserCreationForm.Meta):
+        model = UserProfile
+        fields = ['nickname','email', 'bio']
