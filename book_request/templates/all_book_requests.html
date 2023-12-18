@@ -1,0 +1,39 @@
+<!-- all_requests.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Requests</title>
+</head>
+<body>
+    <h1>All Requests</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+                <tr>
+                    <td>{{ request.name }}</td>
+                    <td>{{ request.author }}</td>
+                    <td>{{ request.get_request_status_display }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'approve_request' request.id %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Approve">
+                        </form>
+                        <form method="POST" action="{% url 'reject_request' request.id %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Reject">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
