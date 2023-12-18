@@ -136,9 +136,7 @@ from django.http import HttpResponse
 
 def get_profile_flutter(request):
     data = UserProfile.objects.get(user=request.user)
-    print(data)
     serialized_data = serialize("json", [data])
-    print(serialized_data)
     return HttpResponse(
         serialized_data,
         content_type="application/json"
@@ -148,10 +146,9 @@ def get_profile_flutter(request):
 @csrf_exempt
 def edit_profile_mobile(request):
     if request.method == 'POST':
-
         formData = request.POST
         profile = UserProfile.objects.get(user=request.user)
-        print(formData)
+        
         profile.nickname = formData.get('nickname')
         profile.email = formData.get('email')
         profile.bio = formData.get('bio')
