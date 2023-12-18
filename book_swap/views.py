@@ -126,34 +126,33 @@ def cancel_swap(request):
 
 # Processed Book Swap JSON
 def get_processed_book_json(request):
-    book_swap = BookSwap.objects.filter(from_user=request.user).filter(swapped=False)
-    return HttpResponse(serializers.serialize('json', book_swap))
-
+    book_swap = BookSwap.objects.filter(swapped=False).filter(from_user=request.user.username)
+    return HttpResponse(serializers.serialize("json", book_swap),
+        content_type="application/json")
 # Waiting Accept Book Swap JSON
 def get_waiting_accept_book_json(request):
     book_swap = BookSwap.objects.exclude(from_user=request.user).filter(processed=False).filter(swapped=False)
-    return HttpResponse(serializers.serialize('json', book_swap))
-
+    return HttpResponse(serializers.serialize("json", book_swap),
+        content_type="application/json")
 # Accepted Book Swap JSON
 def get_accepted_book_json(request):
     book_swap = BookSwap.objects.filter(from_user=request.user).filter(processed=True)
-    return HttpResponse(serializers.serialize('json', book_swap))
+    return HttpResponse(serializers.serialize("json", book_swap),
+        content_type="application/json")
 # Finished Book Swap JSON
 def get_finished_book_json(request):
     book_swap = BookSwap.objects.filter(from_user=request.user).filter(swapped=True)
-    return HttpResponse(serializers.serialize('json', book_swap))
+    return HttpResponse(serializers.serialize("json", book_swap),
+        content_type="application/json")
 
 # Create Book Swap
-@login_required(login_url='/login')
+@login_required
 @csrf_exempt
 def create_swap_mobile(request):
     if request.method == 'POST':
-        import json
-        post_data = json.loads(request.body)
-        ownedbook = post_data.get('ownedbook')
-        wantedbook = post_data.get('wantedbook')
-        frommessage = post_data.get('message')
-        print(ownedbook, wantedbook, frommessage)
+        ownedbook = request.POST.get('bookid')
+        wantedbook = request.POST.get('bookid2')
+        frommessage = request.POST.get('message')
         new_product = BookSwap.objects.create(
             from_user = request.user.username,
             have_book = ownedbook,
@@ -166,25 +165,25 @@ def create_swap_mobile(request):
         return JsonResponse({"status": "error"}, status=401)
     
 # Accept Book Swap
-@login_required(login_url='/login')
+@login_required
 @csrf_exempt
 def cancel_swap_mobile(request):
     if request.method == 'POST':
-        swaps = BookSwap.objects.filter(from_user = request.user).filter(swapped=False)
-        deletedSwaps = swaps.get(pk=request.POST.get('id'))
-        print(request.POST.get('id'))
-        deletedSwaps.delete()
+        id = request.POST.get('id')
+        book_swap = BookSwap.objects.filter(swapped=False).filter(from_user=request.user.username)
+        book_swap.get(pk=id).delete()
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
     
 # Accept Book Swap
-@login_required(login_url='/login')
+@login_required
 @csrf_exempt
 def accept_swap_mobile(request):
     if request.method == 'POST':
-        swaps = BookSwap.objects.all().filter(processed=False)
-        acceptedSwap = swaps.get(pk=request.POST.get('id'))
+        id = request.POST.get('id')
+        book_swap = BookSwap.objects.exclude(from_user=request.user).filter(processed=False).filter(swapped=False)
+        acceptedSwap = book_swap.get(pk=id)
         acceptedSwap.processed = True
         acceptedSwap.to_user = request.user.username
         acceptedSwap.to_message = request.POST.get('message')
@@ -194,12 +193,13 @@ def accept_swap_mobile(request):
         return JsonResponse({"status": "error"}, status=401)
 
 # Finish Book Swap
-@login_required(login_url='/login')
+@login_required
 @csrf_exempt
 def finish_swap_mobile(request):
     if request.method == 'POST':
-        swaps = BookSwap.objects.all().filter(processed=True)
-        acceptedSwap = swaps.get(pk=request.POST.get('id'))
+        id = request.POST.get('id')
+        book_swap = BookSwap.objects.filter(from_user=request.user).filter(processed=True)
+        acceptedSwap = book_swap.get(pk=id)
         acceptedSwap.swapped = True
         acceptedSwap.save()
         return JsonResponse({"status": "success"}, status=200)
