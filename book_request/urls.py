@@ -11,8 +11,3 @@ urlpatterns = [
     path('requests/reject/<int:request_id>', reject_request, name='reject_request'),
     path('request-book-mobile', request_book_by_ajax, name='request_book_mobile'),
 ]
-
-# error DBnya
-# bisa benerinnya?
-# ngecas kok ga masuk itu 
-# kalau DBnya kayaknya perlu sama koor asdosnya pak soalnya itu di masalah deployment :(
