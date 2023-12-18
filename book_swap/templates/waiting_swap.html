@@ -43,29 +43,76 @@
   </form>
   </div>
 
-  {%for swap in swaps%}
-  <div class="justify-center md:max-w-1/2">
-    <div class=" inline-flex text-white bg-gray-800 shadow rounded-lg mx-3 my-3 p-6 justify-center items-center">
-      <div class="flex-initial w-24  md:w-32">
-        <h1>{{swap.user}}</h1>
-        <input type="text" name="username" class="form-control"
-                                      placeholder="Desired Username" hidden value="{{swap.user}}"/>
+  <!--Card-->
+  <div id="header">
+    <div class="flex bg-gray-800 m-3 p-6">
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">Buku Pengirim</h1>
       </div>
-      <div class="flex-initial w-24  md:w-32">
-        <h1>{{swap.name}}</h1>
-        <input type="text" name="name" class="form-control"
-                                      placeholder="Desired Username" hidden value="{{swap.name}}"/>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">Buku Yang Diinginkan</h1>
       </div>
-      <div class="flex-initial w-24  md:w-32">
-        <a href="{% url 'book_swap:accept_swap' swap.id %}">
-          <button id="accept-button" class="bg-gray-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">User Pengirim</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">Aksi</h1>
+      </div>
+    </div>
+  </div>
+  <!--<a href="{% url 'book_swap:delete_all_swap' %}">
+    Reset
+  </a>-->
+
+  <div id="content" class="align-center p-3">
+    <p>Tidak ada Konten</p>
+  </div>
+</div>
+<script>
+  async function getSwaps() {
+        return fetch("{% url 'book_swap:get_waiting_accept_book_json' %}").then((res) => res.json())
+    }
+
+  async function refreshSwaps(){
+    document.getElementById("content").innerHTML = ""
+    const swaps = await getSwaps()
+    let content = ``
+    swaps.forEach((swap) => {
+      content += `
+      <div class="flex bg-gray-800 m-3 p-6">
+        <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">${swap.fields.want_book}</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">${swap.fields.have_book}</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">${swap.fields.from_user}</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <a href="">
+          <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick=acceptReq(${swap.pk})>
             Terima
           </button>
         </a>
       </div>
-    </div>
-  </div>
-  {% endfor%}
-</div>
-
+        </div>
+      `
+      document.getElementById("content").innerHTML = content
+    })
+  }
+  refreshSwaps()
+  function acceptReq(id){
+    fetch("{% url 'book_swap:accept_book_swap' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token }}"
+      },
+      body: JSON.stringify({id: id})
+    }).then(() => {
+      refreshSwaps()
+    })
+  }
+</script>
 {% endblock %}

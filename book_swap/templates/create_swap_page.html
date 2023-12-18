@@ -1,0 +1,117 @@
+{% extends "request_swap_main.html" %}
+
+{% block content1 %}
+<!--Desktop Content-->
+<div class="lg" id="desktop-content">
+  <div class="flex justify-center">
+    <div class="overflow-x-auto text-white bg-gray-800 w-4/5 rounded-lg mx-5 my-3 p-6 justify-center">
+      <h1>Request Buku yang Kamu Inginkan</h1>
+      <form method="POST">
+        {% csrf_token %}
+        <!-- Select From All Book-->
+        <div>
+            <select class="bg-gray-900 w-300" id="dropdown">
+                <option value="" disabled selected>Pilih Buku</option>
+            </select>
+        </div>
+        <!-- Message -->
+        <div class="w-500">
+            <p class="my-3">Pesan:</p>
+            <textarea rows="5" cols="33" class="bg-gray-900 my-3" name="message" placeholder="Tulis pesanmu disini"></textarea>
+        </div>
+        <!-- Checkbox-->
+        <div>
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" name="agree" value="agree">
+            <label for="agree" class="ml-2 text-gray-600">Punya Buku?</label>
+        </div>
+        <div class="hidden" id="wanted-book">
+            <select class="bg-gray-900 w-300" id="dropdown2">
+                <option value="" disabled selected>Pilih Buku</option>
+            </select>
+        </div>
+    </form>
+    <!-- Button -->
+    <div class="flex justify-center my-3">
+        <a href="{% url 'book_swap:show_processed_book_swap' %}">  
+            <button class="bg-gray-900 text-white rounded-md px-3 py-2 text-md font-medium" id="button_add">Request</button>
+        </a>
+    </div>
+  </div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("mobile-content");
+        var y = document.getElementById("desktop-content");
+        if (x.classList.contains("hidden")) {
+            x.classList.remove("hidden");
+            y.classList.add("hidden");
+        } else {
+            x.classList.add("hidden");
+            y.classList.remove("hidden");
+        }
+    }
+    // If checkbox is checked, display the second dropdown
+    var checkbox = document.querySelector('input[name=agree]');
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById("wanted-book").classList.remove("hidden");
+        } else {
+            document.getElementById("wanted-book").classList.add("hidden");
+        }
+    });
+    // Send Request Swap
+    fetch('/get_model_data/')
+        .then(response => response.json())
+        .then(data => {
+            const dropdown = document.getElementById('dropdown');
+            JSON.parse(data).forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.fields.name;  // Replace 'pk' with the actual primary key field of your model
+                option.text = item.fields.name;  // Replace 'your_field_name' with the actual field you want to display
+                dropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+
+    fetch('/get_model_data/')
+        .then(response => response.json())
+        .then(data => {
+            const dropdown = document.getElementById('dropdown2');
+            JSON.parse(data).forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.fields.name;  // Replace 'pk' with the actual primary key field of your model
+                option.text = item.fields.name;  // Replace 'your_field_name' with the actual field you want to display
+                dropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+    // Add Request Swap To Django Model
+    document.getElementById("button_add").addEventListener("click", function() {
+        var wantedBook = document.getElementById("dropdown").value;
+        var ownedBook = document.getElementById("dropdown2").value;
+        var message = document.getElementsByName("message")[0].value;
+        var data = {
+            "ownedbook": ownedBook,
+            "message": message,
+            "wantedbook": wantedBook,
+        };
+        fetch('/create_swap/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert("Request Swap Berhasil Ditambahkan");
+                window.location.href = "{% url 'book_swap:show_processed_book_swap' %}";
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+{% endblock %}
