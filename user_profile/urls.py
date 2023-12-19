@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import view_profile_byId, view_self_profile, edit_profile, add_favorite, get_buku_by_id, get_username_by_id
+from .views import *
 
 
 app_name = 'user_profile'
@@ -12,5 +12,10 @@ urlpatterns = [
     path('get_buku_by_id/<int:id>/', get_buku_by_id, name='get_buku_by_id'),
 
     path('user/<int:user_id>/', get_username_by_id, name='get_username_by_id'),
+    path('profileflutter/', get_profile_flutter, name='view_flutter'),
+    path('editprofile-mobile/', edit_profile_mobile, name='edit_profile_flutter'),
+    path('fav-mobile/<int:favchange>', edit_fav_mobile, name='fav-mobile'),
+
+    
 
 ]

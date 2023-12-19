@@ -3,10 +3,9 @@ from main.models import Book
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
- 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nickname = models.CharField(max_length=255, default=True)
+    nickname = models.CharField(max_length=255, blank=True)
     email = models.EmailField()
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
     bio = models.TextField(max_length=400)
@@ -20,11 +19,10 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
     
-def create_profile(sender,instance,created, **kwargs):
+def create_profile(sender, instance, created, **kwargs):
     if created:
         user_profile = UserProfile(user=instance)
+        user_profile.nickname = instance.username
         user_profile.save()
 
 post_save.connect(create_profile, sender=User)
-
-

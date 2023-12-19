@@ -75,4 +75,4 @@ def reject_request(request, request_id):
     req = get_object_or_404(RequestBook, pk=request_id)
     req.request_status = RequestBook.REJECTED
     req.save()
-    return redirect('view_all_requests')
+    return redirect('view_all_requests') 

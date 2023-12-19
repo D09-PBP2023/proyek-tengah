@@ -54,19 +54,19 @@ class BookTestCase(TestCase):
 
     def test_get_books(self):
         response = self.client.get(
-            "/get_books/",
+            "/get-books/",
         )
         self.assertEqual(response.status_code, 200)
 
     def test_mislead_get_books(self):
         response = self.client.get(
-            "/get_books/2",
+            "/get-books/2",
         )
         self.assertEqual(response.status_code, 404)
 
     def test_get_books_by_name(self):
         response = self.client.get(
-            "/get_books_by_name/a",
+            "/get-books-by-name/a",
         )
         self.assertEqual(response.status_code, 200)
 
@@ -78,11 +78,11 @@ class BookTestCase(TestCase):
 
     def test_mislead_get_books_by_name(self):
         response = self.client.get(
-            "/get_books_by_name/",
+            "/get-books-by-name/",
         )
         self.assertEqual(response.status_code, 404)
 
         response = self.client.get(
-            "/get_books_by_name/a/bc",
+            "/get-books-by-name/a/bc",
         )
         self.assertEqual(response.status_code, 404)

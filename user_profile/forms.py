@@ -26,4 +26,3 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['favoriteBook1','favoriteBook2','favoriteBook3']
-
