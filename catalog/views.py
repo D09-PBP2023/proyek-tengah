@@ -100,6 +100,23 @@ def add_review(request, id):
         
     return HttpResponseNotFound()
 
+@csrf_exempt
+def create_review_flutter(request):
+    if request.method == 'POST':
+
+        new_review = Review.objects.create(
+            user = request.user,
+            review = request.POST.get("review"),
+            rating = int(float(request.POST.get("rating"))),
+            book = get_object_or_404(Book, pk=int(request.POST.get("book_id")))
+        )
+
+        new_review.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
 def get_average_rating(request, id):
     book = get_object_or_404(Book, pk=id)
     average_rating = book.calculate_average_rating
