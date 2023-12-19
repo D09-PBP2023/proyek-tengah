@@ -136,7 +136,7 @@ def get_waiting_accept_book_json(request):
         content_type="application/json")
 # Accepted Book Swap JSON
 def get_accepted_book_json(request):
-    book_swap = BookSwap.objects.filter(from_user=request.user).filter(processed=True)
+    book_swap = BookSwap.objects.filter(from_user=request.user).filter(swapped=False).filter(processed=True)
     return HttpResponse(serializers.serialize("json", book_swap),
         content_type="application/json")
 # Finished Book Swap JSON
