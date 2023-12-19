@@ -6,7 +6,6 @@ from book_swap.views import create_swap_mobile, create_swap, show_create_swap
 from book_swap.views import get_model_data, delete_all_swap
 from book_swap.views import get_processed_book_json, get_waiting_accept_book_json, get_accepted_book_json, get_finished_book_json
 from book_swap.views import cancel_swap_mobile, accept_swap_mobile, finish_swap_mobile
-
 app_name = 'book_swap'
 
 urlpatterns = [
