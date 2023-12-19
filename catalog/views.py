@@ -103,14 +103,12 @@ def add_review(request, id):
 @csrf_exempt
 def create_review_flutter(request):
     if request.method == 'POST':
-        
-        data = json.loads(request.body)
 
         new_review = Review.objects.create(
             user = request.user,
-            review = data["review"],
-            rating = int(data["rating"]),
-            book = get_object_or_404(Book, pk=int(data["book_id"]))
+            review = request.POST.get("review"),
+            rating = request.POST.get("rating"),
+            book = get_object_or_404(Book, pk=int(request.POST.get("book_id")))
         )
 
         new_review.save()
