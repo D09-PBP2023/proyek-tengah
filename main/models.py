@@ -21,4 +21,3 @@ class Review(models.Model):
     review = models.TextField(max_length=512)
     rating = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-
