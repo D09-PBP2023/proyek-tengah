@@ -15,6 +15,7 @@ class UserProfile(models.Model):
     favoriteBook1 = models.ForeignKey(Book, on_delete=models.SET_NULL, related_name='profile_book1', blank=True, null=True)
     favoriteBook2 = models.ForeignKey(Book, on_delete=models.SET_NULL, related_name='profile_book2', blank=True, null=True)
     favoriteBook3 = models.ForeignKey(Book, on_delete=models.SET_NULL, related_name='profile_book3', blank=True, null=True)
+    isAdmin = models.BooleanField(default= False)
 
     def __str__(self):
         return self.user.username
