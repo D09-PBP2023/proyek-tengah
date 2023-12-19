@@ -9,7 +9,7 @@ class Book(models.Model):
     year_published = models.IntegerField()
     sales = models.IntegerField()
     genre = models.CharField(max_length=256)
-    cover_image = models.ImageField(null=True)
+    cover_image = models.ImageField(null=True, upload_to="input/cover")
 
 
     @property
