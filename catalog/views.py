@@ -107,7 +107,7 @@ def create_review_flutter(request):
         new_review = Review.objects.create(
             user = request.user,
             review = request.POST.get("review"),
-            rating = request.POST.get("rating"),
+            rating = int(float(request.POST.get("rating"))),
             book = get_object_or_404(Book, pk=int(request.POST.get("book_id")))
         )
 
