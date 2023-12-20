@@ -1,9 +1,11 @@
 {% extends "book_swap_main.html" %}
 
 {% block content2 %}
+<!--Processed Book-->
 <div class="justify-center" id="mobile-content">
   <div class="text-center">
   <h1 class="font-bold text-3xl mx-3">Daftar Tukar Buku</h1>
+  <!--Option-->
   <div class="justify-center items-center inline-flex">
     <a href="#">  
       <div class="text-white bg-gray-900 shadow rounded-lg my-3 p-2 mx-3" aria-current="page">
@@ -21,8 +23,11 @@
       </div>
     </a>
   </div>
-
+  <!--SearchBar-->
   <div class="md:inline-flex text-white bg-gray-800 shadow rounded-lg mx-3 my-3 p-6 justify-center items-center">
+    <a href="{% url 'book_swap:delete_all_swap' %}">
+      Reset
+    </a>
     <h1 class="me-3">Cari kata kunci</h1>
     <form action="{% url 'book_swap:search_key' %}" method="POST">
       {% csrf_token %}
@@ -37,67 +42,87 @@
     <button id="search-button" class="btn btn-outline-success hover:bg-blue-700 rounded" type="submit">Cari</button>
   </form>
   </div>
-  
-  <div class="inline-flex relative sm:overflow-x-auto">
-    <div class=" mw-3">
-      <table id="product_table" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">      
-      
-      </table>
-    </div>
 
-    <div class=" me-3">
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">      
-        <thead  class="border-b bg-slate-800 font-medium dark:border-black dark:bg-slate-900">
-          <th scope="col" class=" px-6 py-4">Action</th>
-        </thead>
-        {%for swap in swaps%}
-        <tr class="border-b dark:border-black">
-        <td class="whitespace-nowrap  px-6 py-4">
-          <div class="justify-between">
-              <a href="{% url 'book_swap:cancel_swap' swap.pk %}">
-                  <button class="bg-slate-800 hover:bg-blue-700 font-bold rounded px-2">
-                Delete
-            </button>
-            </a>
-        </div>
-        </td>
-      </tr>
-        {%endfor%}
-      </table>
+  <!--Card-->
+  <div id="header">
+    <div class="flex bg-gray-800 m-3 p-6">
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">Buku Kamu</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">Buku Yang Diminta</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">User Penerima</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">Status</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">Aksi</h1>
+      </div>
     </div>
+  </div>
+
+
+
+  <div id="content" class="align-center p-3">
+    <p>Tidak ada Konten</p>
   </div>
 </div>
 
 <script>
-  async function getProducts() {
+  async function getSwaps() {
         return fetch("{% url 'book_swap:get_processed_book_json' %}").then((res) => res.json())
-  }
-  async function refreshProducts() {
-        document.getElementById("product_table").innerHTML = ""
-        const products = await getProducts()
-        let htmlString = `<thead
-                class="border-b bg-slate-800 font-medium dark:border-black dark:bg-slate-900">
-                <tr>
-                  <th scope="col" class=" px-6 py-4">Nama</th>
-                  <th scope="col" class=" px-6 py-4">Judul</th>
-                  <th scope="col" class=" px-6 py-4">Pesan</th>
-        
-                </tr>
-              </thead>`
-        
-              products.forEach((item) => {
-            htmlString += `\n
-            <tr class="border-b dark:border-black">
-                        <td class="whitespace-nowrap px-6 py-4 font-medium">
-                            <p>${ item.fields.user }</p>  
-                        </td>
-                      <td class="whitespace-nowrap  px-6 py-4">${ item.fields.name }</td>
-                      <td class="whitespace-nowrap  px-6 py-4">${ item.fields.message }</td>  
-            </tr>
-            ` 
-        })
-        document.getElementById("product_table").innerHTML = htmlString
     }
-    refreshProducts()
+
+  async function refreshSwaps(){
+    document.getElementById("content").innerHTML = ""
+    const swaps = await getSwaps()
+    let content = ``
+    swaps.forEach((swap) => {
+      content += `
+      <div class="flex bg-gray-800 m-3 p-6">
+        <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">${swap.fields.want_book}</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">${swap.fields.have_book}</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">${
+          swap.fields.to_user ? swap.fields.to_user : 'Tidak Ada'}</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <h1 class="font-semibold text-white text-center">${
+          swap.fields.swapped 
+            ? (swap.fields.processed === true ? 'Selesai' : 'Diproses') 
+            : 'Belum ditukar'
+        }</h1>
+      </div>
+      <div class="flex-auto w-32">
+        <form method="POST">
+          {% csrf_token %}
+          <button class="text-white btn btn-outline-success hover:bg-blue-700 rounded" type="submit" onclick="cancelSwap(${swap.pk})">Batalkan</button>
+        </form>
+      </div>
+        </div>
+      `
+      document.getElementById("content").innerHTML = content
+    })
+
+  }
+  refreshSwaps()
+  function cancelSwap(itemID) {
+      fetch("{% url 'book_swap:cancel_swap' %}", {
+            method: "POST",
+            body: JSON.stringify({
+              id: itemID,
+            }),
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
 </script>
 {% endblock %}
