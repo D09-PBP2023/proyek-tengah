@@ -18,6 +18,5 @@ class Migration(migrations.Migration):
             model_name='bookswap',
             name='id',
             field=models.BigAutoField(auto_created=True, default=1, primary_key=True, serialize=False, verbose_name='ID'),
-            preserve_default=False,
         ),
     ]
