@@ -9,5 +9,5 @@ urlpatterns = [
     path('requests/', view_all_requests, name='view_all_requests'),
     path('requests/approve/<int:request_id>', approve_request, name='approve_request'),
     path('requests/reject/<int:request_id>', reject_request, name='reject_request'),
-    path('request-book-mobile', request_book_by_ajax, name='request_book_mobile'),
+    path('request-book-mobile/', request_book_by_ajax, name='request_book_mobile'),
 ]

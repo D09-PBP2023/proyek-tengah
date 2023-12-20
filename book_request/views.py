@@ -18,9 +18,9 @@ def request_book_by_ajax(request):
             user_request.request_status = 'PENDING'
             user_request.user = request.user
             user_request.save()
-            return JsonResponse({'error': False, 'message': 'Request Added Successfully'})
+            return JsonResponse({'status': True, 'message': 'Request Added Successfully'})
         else:
-            return JsonResponse({'error': True, 'errors': form.errors, 'message': 'Request Failed'})
+            return JsonResponse({'status': False, 'errors': form.errors, 'message': 'Request Failed'})
     else:
         form = RequestBookForm()
         return render(request, 'book_request_by_ajax.html', {'form': form})
